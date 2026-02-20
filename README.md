@@ -1,42 +1,24 @@
 # paradox
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A monorepo containing the frontend and backend for paradox.
 
-## Creating a project
+## Structure
 
-If you're seeing this, you've probably already done this step. Congrats!
+- [`frontend/`](./frontend) — SvelteKit frontend
+- [`backend/`](./backend) — ElysiaJS (Bun) backend
 
-```sh
-# create a new project
-npx sv create my-app
-```
+## Frontend
 
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv create --template minimal --types ts --install npm .
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```bash
+cd frontend
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Backend
 
-To create a production version of your app:
-
-```sh
-npm run build
+```bash
+cd backend
+bun install
+bun run dev
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
