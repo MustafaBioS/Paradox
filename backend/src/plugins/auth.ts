@@ -28,7 +28,7 @@ export const authPlugin = new Elysia({ prefix: "/auth" })
       const frontendUrl = process.env.FRONTEND_URL ?? "http://localhost:5173";
 
       if (!code) {
-        return redirect(`${frontendUrl}/login?error=no_code`);
+        return redirect(`${frontendUrl}/?error=no_code`);
       }
 
       // Exchange authorization code for access token
@@ -46,7 +46,7 @@ export const authPlugin = new Elysia({ prefix: "/auth" })
       });
 
       if (!tokenRes.ok) {
-        return redirect(`${frontendUrl}/login?error=token_exchange_failed`);
+        return redirect(`${frontendUrl}/?error=token_exchange_failed`);
       }
 
       const { access_token } = (await tokenRes.json()) as {
