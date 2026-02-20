@@ -94,7 +94,7 @@ export const authPlugin = new Elysia({ prefix: "/auth" })
     return { user: (await res.json()) as HackClubUser };
   })
 
-  .post("/logout", ({ cookie, redirect }) => {
+  .get("/logout", ({ cookie, redirect }) => {
     const frontendUrl = process.env.FRONTEND_URL ?? "http://localhost:5173";
     cookie.access_token.remove();
     return redirect(frontendUrl);
