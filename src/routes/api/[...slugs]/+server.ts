@@ -1,7 +1,11 @@
 import { Elysia } from "elysia";
 import { authPlugin } from "$lib/server/auth";
+import { drizzlePlugin } from "$lib/server/db/plugin";
 
-const app = new Elysia({ prefix: "/api" }).use(authPlugin).compile();
+const app = new Elysia({ prefix: "/api" })
+	.use(authPlugin)
+	.use(drizzlePlugin)
+	.compile();
 
 const handle = ({ request }: { request: Request }) => app.handle(request);
 
