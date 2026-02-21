@@ -1,24 +1,19 @@
 # paradox
 
-A monorepo containing the frontend and backend for paradox.
+A SvelteKit application with an integrated ElysiaJS API (no separate backend needed).
 
 ## Structure
 
-- [`frontend/`](./frontend) — SvelteKit frontend
-- [`backend/`](./backend) — ElysiaJS (Bun) backend
+- [`frontend/`](./frontend) — SvelteKit frontend with integrated ElysiaJS API routes at `/api/*`
+- [`backend/`](./backend) — Legacy standalone ElysiaJS backend (no longer needed)
 
-## Frontend
+## Getting Started
 
 ```bash
 cd frontend
 npm install
+cp .env.example .env  # fill in your credentials
 npm run dev
 ```
 
-## Backend
-
-```bash
-cd backend
-bun install
-bun run dev
-```
+The Elysia API is mounted at `/api` within the SvelteKit app (e.g. `/api/auth/login`).
