@@ -5,7 +5,7 @@
 
 	let { data }: { data: PageData } = $props();
 
-	const backendUrl = import.meta.env.PUBLIC_BACKEND_URL ?? "http://localhost:3000";
+	const apiBase = "/api";
 
 	let open = $state(false);
 
@@ -22,12 +22,12 @@
 
 	{#if data.user}
 		<p>Signed in as {data.user.name}</p>
-		<a href="{backendUrl}/auth/logout">Sign out</a>
+		<a href="{apiBase}/auth/logout">Sign out</a>
 	{:else}
 		{#if page.url.searchParams.get("error")}
 			<p>Authentication error. Please try again.</p>
 		{/if}
-		<a href="{backendUrl}/auth/login">Sign in with Hack Club</a>
+		<a href="{apiBase}/auth/login">Sign in with Hack Club</a>
 	{/if}
 
 	<div class="allCon font-mono">
