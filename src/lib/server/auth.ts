@@ -19,6 +19,12 @@ export const authPlugin = new Elysia({ prefix: "/auth" })
 			scope: "openid profile email",
 		});
 		return redirect(`${HACKCLUB_AUTH_URL}/oauth/authorize?${params}`);
+	}, {
+		detail: {
+			tags: ["Auth"],
+			summary: "Login",
+			description: "Redirects the user to Hack Club OAuth to begin the login flow.",
+		},
 	})
 
 	.get(
@@ -70,6 +76,12 @@ export const authPlugin = new Elysia({ prefix: "/auth" })
 				code: t.Optional(t.String()),
 				error: t.Optional(t.String()),
 			}),
+			detail: {
+				tags: ["Auth"],
+				summary: "OAuth Callback",
+				description: "Handles the Hack Club OAuth callback. Exchanges the authorization code for an access token and sets it as an httpOnly cookie.",
+				hide: true,
+			},
 		}
 	)
 
@@ -89,10 +101,23 @@ export const authPlugin = new Elysia({ prefix: "/auth" })
 		}
 
 		return { user: (await res.json()) as HackClubUser };
+	}, {
+		detail: {
+			tags: ["Auth"],
+			summary: "Get current user",
+			description: "Returns the currently authenticated user from the Bearer token. Returns null if unauthenticated.",
+			security: [{ bearerAuth: [] }],
+		},
 	})
 
 	.get("/logout", ({ cookie, redirect }) => {
 		const origin = process.env.ORIGIN ?? "http://localhost:5173";
 		cookie.access_token.remove();
 		return redirect(origin);
+	}, {
+		detail: {
+			tags: ["Auth"],
+			summary: "Logout",
+			description: "Clears the session cookie and redirects the user home.",
+		},
 	});
