@@ -5,7 +5,6 @@ A SvelteKit application with an integrated ElysiaJS API (no separate backend nee
 ## Structure
 
 - [`frontend/`](./frontend) — SvelteKit frontend with integrated ElysiaJS API routes at `/api/*`
-- [`backend/`](./backend) — Legacy standalone ElysiaJS backend (no longer needed)
 
 ## Getting Started
 
