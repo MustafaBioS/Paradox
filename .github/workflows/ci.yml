@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  type-check:
+    name: Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      HACKCLUB_CLIENT_ID: ci
+      HACKCLUB_CLIENT_SECRET: ci
+      HACKCLUB_REDIRECT_URI: http://localhost:5173/api/auth/callback
+      ORIGIN: http://localhost:5173
+      NODE_ENV: production
+      DATABASE_URL: postgres://ci:ci@localhost:5432/ci
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+
+  migration-check:
+    name: Migration Drift
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgres://ci:ci@localhost:5432/ci
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - name: Check for uncommitted migrations
+        run: |
+          bunx drizzle-kit generate
+          git diff --exit-code drizzle/
