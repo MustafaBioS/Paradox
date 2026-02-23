@@ -2,16 +2,30 @@ import { Elysia, t } from "elysia";
 import { db } from "./db/index";
 import { rsvps } from "./db/schema";
 
+type RsvpBody = { email: string };
+
 export const rsvpPlugin = new Elysia({ prefix: "/rsvps" }).post(
 	"/",
 	async ({ body, set }) => {
-		const email = body.email.trim().toLowerCase();
+		const email = (body as RsvpBody).email.trim().toLowerCase();
 
 		try {
-			const [rsvp] = await db
+			const [row] = await db
 				.insert(rsvps)
 				.values({ email })
 				.returning({ id: rsvps.id, email: rsvps.email, createdAt: rsvps.createdAt });
+
+			if (!row) {
+				set.status = 500;
+				return { success: false, message: "Failed to create RSVP." };
+			}
+
+			// Drizzle returns Date for timestamp columns; response schema expects ISO string
+			const rsvp = {
+				id: row.id,
+				email: row.email,
+				createdAt: row.createdAt instanceof Date ? row.createdAt.toISOString() : String(row.createdAt),
+			};
 
 			set.status = 201;
 			return { success: true, rsvp };
@@ -31,7 +45,7 @@ export const rsvpPlugin = new Elysia({ prefix: "/rsvps" }).post(
 		response: {
 			201: "RsvpSuccessResponse",
 			409: "RsvpConflictResponse",
-		},
+		} as unknown as Record<number, ReturnType<typeof t.Object>>,
 		detail: {
 			tags: ["RSVPs"],
 			summary: "Submit RSVP",
