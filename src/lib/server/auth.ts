@@ -20,6 +20,9 @@ export const authPlugin = new Elysia({ prefix: "/auth" })
 		});
 		return redirect(`${HACKCLUB_AUTH_URL}/oauth/authorize?${params}`);
 	}, {
+		response: {
+			302: t.String({ description: "Redirect to Hack Club OAuth authorize URL" }),
+		},
 		detail: {
 			tags: ["Auth"],
 			summary: "Login",
@@ -79,8 +82,11 @@ export const authPlugin = new Elysia({ prefix: "/auth" })
 			detail: {
 				tags: ["Auth"],
 				summary: "OAuth Callback",
-				description: "Handles the Hack Club OAuth callback. Exchanges the authorization code for an access token and sets it as an httpOnly cookie.",
+				description: "Handles the Hack Club OAuth callback. Exchanges the authorization code for an access token and sets it as an httpOnly cookie. Redirects to origin with ?error=no_code or ?error=token_exchange_failed on failure.",
 				hide: true,
+				responses: {
+					302: { description: "Redirect to origin on success, or to origin with ?error=no_code | ?error=token_exchange_failed on failure" },
+				},
 			},
 		}
 	)
@@ -102,6 +108,9 @@ export const authPlugin = new Elysia({ prefix: "/auth" })
 
 		return { user: (await res.json()) as HackClubUser };
 	}, {
+		response: {
+			200: "MeResponse",
+		},
 		detail: {
 			tags: ["Auth"],
 			summary: "Get current user",
@@ -115,6 +124,9 @@ export const authPlugin = new Elysia({ prefix: "/auth" })
 		cookie.access_token.remove();
 		return redirect(origin);
 	}, {
+		response: {
+			302: t.String({ description: "Redirect to origin after clearing session" }),
+		},
 		detail: {
 			tags: ["Auth"],
 			summary: "Logout",
