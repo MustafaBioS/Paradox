@@ -14,72 +14,43 @@
             open = true;
         });
     });
-
 </script>
 
 <main>
-	<h1>Sign in to Paradox</h1>
+<!--	<h1>Sign in to Paradox</h1>-->
 
-	{#if data.user}
-		<p>Signed in as {data.user.name}</p>
-		<a href="{apiBase}/auth/logout">Sign out</a>
-	{:else}
-		{#if page.url.searchParams.get("error")}
-			<p>Authentication error. Please try again.</p>
-		{/if}
-		<a href="{apiBase}/auth/login">Sign in with Hack Club</a>
-	{/if}
+<!--	{#if data.user}-->
+<!--		<p>Signed in as {data.user.name}</p>-->
+<!--		<a href="{apiBase}/auth/logout">Sign out</a>-->
+<!--	{:else}-->
+<!--		{#if page.url.searchParams.get("error")}-->
+<!--			<p>Authentication error. Please try again.</p>-->
+<!--		{/if}-->
+<!--		<a href="{apiBase}/auth/login">Sign in with Hack Club</a>-->
+<!--	{/if}-->
 
-	<div class="allCon font-mono">
+	<div class="w-screen h-screen relative bg-black flex justify-start items-start z-50">
 
-		<div class:open={open} class="fixed inset-0 flex z-50 pointer-events-none">
-		<div class="curtain left w-6/12 h-full transition-all duration-[1600ms] ease-in-out"></div>
-		<div class="curtain right w-6/12 h-full transition-all duration-[1600ms] ease-in-out"></div>
-		</div>
+		<img src="/images/Stage.png"
+			 class="absolute inset-0 w-full h-full object-contain z-0"
+			 alt="Stage" />
 
-		<div class="w-full h-full absolute z-0 bg-gradient-to-t from-[#111] to-[#222] flex items-center justify-center flex-col">
-			<img src="/images/Paradox.png" alt="Paradox Logo" class="w-[clamp(24rem,45vw,120rem)]">
-			<h1 class="text-white text-3xl text-center mt-10">Build story-driven projects for 35 hours<br>
-				Go to a 4 day in-person Game Jam in a london theatre
-			</h1>
-			<button class="mt-10 h-[clamp(3.2rem,6vw,_3.5rem)] w-[clamp(8.8rem,10vw,_11rem)] text-xl rounded-xl bg-white transition ease-in-out duration-350 hover:bg-black hover:text-white cursor-pointer">RSVP</button>
-		</div>
-		
+		<img src="/images/Curtain.png"
+			 class="absolute left-0 top-0 h-full object-contain z-10"
+			 alt="Left Curtain" />
+
+		<img src="/images/Curtain.png"
+			 class="absolute right-0 top-0 h-full object-contain z-10 scale-x-[-1]"
+			 alt="Right Curtain" />
+
+		<img src="/images/Sign.png"
+			 class="absolute right-0 top-0 h-full object-contain z-20 transition duration-300 hover:opacity-60 cursor-pointer"
+			 alt="Sign" />
+
+		<img src="/images/Logo.png"
+			 class="absolute w-5/12 h-5/12 top-[14.3rem] left-1/2 -translate-x-1/2 object-contain z-30"
+			 alt="Logo" />
+
 	</div>
 
 </main>
-
-<style>
-
-    .curtain {
-        background:
-        repeating-linear-gradient(
-        to right,
-        #7b0000 0px,
-        #8f0000 20px,
-        #7b0000 40px
-        );
-        box-shadow: inset -20px 0 40px rgba(0,0,0,0.5);
-    }
-
-    .right {
-        box-shadow: inset 20px 0 40px rgba(0,0,0,0.5);
-    }
-
-    .left {
-        transform: translateX(0);
-    }
-
-    .right {
-        transform: translateX(0);
-    }
-
-    .open .left {
-        transform: translateX(-100%);
-    }
-
-    .open .right {
-        transform: translateX(100%);
-    }
-
-</style>
