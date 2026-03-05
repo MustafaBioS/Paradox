@@ -115,8 +115,10 @@
 
 	</div>
 
-	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01]"
+	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] flex flex-col items-center justify-center pointer-events-none select-none z-30"
 		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">
+		<!-- Needs to be fixed as the resolution is bad -->
+		<img src="/images/2/Instructions.png" alt="Instructions">
 	</div>
 </main>
 
