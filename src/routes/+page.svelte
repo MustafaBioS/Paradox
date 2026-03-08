@@ -99,14 +99,13 @@
 					 class="w-full h-auto pointer-events-none select-none"
 					 alt="Board" />
 				<input type="email" name="email"
-					   class="absolute bg-transparent text-gray-300 font-bold text-center border-none outline-none pointer-events-auto"
+					   class="font-myFont font-bold absolute bg-transparent text-gray-300 text-center border-none outline-none pointer-events-auto"
 					   style="
-						font-family: 'myFont', sans-serif;
 						width: 85%;
 						left: 7.5%;
 						top: 55%;
 						transform: translateY(-30%);
-						font-size: clamp(1rem, 2.5vw, 2.5rem);
+						font-size: clamp(1.3rem, 2.5vw, 3rem);
 						letter-spacing: 0.08em;
 					"
 					   placeholder="ENTER YOUR EMAIL HERE..." />
@@ -115,11 +114,11 @@
 
 	</div>
 
-	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] flex flex-col items-center justify-center pointer-events-none select-none z-30"
-		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">
-		<!-- Needs to be fixed as the resolution is bad -->
-		<img src="/images/2/Instructions.png" alt="Instructions">
-	</div>
+<!--	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] flex flex-col items-center justify-center pointer-events-none select-none z-30"-->
+<!--		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">-->
+<!--		&lt;!&ndash; Needs to be fixed as the resolution is bad &ndash;&gt;-->
+<!--		<img src="/images/2/Instructions.png" alt="Instructions" class="w-[65%]">-->
+<!--	</div>-->
 </main>
 
 <style>
