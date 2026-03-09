@@ -4,7 +4,7 @@
 
 @font-face {
     font-family: "Avenir";
-    src: url("src/fonts/Avenir-Next-Condensed-Bold.ttf") format("truetype");
+    src: url("fonts/Avenir-Next-Condensed-Bold.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
 }

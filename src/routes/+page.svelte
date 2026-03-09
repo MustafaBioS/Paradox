@@ -7,21 +7,28 @@
 	const apiBase = "/api";
 	let open = $state(false);
 
+	let email = $state('');
+
 	onMount(() => requestAnimationFrame(() => { open = true; }));
 
 	function signIn() {
 		window.location.href = `${apiBase}/auth/login`;
 	}
+
+	function handleSubmit() {
+		console.log(email);
+	}
+
 </script>
 
 <main class="overflow-x-hidden">
 	<div class="w-screen h-screen relative bg-[#180c04] overflow-hidden select-none">
 
-		<div class="fixed top-0 left-4 z-50">
+		<a class="fixed top-0 left-4 z-50" href="https://hackclub.com/">
 			<img src="/images/flag-orpheus-top.svg" alt="Orpheus Flag"
 				 class="transition-all duration-300 hover:opacity-65 cursor-pointer"
 				 style="width: clamp(130px, 13vw, 220px); height: auto;" />
-		</div>
+		</a>
 
 		{#if !data.user}
 			{#if page.url.searchParams.get("error")}
@@ -29,13 +36,13 @@
 					Authentication error. Please try again.
 				</p>
 			{/if}
-			<button onclick={() => signIn()}
-					class="fixed top-0 right-6 z-50 cursor-pointer transition-opacity duration-300 hover:opacity-60">
-				<img src="/images/1/Sign-fixed.png"
-					 class="pointer-events-none select-none"
-					 style="width: clamp(130px, 13vw, 220px); height: auto;"
-					 alt="Sign In" />
-			</button>
+<!--			<button onclick={() => signIn()}-->
+<!--					class="fixed top-0 right-6 z-50 cursor-pointer transition-opacity duration-300 hover:opacity-60">-->
+<!--				<img src="/images/1/Sign-fixed.png"-->
+<!--					 class="pointer-events-none select-none"-->
+<!--					 style="width: clamp(130px, 13vw, 220px); height: auto;"-->
+<!--					 alt="Sign In" />-->
+<!--			</button>-->
 		{/if}
 
 		<img src="/images/1/Stage-fixed.jpg"
@@ -88,26 +95,48 @@
 		<div class="absolute inset-x-0 bottom-0 flex flex-col items-center pointer-events-none select-none z-30"
 			 style="padding-bottom: clamp(1%, 2vh, 4%);">
 
-			<img src="/images/1/Mask-fixed.png"
-				 class="pointer-events-none select-none relative z-30"
-				 style="width: clamp(120px, 18vw, 280px); height: auto; margin-bottom: -2.5%;"
-				 alt="Mask" />
-
 			<div class="relative pointer-events-none select-none z-20"
 				 style="width: clamp(300px, 58vw, 860px);">
+
+				<img src="/images/1/Mask-fixed.png"
+					 class="pointer-events-none select-none absolute left-1/2 z-30"
+					 style="
+               width: clamp(100px, 15vw, 265px);
+               height: auto;
+               transform: translateX(-50%) translateY(-82%);
+               top: 0;
+             "
+					 alt="Mask" />
+
+				<img src="/images/1/star.png"
+					 alt="Star"
+					 onclick={handleSubmit}
+					 class="absolute z-30 star"
+					 style="
+               width: clamp(40px, 8vw, 120px);
+               height: auto;
+               left: -3%;
+               top: 10%;
+               transform: translateY(-50%);
+             "
+				/>
+
 				<img src="/images/1/Board-fixed.png"
 					 class="w-full h-auto pointer-events-none select-none"
 					 alt="Board" />
+
 				<input type="email" name="email"
 					   class="font-myFont font-bold absolute bg-transparent text-gray-300 text-center border-none outline-none pointer-events-auto"
 					   style="
-						width: 85%;
-						left: 7.5%;
-						top: 55%;
-						transform: translateY(-30%);
-						font-size: clamp(1.3rem, 2.5vw, 3rem);
-						letter-spacing: 0.08em;
-					"
+						   width: 85%;
+						   left: 7.5%;
+						   top: 55%;
+						   transform: translateY(-30%);
+						   font-size: clamp(1.0rem, 2.5vw, 3rem);
+						   letter-spacing: 0.08em;
+					   "
+					   bind:value={email}
+					   onkeydown={(e) => e.key === 'Enter' && handleSubmit()}
 					   placeholder="ENTER YOUR EMAIL HERE..." />
 			</div>
 		</div>
@@ -130,4 +159,15 @@
 		transition: background-color 5000s ease-in-out 0s;
 	}
 	input { filter: none; }
+
+	.star {
+		transition: 0.3s ease all;
+		cursor: pointer;
+		pointer-events: auto;
+	}
+
+	.star:hover {
+		opacity: 0.75;
+	}
+
 </style>
