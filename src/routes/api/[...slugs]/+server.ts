@@ -1,5 +1,4 @@
 import { Elysia, t } from "elysia";
-import { openapi } from "@elysiajs/openapi";
 import { authPlugin } from "$lib/server/auth";
 import { drizzlePlugin } from "$lib/server/db/plugin";
 import { rsvpPlugin } from "$lib/server/rsvpPlugin";
@@ -63,7 +62,7 @@ const base = new Elysia({ prefix: "/api" })
 	});
 
 const app = (typeof process !== "undefined" && process.env.NODE_ENV !== "production"
-	? base.use(openapi(openapiConfig))
+	? base.use((await import("@elysiajs/openapi")).openapi(openapiConfig))
 	: base
 )
 	.use(authPlugin)
