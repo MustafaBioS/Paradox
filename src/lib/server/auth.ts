@@ -109,7 +109,15 @@ export const authPlugin = new Elysia({ prefix: "/auth" })
 		return { user: (await res.json()) as HackClubUser };
 	}, {
 		response: {
-			200: "MeResponse",
+			200: t.Object({
+				user: t.Nullable(t.Object({
+					id: t.String(),
+					email: t.String(),
+					name: t.String(),
+					username: t.Optional(t.String()),
+					avatar: t.Optional(t.String()),
+				})),
+			}),
 		},
 		detail: {
 			tags: ["Auth"],

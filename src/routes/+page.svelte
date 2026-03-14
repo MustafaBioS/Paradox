@@ -8,6 +8,52 @@
 	let open = $state(false);
 
 	let email = $state('');
+	let submitting = $state(false);
+	let message = $state<{ type: "success" | "error"; text: string } | null>(null);
+	let messagePhase = $state<'in' | 'visible' | 'out'>('in');
+	const messageTimeouts: ReturnType<typeof setTimeout>[] = [];
+
+	function clearMessageTimers() {
+		messageTimeouts.forEach(clearTimeout);
+		messageTimeouts.length = 0;
+	}
+
+	function setMessage(payload: { type: "success" | "error"; text: string } | null) {
+		clearMessageTimers();
+		if (payload === null) {
+			message = null;
+			return;
+		}
+		message = payload;
+		messagePhase = 'in';
+		messageTimeouts.push(
+			setTimeout(() => {
+				messagePhase = 'visible';
+			}, 10)
+		);
+		messageTimeouts.push(
+			setTimeout(() => {
+				messagePhase = 'out';
+				messageTimeouts.push(
+					setTimeout(() => {
+						message = null;
+						messagePhase = 'in';
+					}, 300)
+				);
+			}, 4000)
+		);
+	}
+
+	function dismissMessage() {
+		clearMessageTimers();
+		messagePhase = 'out';
+		messageTimeouts.push(
+			setTimeout(() => {
+				message = null;
+				messagePhase = 'in';
+			}, 300)
+		);
+	}
 
 	onMount(() => requestAnimationFrame(() => { open = true; }));
 
@@ -15,8 +61,35 @@
 		window.location.href = `${apiBase}/auth/login`;
 	}
 
-	function handleSubmit() {
-		console.log(email);
+	async function handleSubmit() {
+		const trimmed = email.trim();
+		if (!trimmed) return;
+
+		submitting = true;
+		setMessage(null);
+
+		try {
+			const res = await fetch(`${apiBase}/rsvps`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ email: trimmed }),
+			});
+
+			const data = await res.json().catch(() => ({}));
+
+			if (res.ok && data.success) {
+				setMessage({ type: "success", text: "You're on the list!" });
+				email = "";
+			} else if (res.status === 409 || data.message?.toLowerCase().includes("already registered")) {
+				setMessage({ type: "error", text: data.message ?? "This email is already registered." });
+			} else {
+				setMessage({ type: "error", text: data.message ?? "Something went wrong. Please try again." });
+			}
+		} catch {
+			setMessage({ type: "error", text: "Something went wrong. Please try again." });
+		} finally {
+			submitting = false;
+		}
 	}
 
 </script>
@@ -108,18 +181,23 @@
              "
 					 alt="Mask" />
 
-				<img src="/images/1/star.png"
-					 alt="Star"
-					 onclick={handleSubmit}
-					 class="absolute z-30 star"
-					 style="
+				<form class="contents" onsubmit={(e) => { e.preventDefault(); if (!submitting) handleSubmit(); }}>
+					<button type="submit"
+							disabled={submitting}
+							class="absolute z-30 star border-0 bg-transparent p-0 cursor-pointer"
+							style="
                width: clamp(40px, 8vw, 120px);
                height: auto;
                left: -3%;
                top: 10%;
                transform: translateY(-50%);
              "
-				/>
+							aria-label="Submit RSVP">
+						<img src="/images/1/star.png"
+							 alt="Star"
+							 class="pointer-events-none w-full h-auto block"
+						/>
+					</button>
 
 				<img src="/images/1/Board-fixed.png"
 					 class="w-full h-auto pointer-events-none select-none"
@@ -136,10 +214,28 @@
 						   letter-spacing: 0.08em;
 					   "
 					   bind:value={email}
-					   onkeydown={(e) => e.key === 'Enter' && handleSubmit()}
+					   disabled={submitting}
 					   placeholder="ENTER YOUR EMAIL HERE..." />
+				</form>
 			</div>
 		</div>
+
+		<!-- Notification toast: fixed top center -->
+		{#if message}
+			<div class="fixed top-6 inset-x-0 flex flex-col items-center gap-2 z-50 pointer-events-none">
+				<div
+					class="notification-toast pointer-events-auto flex items-start justify-between gap-3 px-5 py-3 border-2 font-medium max-w-sm w-full shadow-sm transition-all duration-300 ease-out {message.type === 'error' ? 'notification-toast-error' : 'notification-toast-success'} {messagePhase !== 'visible' ? 'notification-toast-hidden' : ''}"
+				>
+					<span>{message.text}</span>
+					<button
+						type="button"
+						onclick={dismissMessage}
+						class="notification-dismiss"
+						aria-label="Dismiss"
+					>✕</button>
+				</div>
+			</div>
+		{/if}
 
 	</div>
 
@@ -166,8 +262,46 @@
 		pointer-events: auto;
 	}
 
-	.star:hover {
+	.star:hover:not(:disabled) {
 		opacity: 0.75;
+	}
+
+	.star:disabled {
+		cursor: not-allowed;
+		opacity: 0.7;
+	}
+
+	/* Notification toast */
+	.notification-toast {
+		font-family: var(--font-myFont), sans-serif;
+	}
+	.notification-toast-success {
+		background-color: #c8e6d8;
+		border-color: #61453a;
+		color: #61453a;
+	}
+	.notification-toast-error {
+		background-color: #fecaca;
+		border-color: #61453a;
+		color: #61453a;
+	}
+	.notification-toast-hidden {
+		opacity: 0;
+		transform: translateY(-0.5rem);
+	}
+	.notification-dismiss {
+		flex-shrink: 0;
+		opacity: 0.6;
+		background: transparent;
+		border: none;
+		color: inherit;
+		padding: 0;
+		cursor: pointer;
+		font-size: 1.125rem;
+		line-height: 1;
+	}
+	.notification-dismiss:hover {
+		opacity: 1;
 	}
 
 </style>

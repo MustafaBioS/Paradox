@@ -30,8 +30,9 @@ export const rsvpPlugin = new Elysia({ prefix: "/rsvps" }).post(
 			set.status = 201;
 			return { success: true, rsvp };
 		} catch (err: any) {
-			// Postgres unique constraint violation
-			if (err?.code === "23505") {
+			// Postgres unique constraint violation (code may be on err or err.cause in Drizzle)
+			const code = err?.code ?? err?.cause?.code;
+			if (code === "23505") {
 				set.status = 409;
 				return { success: false, message: "This email is already registered." };
 			}
