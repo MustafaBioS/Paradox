@@ -2,6 +2,8 @@
 	import { page } from "$app/state";
 	import type { PageData } from "./$types";
 	import { onMount } from "svelte";
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 	let { data }: { data: PageData } = $props();
 	const apiBase = "/api";
@@ -55,8 +57,6 @@
 		);
 	}
 
-	onMount(() => requestAnimationFrame(() => { open = true; }));
-
 	function signIn() {
 		window.location.href = `${apiBase}/auth/login`;
 	}
@@ -92,10 +92,24 @@
 		}
 	}
 
+	let hero: HTMLElement;
+
+	onMount(() => {
+		requestAnimationFrame(() => { open = true; });
+
+		gsap.registerPlugin(ScrollTrigger);
+
+		ScrollTrigger.create({
+			trigger: hero,
+			pin: true,
+			start: 'top top',
+		});
+	});
+
 </script>
 
 <main class="overflow-x-hidden">
-	<div class="w-screen h-screen relative bg-[#180c04] overflow-hidden select-none">
+	<div class="w-screen h-screen bg-[#180c04] select-none z-10" bind:this={hero}>
 
 		<div class="flex items-start justify-end">
 			<button title="FAQ" class="faqBtn z-40 m-12 mr-14 rotate-12">
@@ -250,7 +264,7 @@
 
 	</div>
 
-	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] flex items-center justify-center pointer-events-none select-none z-30"
+	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] mt-[-100vh] relative flex items-center justify-center pointer-events-none select-none z-30"
 		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">
 
 	</div>
