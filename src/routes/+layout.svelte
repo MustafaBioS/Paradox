@@ -1,5 +1,24 @@
 <script>
 import "../app.css";
+import Lenis from "lenis";
+import { onMount, onDestroy } from "svelte";
+
+let lenis;
+
+onMount(() => {
+	lenis = new Lenis();
+
+	function raf(time) {
+		lenis.raf(time);
+		requestAnimationFrame(raf);
+	}
+
+	requestAnimationFrame(raf);
+});
+
+onDestroy(() => {
+	lenis?.destroy();
+});
 
 let { children } = $props();</script>
 

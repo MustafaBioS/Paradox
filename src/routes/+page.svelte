@@ -98,16 +98,21 @@
 	<div class="w-screen h-screen relative bg-[#180c04] overflow-hidden select-none">
 
 		<div class="flex items-start justify-end">
-			<button title="FAQ" class="faqBtn z-40 m-12 rotate-12">
-				<img src="/images/1/o-mask.png" class="faqMask z-50 w-16" alt="Paradox Mask"/>
+			<button title="FAQ" class="faqBtn z-40 m-12 mr-14 rotate-12">
+				<img src="/images/1/o-mask.png" class="faqMask z-50 w-[clamp(40px,5vw,65px)]" alt="Paradox Mask"/>
 			</button>
 		</div>
 
 		<a class="fixed top-0 left-4 z-50" href="https://hackclub.com/">
 			<img src="/images/flag-orpheus-top.svg" alt="Orpheus Flag"
-				 class="transition-all duration-300 hover:opacity-65 cursor-pointer"
-				 style="width: clamp(130px, 13vw, 220px); height: auto;" />
+				 class="transition-all duration-300 hover:opacity-65 cursor-pointer h-auto w-[clamp(130px,13vw,220px)]"/>
 		</a>
+
+		<div class="h-screen inset-0 w-full bg-black z-50 fixed opacity-55 hidden pointer-events-none select-none"></div>
+
+<!--		<div class="h-full w-full absolute flex items-center justify-center z-50 inset-0 pointer-events-none select-none">-->
+<!--			<div class="bg-black h-40 w-40"></div>-->
+<!--		</div>-->
 
 		{#if !data.user}
 			{#if page.url.searchParams.get("error")}
@@ -245,11 +250,10 @@
 
 	</div>
 
-<!--	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] flex flex-col items-center justify-center pointer-events-none select-none z-30"-->
-<!--		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">-->
-<!--		&lt;!&ndash; Needs to be fixed as the resolution is bad &ndash;&gt;-->
-<!--		<img src="/images/2/Instructions.png" alt="Instructions" class="w-[65%]">-->
-<!--	</div>-->
+	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] flex items-center justify-center pointer-events-none select-none z-30"
+		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">
+
+	</div>
 </main>
 
 <style>
