@@ -97,6 +97,12 @@
 <main class="overflow-x-hidden">
 	<div class="w-screen h-screen relative bg-[#180c04] overflow-hidden select-none">
 
+		<div class="flex items-start justify-end">
+			<button title="FAQ" class="faqBtn z-40 m-12 rotate-12">
+				<img src="/images/1/o-mask.png" class="faqMask z-50 w-16" alt="Paradox Mask"/>
+			</button>
+		</div>
+
 		<a class="fixed top-0 left-4 z-50" href="https://hackclub.com/">
 			<img src="/images/flag-orpheus-top.svg" alt="Orpheus Flag"
 				 class="transition-all duration-300 hover:opacity-65 cursor-pointer"
@@ -255,6 +261,16 @@
 		transition: background-color 5000s ease-in-out 0s;
 	}
 	input { filter: none; }
+
+	.faqBtn {
+		transition: all 0.3s ease;
+	}
+
+	.faqBtn:hover {
+		transform: rotate(0);
+		scale: 1.10;
+		opacity: 0.8;
+	}
 
 	.star {
 		transition: 0.3s ease all;
