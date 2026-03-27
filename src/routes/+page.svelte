@@ -16,13 +16,13 @@
 	const messageTimeouts: ReturnType<typeof setTimeout>[] = [];
 
 	const frames = [
-			'/images/curtains/frame7.png',
-			'/images/curtains/frame6.png',
-			'/images/curtains/frame5.png',
-			'/images/curtains/frame4.png',
-			'/images/curtains/frame3.png',
-			'/images/curtains/frame2.png',
 			'/images/curtains/frame1.png',
+			'/images/curtains/frame2.png',
+			'/images/curtains/frame3.png',
+			'/images/curtains/frame4.png',
+			'/images/curtains/frame5.png',
+			'/images/curtains/frame6.png',
+			'/images/curtains/frame7.png',
 	]
 
 	let curtainLeft: HTMLImageElement;
@@ -106,8 +106,17 @@
 	}
 
 	let hero: HTMLElement;
+	let barFill: HTMLElement;
 
 	onMount(() => {
+
+		window.addEventListener("scroll", () => {
+			const scrolled = window.scrollY;
+			const total = document.body.scrollHeight - window.innerHeight;
+			const progress = (scrolled / total) * 100;
+			barFill.style.width = `${progress}%`;
+		});
+
 		requestAnimationFrame(() => { open = true; });
 
 		gsap.registerPlugin(ScrollTrigger);
@@ -116,7 +125,7 @@
 			trigger: hero,
 			pin: true,
 			start: 'top top',
-			end: '+1500',
+			end: '+2500',
 			scrub: 1,
 			onUpdate: (self) => {
 				const curtainProgress = Math.min(self.progress / 0.5, 1);
@@ -130,10 +139,15 @@
 </script>
 
 <main class="overflow-x-hidden">
+
+	<div class="fixed top-0 left-0 h-2.5 w-full bg-black z-[9999]">
+		<div bind:this={barFill} class="h-full w-0 bg-[#732e01] transition-[width] duration-100 ease-linear"></div>
+	</div>
+
 	<div class="w-screen h-screen bg-[#180c04] select-none z-10" bind:this={hero}>
 
 		<div class="flex items-start justify-end">
-			<button title="FAQ" class="faqBtn z-40 m-12 mr-14 rotate-12">
+			<button title="FAQ" class="faqBtn z-50 m-12 mr-14 rotate-12">
 				<img src="/images/1/o-mask.png" class="faqMask z-50 w-[clamp(40px,5vw,65px)]" alt="Paradox Mask"/>
 			</button>
 		</div>
@@ -170,11 +184,11 @@
 
 		<img src="/images/1/Curtain-fixed.png"
 			 bind:this={curtainLeft}
-			 class="absolute left-0 top-0 h-[80%] w-auto pointer-events-none select-none z-50"
+			 class="absolute left-0 top-0 h-[80%] w-auto pointer-events-none select-none z-40"
 			 alt="Left Curtain" />
 		<img src="/images/1/Curtain-fixed.png"
 			 bind:this={curtainRight}
-			 class="absolute right-0 top-0 h-[80%] w-auto pointer-events-none select-none z-50 scale-x-[-1]"
+			 class="absolute right-0 top-0 h-[80%] w-auto pointer-events-none select-none z-40 scale-x-[-1]"
 			 alt="Right Curtain" />
 
 		<div class="absolute pointer-events-none select-none z-10"
