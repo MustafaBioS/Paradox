@@ -367,8 +367,8 @@
 	</div>
 
 	<div
-		class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] relative flex items-center flex-col justify-center z-30 p-20"
-		style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)"
+		class="w-screen h-screen overflow-hidden relative flex items-center flex-col justify-center z-30 p-20"
+		style="background: linear-gradient(#261d18, black)"
 	>
 		<h1
 			class="mt-10 mb-10"
