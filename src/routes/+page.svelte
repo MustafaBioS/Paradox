@@ -140,10 +140,6 @@
 
 <main class="overflow-x-hidden">
 
-	<div class="fixed top-0 left-0 h-2.5 w-full bg-black z-[9999]">
-		<div bind:this={barFill} class="h-full w-0 bg-[#732e01] transition-[width] duration-100 ease-linear"></div>
-	</div>
-
 	<div class="w-screen h-screen bg-[#180c04] select-none z-10" bind:this={hero}>
 
 		<div class="flex items-start justify-end">
@@ -301,7 +297,7 @@
 
 	</div>
 
-	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] mt-[-100vh] relative flex items-center flex-col justify-center z-30 p-20"
+	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] relative flex items-center flex-col justify-center z-30 p-20"
 		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">
 		<h1 class="mt-10 mb-10"
 			style="
