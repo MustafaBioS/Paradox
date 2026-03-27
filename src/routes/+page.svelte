@@ -301,10 +301,35 @@
 
 	</div>
 
-	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] mt-[-100vh] relative flex items-center justify-center pointer-events-none select-none z-30"
+	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] mt-[-100vh] relative flex items-center flex-col justify-center z-30 p-20"
 		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">
-
+		<h1 class="mt-10 mb-10"
+			style="
+				font-family: 'IM Fell DW Pica', serif;
+				font-style: italic;
+				font-size: clamp(3rem, 4vw, 8rem);
+				color: #fff8e7;
+				text-shadow:
+					0 0 10px rgba(255,200,80,0.9),
+					0 0 20px rgba(255,180,50,0.7),
+					0 0 40px rgba(255,150,20,0.5),
+					0 0 80px rgba(255,120,0,0.3);
+				text-align: center;
+			">How Does It Work?</h1>
+		<div class="relative flex items-center justify-center w-full h-full">
+			<div class="h-full flex flex-col items-center justify-center z-30 w-[clamp(10rem,25vw,25rem)]">
+				<img src="/images/2/build-cropped.png" class="ins" alt="Build">
+				<img src="/images/2/get-cropped.png" class="ins mt-4" alt="Get">
+			</div>
+			<div class="w-[clamp(20rem,35vw,40rem)]">
+				<img src="/images/2/write-cropped.png" class="ins" alt="Write">
+			</div>
+		</div>
 	</div>
+
+<!--	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] relative flex items-center flex-col justify-center z-30"-->
+<!--		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">-->
+<!--	</div>-->
 </main>
 
 <style>
@@ -316,6 +341,15 @@
 		transition: background-color 5000s ease-in-out 0s;
 	}
 	input { filter: none; }
+
+	.ins {
+		transition: all 0.3s ease;
+	}
+
+	.ins:hover {
+		scale: 1.05;
+		opacity: 0.8;
+	}
 
 	.faqBtn {
 		transition: all 0.3s ease;
