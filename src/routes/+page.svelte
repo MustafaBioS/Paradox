@@ -15,6 +15,19 @@
 	let messagePhase = $state<'in' | 'visible' | 'out'>('in');
 	const messageTimeouts: ReturnType<typeof setTimeout>[] = [];
 
+	const frames = [
+			'/images/curtains/frame7.png',
+			'/images/curtains/frame6.png',
+			'/images/curtains/frame5.png',
+			'/images/curtains/frame4.png',
+			'/images/curtains/frame3.png',
+			'/images/curtains/frame2.png',
+			'/images/curtains/frame1.png',
+	]
+
+	let curtainLeft: HTMLImageElement;
+	let curtainRight: HTMLImageElement;
+
 	function clearMessageTimers() {
 		messageTimeouts.forEach(clearTimeout);
 		messageTimeouts.length = 0;
@@ -103,6 +116,14 @@
 			trigger: hero,
 			pin: true,
 			start: 'top top',
+			end: '+1500',
+			scrub: 1,
+			onUpdate: (self) => {
+				const curtainProgress = Math.min(self.progress / 0.5, 1);
+				const index = Math.floor(curtainProgress * (frames.length - 1));
+				curtainLeft.src = frames[index];
+				curtainRight.src = frames[index];
+			}
 		});
 	});
 
@@ -148,10 +169,12 @@
 			 alt="Stage" />
 
 		<img src="/images/1/Curtain-fixed.png"
-			 class="absolute left-0 top-0 h-[80%] w-auto pointer-events-none select-none z-20"
+			 bind:this={curtainLeft}
+			 class="absolute left-0 top-0 h-[80%] w-auto pointer-events-none select-none z-50"
 			 alt="Left Curtain" />
 		<img src="/images/1/Curtain-fixed.png"
-			 class="absolute right-0 top-0 h-[80%] w-auto pointer-events-none select-none z-20 scale-x-[-1]"
+			 bind:this={curtainRight}
+			 class="absolute right-0 top-0 h-[80%] w-auto pointer-events-none select-none z-50 scale-x-[-1]"
 			 alt="Right Curtain" />
 
 		<div class="absolute pointer-events-none select-none z-10"
