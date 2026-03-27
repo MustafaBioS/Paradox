@@ -9,21 +9,23 @@
 	const apiBase = "/api";
 	let open = $state(false);
 
-	let email = $state('');
+	let email = $state("");
 	let submitting = $state(false);
-	let message = $state<{ type: "success" | "error"; text: string } | null>(null);
-	let messagePhase = $state<'in' | 'visible' | 'out'>('in');
+	let message = $state<{ type: "success" | "error"; text: string } | null>(
+		null,
+	);
+	let messagePhase = $state<"in" | "visible" | "out">("in");
 	const messageTimeouts: ReturnType<typeof setTimeout>[] = [];
 
 	const frames = [
-			'/images/curtains/frame1.png',
-			'/images/curtains/frame2.png',
-			'/images/curtains/frame3.png',
-			'/images/curtains/frame4.png',
-			'/images/curtains/frame5.png',
-			'/images/curtains/frame6.png',
-			'/images/curtains/frame7.png',
-	]
+		"/images/curtains/frame1.png",
+		"/images/curtains/frame2.png",
+		"/images/curtains/frame3.png",
+		"/images/curtains/frame4.png",
+		"/images/curtains/frame5.png",
+		"/images/curtains/frame6.png",
+		"/images/curtains/frame7.png",
+	];
 
 	let curtainLeft: HTMLImageElement;
 	let curtainRight: HTMLImageElement;
@@ -33,40 +35,42 @@
 		messageTimeouts.length = 0;
 	}
 
-	function setMessage(payload: { type: "success" | "error"; text: string } | null) {
+	function setMessage(
+		payload: { type: "success" | "error"; text: string } | null,
+	) {
 		clearMessageTimers();
 		if (payload === null) {
 			message = null;
 			return;
 		}
 		message = payload;
-		messagePhase = 'in';
+		messagePhase = "in";
 		messageTimeouts.push(
 			setTimeout(() => {
-				messagePhase = 'visible';
-			}, 10)
+				messagePhase = "visible";
+			}, 10),
 		);
 		messageTimeouts.push(
 			setTimeout(() => {
-				messagePhase = 'out';
+				messagePhase = "out";
 				messageTimeouts.push(
 					setTimeout(() => {
 						message = null;
-						messagePhase = 'in';
-					}, 300)
+						messagePhase = "in";
+					}, 300),
 				);
-			}, 4000)
+			}, 4000),
 		);
 	}
 
 	function dismissMessage() {
 		clearMessageTimers();
-		messagePhase = 'out';
+		messagePhase = "out";
 		messageTimeouts.push(
 			setTimeout(() => {
 				message = null;
-				messagePhase = 'in';
-			}, 300)
+				messagePhase = "in";
+			}, 300),
 		);
 	}
 
@@ -93,13 +97,27 @@
 			if (res.ok && data.success) {
 				setMessage({ type: "success", text: "You're on the list!" });
 				email = "";
-			} else if (res.status === 409 || data.message?.toLowerCase().includes("already registered")) {
-				setMessage({ type: "error", text: data.message ?? "This email is already registered." });
+			} else if (
+				res.status === 409 ||
+				data.message?.toLowerCase().includes("already registered")
+			) {
+				setMessage({
+					type: "error",
+					text: data.message ?? "This email is already registered.",
+				});
 			} else {
-				setMessage({ type: "error", text: data.message ?? "Something went wrong. Please try again." });
+				setMessage({
+					type: "error",
+					text:
+						data.message ??
+						"Something went wrong. Please try again.",
+				});
 			}
 		} catch {
-			setMessage({ type: "error", text: "Something went wrong. Please try again." });
+			setMessage({
+				type: "error",
+				text: "Something went wrong. Please try again.",
+			});
 		} finally {
 			submitting = false;
 		}
@@ -109,7 +127,6 @@
 	let barFill: HTMLElement;
 
 	onMount(() => {
-
 		window.addEventListener("scroll", () => {
 			const scrolled = window.scrollY;
 			const total = document.body.scrollHeight - window.innerHeight;
@@ -117,89 +134,111 @@
 			barFill.style.width = `${progress}%`;
 		});
 
-		requestAnimationFrame(() => { open = true; });
+		requestAnimationFrame(() => {
+			open = true;
+		});
 
 		gsap.registerPlugin(ScrollTrigger);
 
 		ScrollTrigger.create({
 			trigger: hero,
 			pin: true,
-			start: 'top top',
-			end: '+2500',
+			start: "top top",
+			end: "+2500",
 			scrub: 1,
 			onUpdate: (self) => {
 				const curtainProgress = Math.min(self.progress / 0.5, 1);
 				const index = Math.floor(curtainProgress * (frames.length - 1));
 				curtainLeft.src = frames[index];
 				curtainRight.src = frames[index];
-			}
+			},
 		});
 	});
-
 </script>
 
 <main class="overflow-x-hidden">
-
-	<div class="w-screen h-screen bg-[#180c04] select-none z-10" bind:this={hero}>
-
+	<div
+		class="w-screen h-screen bg-[#180c04] select-none z-10"
+		bind:this={hero}
+	>
 		<div class="flex items-start justify-end">
 			<button title="FAQ" class="faqBtn z-50 m-12 mr-14 rotate-12">
-				<img src="/images/1/o-mask.png" class="faqMask z-50 w-[clamp(40px,5vw,65px)]" alt="Paradox Mask"/>
+				<img
+					src="/images/1/o-mask.png"
+					class="faqMask z-50 w-[clamp(40px,5vw,65px)]"
+					alt="Paradox Mask"
+				/>
 			</button>
 		</div>
 
 		<a class="fixed top-0 left-4 z-50" href="https://hackclub.com/">
-			<img src="/images/flag-orpheus-top.svg" alt="Orpheus Flag"
-				 class="transition-all duration-300 hover:opacity-65 cursor-pointer h-auto w-[clamp(130px,13vw,220px)]"/>
+			<img
+				src="/images/flag-orpheus-top.svg"
+				alt="Orpheus Flag"
+				class="transition-all duration-300 hover:opacity-65 cursor-pointer h-auto w-[clamp(130px,13vw,220px)]"
+			/>
 		</a>
 
-		<div class="h-screen inset-0 w-full bg-black z-50 fixed opacity-55 hidden pointer-events-none select-none"></div>
+		<div
+			class="h-screen inset-0 w-full bg-black z-50 fixed opacity-55 hidden pointer-events-none select-none"
+		></div>
 
-<!--		<div class="h-full w-full absolute flex items-center justify-center z-50 inset-0 pointer-events-none select-none">-->
-<!--			<div class="bg-black h-40 w-40"></div>-->
-<!--		</div>-->
+		<!--		<div class="h-full w-full absolute flex items-center justify-center z-50 inset-0 pointer-events-none select-none">-->
+		<!--			<div class="bg-black h-40 w-40"></div>-->
+		<!--		</div>-->
 
 		{#if !data.user}
 			{#if page.url.searchParams.get("error")}
-				<p class="absolute top-4 left-1/2 -translate-x-1/2 z-50 text-red-300 text-sm">
+				<p
+					class="absolute top-4 left-1/2 -translate-x-1/2 z-50 text-red-300 text-sm"
+				>
 					Authentication error. Please try again.
 				</p>
 			{/if}
-<!--			<button onclick={() => signIn()}-->
-<!--					class="fixed top-0 right-6 z-50 cursor-pointer transition-opacity duration-300 hover:opacity-60">-->
-<!--				<img src="/images/1/Sign-fixed.png"-->
-<!--					 class="pointer-events-none select-none"-->
-<!--					 style="width: clamp(130px, 13vw, 220px); height: auto;"-->
-<!--					 alt="Sign In" />-->
-<!--			</button>-->
+			<!--			<button onclick={() => signIn()}-->
+			<!--					class="fixed top-0 right-6 z-50 cursor-pointer transition-opacity duration-300 hover:opacity-60">-->
+			<!--				<img src="/images/1/Sign-fixed.png"-->
+			<!--					 class="pointer-events-none select-none"-->
+			<!--					 style="width: clamp(130px, 13vw, 220px); height: auto;"-->
+			<!--					 alt="Sign In" />-->
+			<!--			</button>-->
 		{/if}
 
-		<img src="/images/1/Stage-fixed.jpg"
-			 class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
-			 alt="Stage" />
+		<img
+			src="/images/1/Stage-fixed.jpg"
+			class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
+			alt="Stage"
+		/>
 
-		<img src="/images/1/Curtain-fixed.png"
-			 bind:this={curtainLeft}
-			 class="absolute left-0 top-0 h-[80%] w-auto pointer-events-none select-none z-40"
-			 alt="Left Curtain" />
-		<img src="/images/1/Curtain-fixed.png"
-			 bind:this={curtainRight}
-			 class="absolute right-0 top-0 h-[80%] w-auto pointer-events-none select-none z-40 scale-x-[-1]"
-			 alt="Right Curtain" />
+		<img
+			src="/images/1/Curtain-fixed.png"
+			bind:this={curtainLeft}
+			class="absolute left-0 top-0 h-[80%] w-auto pointer-events-none select-none z-40"
+			alt="Left Curtain"
+		/>
+		<img
+			src="/images/1/Curtain-fixed.png"
+			bind:this={curtainRight}
+			class="absolute right-0 top-0 h-[80%] w-auto pointer-events-none select-none z-40 scale-x-[-1]"
+			alt="Right Curtain"
+		/>
 
-		<div class="absolute pointer-events-none select-none z-10"
-			 style="
+		<div
+			class="absolute pointer-events-none select-none z-10"
+			style="
 			aspect-ratio: 16 / 9;
 			width: max(100vw, calc(100vh * 16 / 9));
 			height: max(100vh, calc(100vw * 9 / 16));
 			top: 50%;
 			left: 50%;
-			transform: translate(-50%, -50%);
-		 ">
-
-			<div class="absolute flex flex-col items-center"
-				 style="top: 13%; left: 50%; transform: translateX(-50%); width: 43.5%;">
-				<p style="
+			transform: translate(-50%, -50%);"
+		>
+			<div
+				class="absolute flex flex-col items-center"
+				style="top: 13%; left: 50%; transform: translateX(-50%); width: 43.5%;"
+			>
+				<p
+					style="
 				font-family: 'IM Fell DW Pica', serif;
 				font-style: italic;
 				font-size: clamp(1rem, 2vw, 2rem);
@@ -215,55 +254,77 @@
 				text-align: center;
 				margin-top: 50px;
 				position: absolute;
-			">Build a story. Then live inside it.</p>
+			"
+				>
+					Build a story. Then live inside it.
+				</p>
 
-				<img src="/images/1/Logo-fixed.png"
-					 class="pointer-events-none select-none w-full h-auto"
-					 alt="Paradox Logo" />
+				<img
+					src="/images/1/Logo-fixed.png"
+					class="pointer-events-none select-none w-full h-auto"
+					alt="Paradox Logo"
+				/>
 			</div>
 		</div>
 
-		<div class="absolute inset-x-0 bottom-0 flex flex-col items-center pointer-events-none select-none z-30"
-			 style="padding-bottom: clamp(1%, 2vh, 4%);">
+		<div
+			class="absolute inset-x-0 bottom-0 flex flex-col items-center pointer-events-none select-none z-30"
+			style="padding-bottom: clamp(1%, 2vh, 4%);"
+		>
+			<div
+				class="relative pointer-events-none select-none z-20"
+				style="width: clamp(300px, 58vw, 860px);"
+			>
+				<img
+					src="/images/1/Mask-fixed.png"
+					class="pointer-events-none select-none absolute left-1/2 z-30"
+					style="
+							width: clamp(100px, 15vw, 265px);
+							height: auto;
+							transform: translateX(-50%) translateY(-82%);
+							top: 0;
+							"
+					alt="Mask"
+				/>
 
-			<div class="relative pointer-events-none select-none z-20"
-				 style="width: clamp(300px, 58vw, 860px);">
-
-				<img src="/images/1/Mask-fixed.png"
-					 class="pointer-events-none select-none absolute left-1/2 z-30"
-					 style="
-               width: clamp(100px, 15vw, 265px);
-               height: auto;
-               transform: translateX(-50%) translateY(-82%);
-               top: 0;
-             "
-					 alt="Mask" />
-
-				<form class="contents" onsubmit={(e) => { e.preventDefault(); if (!submitting) handleSubmit(); }}>
-					<button type="submit"
-							disabled={submitting}
-							class="absolute z-30 star border-0 bg-transparent p-0 cursor-pointer"
-							style="
-               width: clamp(40px, 8vw, 120px);
-               height: auto;
-               left: -3%;
-               top: 10%;
-               transform: translateY(-50%);
-             "
-							aria-label="Submit RSVP">
-						<img src="/images/1/star.png"
-							 alt="Star"
-							 class="pointer-events-none w-full h-auto block"
+				<form
+					class="contents"
+					onsubmit={(e) => {
+						e.preventDefault();
+						if (!submitting) handleSubmit();
+					}}
+				>
+					<button
+						type="submit"
+						disabled={submitting}
+						class="absolute z-30 star border-0 bg-transparent p-0 cursor-pointer"
+						style="
+							width: clamp(40px, 8vw, 120px);
+							height: auto;
+							right: -3%;
+							bottom: -20%;
+							transform: translateY(-50%);
+							"
+						aria-label="Submit RSVP"
+					>
+						<img
+							src="/images/1/star.png"
+							alt="Star"
+							class="pointer-events-none w-full h-auto block"
 						/>
 					</button>
 
-				<img src="/images/1/Board-fixed.png"
-					 class="w-full h-auto pointer-events-none select-none"
-					 alt="Board" />
+					<img
+						src="/images/1/Board-fixed.png"
+						class="w-full h-auto pointer-events-none select-none"
+						alt="Board"
+					/>
 
-				<input type="email" name="email"
-					   class="font-myFont font-bold absolute bg-transparent text-gray-300 text-center border-none outline-none pointer-events-auto"
-					   style="
+					<input
+						type="email"
+						name="email"
+						class="font-myFont font-bold absolute bg-transparent text-gray-300 text-center border-none outline-none pointer-events-auto"
+						style="
 						   width: 85%;
 						   left: 7.5%;
 						   top: 55%;
@@ -271,35 +332,46 @@
 						   font-size: clamp(1.0rem, 2.5vw, 3rem);
 						   letter-spacing: 0.08em;
 					   "
-					   bind:value={email}
-					   disabled={submitting}
-					   placeholder="ENTER YOUR EMAIL HERE..." />
+						bind:value={email}
+						disabled={submitting}
+						placeholder="ENTER YOUR EMAIL HERE..."
+					/>
 				</form>
 			</div>
 		</div>
 
 		<!-- Notification toast: fixed top center -->
 		{#if message}
-			<div class="fixed top-6 inset-x-0 flex flex-col items-center gap-2 z-50 pointer-events-none">
+			<div
+				class="fixed top-6 inset-x-0 flex flex-col items-center gap-2 z-50 pointer-events-none"
+			>
 				<div
-					class="notification-toast pointer-events-auto flex items-start justify-between gap-3 px-5 py-3 border-2 font-medium max-w-sm w-full shadow-sm transition-all duration-300 ease-out {message.type === 'error' ? 'notification-toast-error' : 'notification-toast-success'} {messagePhase !== 'visible' ? 'notification-toast-hidden' : ''}"
+					class="notification-toast pointer-events-auto flex items-start justify-between gap-3 px-5 py-3 border-2 font-medium max-w-sm w-full shadow-sm transition-all duration-300 ease-out {message.type ===
+					'error'
+						? 'notification-toast-error'
+						: 'notification-toast-success'} {messagePhase !==
+					'visible'
+						? 'notification-toast-hidden'
+						: ''}"
 				>
 					<span>{message.text}</span>
 					<button
 						type="button"
 						onclick={dismissMessage}
 						class="notification-dismiss"
-						aria-label="Dismiss"
-					>✕</button>
+						aria-label="Dismiss">✕</button
+					>
 				</div>
 			</div>
 		{/if}
-
 	</div>
 
-	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] relative flex items-center flex-col justify-center z-30 p-20"
-		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">
-		<h1 class="mt-10 mb-10"
+	<div
+		class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] relative flex items-center flex-col justify-center z-30 p-20"
+		style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)"
+	>
+		<h1
+			class="mt-10 mb-10"
 			style="
 				font-family: 'IM Fell DW Pica', serif;
 				font-style: italic;
@@ -311,21 +383,38 @@
 					0 0 40px rgba(255,150,20,0.5),
 					0 0 80px rgba(255,120,0,0.3);
 				text-align: center;
-			">How Does It Work?</h1>
+			"
+		>
+			How Does It Work?
+		</h1>
 		<div class="relative flex items-center justify-center w-full h-full">
-			<div class="h-full flex flex-col items-center justify-center z-30 w-[clamp(10rem,25vw,25rem)]">
-				<img src="/images/2/build-cropped.png" class="ins" alt="Build">
-				<img src="/images/2/get-cropped.png" class="ins mt-4" alt="Get">
+			<div
+				class="h-full flex flex-col items-center justify-center z-30 w-[clamp(10rem,25vw,25rem)]"
+			>
+				<img
+					src="/images/2/build-cropped.png"
+					class="ins"
+					alt="Build"
+				/>
+				<img
+					src="/images/2/get-cropped.png"
+					class="ins mt-4"
+					alt="Get"
+				/>
 			</div>
 			<div class="w-[clamp(20rem,35vw,40rem)]">
-				<img src="/images/2/write-cropped.png" class="ins" alt="Write">
+				<img
+					src="/images/2/write-cropped.png"
+					class="ins"
+					alt="Write"
+				/>
 			</div>
 		</div>
 	</div>
 
-<!--	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] relative flex items-center flex-col justify-center z-30"-->
-<!--		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">-->
-<!--	</div>-->
+	<!--	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] relative flex items-center flex-col justify-center z-30"-->
+	<!--		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">-->
+	<!--	</div>-->
 </main>
 
 <style>
@@ -336,7 +425,9 @@
 		-webkit-text-fill-color: #9ca3af !important;
 		transition: background-color 5000s ease-in-out 0s;
 	}
-	input { filter: none; }
+	input {
+		filter: none;
+	}
 
 	.ins {
 		transition: all 0.3s ease;
@@ -353,7 +444,7 @@
 
 	.faqBtn:hover {
 		transform: rotate(0);
-		scale: 1.10;
+		scale: 1.1;
 		opacity: 0.8;
 	}
 
@@ -404,5 +495,4 @@
 	.notification-dismiss:hover {
 		opacity: 1;
 	}
-
 </style>
