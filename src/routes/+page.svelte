@@ -123,46 +123,37 @@
 		}
 	}
 
-	let hero: HTMLElement;
-	let barFill: HTMLElement;
-
-	onMount(() => {
-		window.addEventListener("scroll", () => {
-			const scrolled = window.scrollY;
-			const total = document.body.scrollHeight - window.innerHeight;
-			const progress = (scrolled / total) * 100;
-			barFill.style.width = `${progress}%`;
-		});
-
-		requestAnimationFrame(() => {
-			open = true;
-		});
-
-		gsap.registerPlugin(ScrollTrigger);
-
-		ScrollTrigger.create({
-			trigger: hero,
-			pin: true,
-			start: "top top",
-			end: "+2500",
-			scrub: 1,
-			onUpdate: (self) => {
-				const curtainProgress = Math.min(self.progress / 0.5, 1);
-				const index = Math.floor(curtainProgress * (frames.length - 1));
-				curtainLeft.src = frames[index];
-				curtainRight.src = frames[index];
-			},
-		});
-	});
+	// let hero: HTMLElement;
+	//
+	// onMount(() => {
+	// 	requestAnimationFrame(() => {
+	// 		open = true;
+	// 	});
+	//
+	// 	gsap.registerPlugin(ScrollTrigger);
+	//
+	// 	ScrollTrigger.create({
+	// 		trigger: hero,
+	// 		pin: true,
+	// 		start: "top top",
+	// 		end: "+2500",
+	// 		scrub: 1,
+	// 		onUpdate: (self) => {
+	// 			const curtainProgress = Math.min(self.progress / 0.5, 1);
+	// 			const index = Math.floor(curtainProgress * (frames.length - 1));
+	// 			curtainLeft.src = frames[index];
+	// 			curtainRight.src = frames[index];
+	// 		},
+	// 	});
+	// });
 </script>
 
-<main class="overflow-x-hidden">
+<main class="relative overflow-x-hidden">
 	<div
-		class="w-screen h-screen bg-[#180c04] select-none z-10"
-		bind:this={hero}
+		class="relative w-full h-screen bg-[#180c04] select-none z-10 overflow-hidden"
 	>
 		<div class="flex items-start justify-end">
-			<button title="FAQ" class="faqBtn z-50 m-12 mr-14 rotate-12">
+			<button title="FAQ" class="z-50 m-12 mr-14 rotate-12 transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-110 hover:opacity-80">
 				<img
 					src="/images/1/o-mask.png"
 					class="faqMask z-50 w-[clamp(40px,5vw,65px)]"
@@ -182,10 +173,6 @@
 		<div
 			class="h-screen inset-0 w-full bg-black z-50 fixed opacity-55 hidden pointer-events-none select-none"
 		></div>
-
-		<!--		<div class="h-full w-full absolute flex items-center justify-center z-50 inset-0 pointer-events-none select-none">-->
-		<!--			<div class="bg-black h-40 w-40"></div>-->
-		<!--		</div>-->
 
 		{#if !data.user}
 			{#if page.url.searchParams.get("error")}
@@ -238,7 +225,7 @@
 				style="top: 13%; left: 50%; transform: translateX(-50%); width: 43.5%;"
 			>
 				<p
-					style="
+				style="
 				font-family: 'IM Fell DW Pica', serif;
 				font-style: italic;
 				font-size: clamp(1rem, 2vw, 2rem);
@@ -367,7 +354,7 @@
 	</div>
 
 	<div
-		class="w-screen h-screen overflow-hidden relative flex items-center flex-col justify-center z-30 p-20"
+		class="w-full h-full relative flex items-center flex-col justify-center z-30 p-10"
 		style="background: linear-gradient(#261d18, black)"
 	>
 		<h1
@@ -389,32 +376,82 @@
 		</h1>
 		<div class="relative flex items-center justify-center w-full h-full">
 			<div
-				class="h-full flex flex-col items-center justify-center z-30 w-[clamp(10rem,25vw,25rem)]"
+				class="h-full flex flex-col items-center justify-center z-30 w-[min(38vw,10rem)] sm:w-[clamp(10rem,25vw,25rem)]"
 			>
 				<img
 					src="/images/2/build-cropped.png"
-					class="ins"
+					class="transition-all duration-300 ease-in-out hover:scale-105 hover:opacity-80"
 					alt="Build"
 				/>
 				<img
 					src="/images/2/get-cropped.png"
-					class="ins mt-4"
+					class="transition-all duration-300 ease-in-out hover:scale-105 hover:opacity-80 mt-4"
 					alt="Get"
 				/>
 			</div>
-			<div class="w-[clamp(20rem,35vw,40rem)]">
+			<div class="w-[min(52vw,20rem)] sm:w-[clamp(20rem,35vw,40rem)]">
 				<img
 					src="/images/2/write-cropped.png"
-					class="ins"
+					class="transition-all duration-300 ease-in-out hover:scale-105 hover:opacity-80"
 					alt="Write"
 				/>
 			</div>
 		</div>
+		<div class="flex flex-col items-center justify-center mt-10 mb-24	">
+			<h1
+				class="mt-10 mb-10"
+				style="
+				font-family: 'IM Fell DW Pica', serif;
+				font-style: italic;
+				font-size: clamp(2rem, 3vw, 7rem);
+				color: #fff8e7;
+				text-shadow:
+					0 0 10px rgba(255,200,80,0.9),
+					0 0 20px rgba(255,180,50,0.7),
+					0 0 40px rgba(255,150,20,0.5),
+					0 0 80px rgba(255,120,0,0.3);
+				text-align: center;
+			"
+			>
+				your story starts here
+			</h1>
+			<div class="flex flex-col items-center justify-center gap-4">
+				<button
+					class="border-2 h-14 w-48 border-[#FBDA80] text-white text-xl font-myFont hover:opacity-70 transition-all duration-300 ease-in-out"
+				>
+					Sign Up!
+				</button>
+				<button
+					class="border-2 h-14 w-48 border-[#FBDA80] text-white text-xl font-myFont hover:opacity-70 transition-all duration-300 ease-in-out"
+				>
+					FAQ
+				</button>
+			</div>
+		</div>
 	</div>
-
-	<!--	<div class="w-screen h-screen overflow-hidden border-t-8 border-[#732e01] relative flex items-center flex-col justify-center z-30"-->
-	<!--		 style="background: radial-gradient(ellipse at center, #7a4010 0%, #3d1c06 45%, #150800 100%)">-->
-	<!--	</div>-->
+	<footer class="flex flex-col items-center justify-center h-64 bg-[#830A18]">
+		<img
+			src="/images/1/Logo.png"
+			class="w-[clamp(14rem,22vw,22rem)]"
+			alt="Paradox Logo"
+		/>
+		<p
+			class="text-[#FBDA80] mt-4 text-lg font-myFont text-center"
+		>
+			&copy; 2026
+			<a
+				href="http://hackclub.com"
+				class="transition-all duration-300 ease-in-out hover:opacity-70"
+			>
+				Hack Club
+			</a>
+		</p>
+		<p
+			class="text-[#FBDA80] text-lg font-myFont text-center"
+		>
+			Made By Teens, For Teens.
+		</p>
+	</footer>
 </main>
 
 <style>
@@ -427,25 +464,6 @@
 	}
 	input {
 		filter: none;
-	}
-
-	.ins {
-		transition: all 0.3s ease;
-	}
-
-	.ins:hover {
-		scale: 1.05;
-		opacity: 0.8;
-	}
-
-	.faqBtn {
-		transition: all 0.3s ease;
-	}
-
-	.faqBtn:hover {
-		transform: rotate(0);
-		scale: 1.1;
-		opacity: 0.8;
 	}
 
 	.star {
@@ -495,4 +513,5 @@
 	.notification-dismiss:hover {
 		opacity: 1;
 	}
+
 </style>
