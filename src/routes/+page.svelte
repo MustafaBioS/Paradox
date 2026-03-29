@@ -166,7 +166,7 @@
 			</button>
 		</div>
 
-		<a class="fixed top-0 left-4 z-50" href="https://hackclub.com/">
+		<a class="absolute top-0 left-4 z-50" href="https://hackclub.com/">
 			<img
 				src="/images/flag-orpheus-top.svg"
 				alt="Orpheus Flag"
