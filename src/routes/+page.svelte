@@ -153,7 +153,11 @@
 		class="relative w-full h-screen bg-[#180c04] select-none z-10 overflow-hidden"
 	>
 		<div class="flex items-start justify-end">
-			<button title="FAQ" class="z-50 m-12 mr-14 rotate-12 transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-110 hover:opacity-80">
+			<button
+				title="FAQ"
+				class="z-50 m-12 mr-14 rotate-12 transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-110 hover:opacity-80"
+				onclick="{() => window.location.href = '/faq'}"
+			>
 				<img
 					src="/images/1/o-mask.png"
 					class="faqMask z-50 w-[clamp(40px,5vw,65px)]"
@@ -418,11 +422,13 @@
 			<div class="flex flex-col items-center justify-center gap-4">
 				<button
 					class="border-2 h-14 w-48 border-[#FBDA80] text-white text-xl font-myFont hover:opacity-70 transition-all duration-300 ease-in-out"
+					onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
 				>
 					Sign Up!
 				</button>
 				<button
 					class="border-2 h-14 w-48 border-[#FBDA80] text-white text-xl font-myFont hover:opacity-70 transition-all duration-300 ease-in-out"
+					onclick="{() => window.location.href = '/faq'}"
 				>
 					FAQ
 				</button>
