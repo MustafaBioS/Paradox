@@ -1,19 +1,12 @@
 <script>
     let isOpen = $state(false);
 
-    let book;
-    let faq;
-
     function animateBook() {
-        if (isOpen === false) {
-            book.classList.add("openBook");
-            faq.style.display = "flex";
-            isOpen = true;
-        }
+        isOpen = !isOpen;
     }
 </script>
 
-<main class="main w-full min-h-screen relative">
+<main class="main w-full min-h-screen relative overflow-hidden">
 
     <div class="absolute top-0 left-0 p-4 sm:p-6">
         <button onclick={() => (window.location.href = "/")}>
@@ -27,14 +20,14 @@
 
     <button class="absolute bottom-0 left-1/2 -translate-x-1/2" onclick={animateBook}>
         <img
-                bind:this={book}
                 src="/images/faq/faq-book.png"
-                class="min-w-[20rem] w-[50rem] max-w-[45vw] transition-all duration-300 ease-in-out hover:opacity-80 cursor-pointer"
+                class="min-w-[20rem] w-[50rem] max-w-[45vw] transition-all duration-500 ease-in-out hover:opacity-80 cursor-pointer"
+                class:openBook={isOpen}
                 alt="FAQ Playbook"
         />
     </button>
 
-    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-row hidden" bind:this={faq}>
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 flex-row" class:flex={isOpen} class:hidden={!isOpen}>
         <div
             class="bg-white min-h-[20rem] h-[50rem] min-w-[20rem] w-[38rem] max-w[42rem] border-r-2 border-black rounded-lg p-10"
         >
@@ -149,5 +142,10 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+    }
+
+    .openBook  { /*Temporary Animation*/
+        transform-origin: center bottom;
+        transform: rotateX(180deg);
     }
 </style>

@@ -2,12 +2,12 @@
 	import { page } from "$app/state";
 	import type { PageData } from "./$types";
 	import { onMount } from "svelte";
-	import { gsap } from "gsap";
-	import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 	let { data }: { data: PageData } = $props();
 	const apiBase = "/api";
 	let open = $state(false);
+
+	let animate = $state(true);
 
 	let email = $state("");
 	let submitting = $state(false);
@@ -18,17 +18,50 @@
 	const messageTimeouts: ReturnType<typeof setTimeout>[] = [];
 
 	const frames = [
-		"/images/curtains/frame1.png",
-		"/images/curtains/frame2.png",
-		"/images/curtains/frame3.png",
-		"/images/curtains/frame4.png",
-		"/images/curtains/frame5.png",
-		"/images/curtains/frame6.png",
 		"/images/curtains/frame7.png",
+		"/images/curtains/frame6.png",
+		"/images/curtains/frame5.png",
+		"/images/curtains/frame4.png",
+		"/images/curtains/frame3.png",
+		"/images/curtains/frame2.png",
+		"/images/curtains/frame1.png",
 	];
+	let currentCurtainFrame = $state(frames.length - 1);
 
 	let curtainLeft: HTMLImageElement;
 	let curtainRight: HTMLImageElement;
+
+
+	onMount(() => {
+		if (window.scrollY > 0) {
+			animate = false;
+			// image.src = frames[0];
+		}
+	});
+
+	onMount(() => {
+		if (animate) {
+			currentCurtainFrame = frames.length - 1;
+			let frameTimer: ReturnType<typeof setTimeout> | null = null;
+
+			frames.forEach((src) => {
+				const image = new Image();
+				image.src = src;
+			});
+
+			const stepCurtainOpen = () => {
+				if (currentCurtainFrame <= 0) return;
+				currentCurtainFrame -= 1;
+				frameTimer = setTimeout(stepCurtainOpen, 90);
+			};
+
+			frameTimer = setTimeout(stepCurtainOpen, 90);
+
+			return () => {
+				if (frameTimer) clearTimeout(frameTimer);
+			};
+		}
+	});
 
 	function clearMessageTimers() {
 		messageTimeouts.forEach(clearTimeout);
@@ -122,30 +155,6 @@
 			submitting = false;
 		}
 	}
-
-	// let hero: HTMLElement;
-	//
-	// onMount(() => {
-	// 	requestAnimationFrame(() => {
-	// 		open = true;
-	// 	});
-	//
-	// 	gsap.registerPlugin(ScrollTrigger);
-	//
-	// 	ScrollTrigger.create({
-	// 		trigger: hero,
-	// 		pin: true,
-	// 		start: "top top",
-	// 		end: "+2500",
-	// 		scrub: 1,
-	// 		onUpdate: (self) => {
-	// 			const curtainProgress = Math.min(self.progress / 0.5, 1);
-	// 			const index = Math.floor(curtainProgress * (frames.length - 1));
-	// 			curtainLeft.src = frames[index];
-	// 			curtainRight.src = frames[index];
-	// 		},
-	// 	});
-	// });
 </script>
 
 <main class="relative overflow-x-hidden">
@@ -202,13 +211,13 @@
 		/>
 
 		<img
-			src="/images/1/Curtain-fixed.png"
+			src={animate ? frames[currentCurtainFrame] : frames[0]}
 			bind:this={curtainLeft}
 			class="absolute left-0 top-0 h-[80%] w-auto pointer-events-none select-none z-40"
 			alt="Left Curtain"
 		/>
 		<img
-			src="/images/1/Curtain-fixed.png"
+			src={animate ? frames[currentCurtainFrame] : frames[0]}
 			bind:this={curtainRight}
 			class="absolute right-0 top-0 h-[80%] w-auto pointer-events-none select-none z-40 scale-x-[-1]"
 			alt="Right Curtain"
