@@ -37,7 +37,7 @@ onDestroy(() => {
 let { children } = $props();</script>
 
 <svelte:head>
-	<link rel="icon" href="/images/1/o-mask.png" />
+	<link rel="icon" href="/images/1/imresizer-o-mask.png" />
 </svelte:head>
 
 {@render children()}

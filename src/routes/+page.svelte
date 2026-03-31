@@ -272,7 +272,7 @@
 					style="
 							width: clamp(100px, 15vw, 265px);
 							height: auto;
-							transform: translateX(-50%) translateY(-82%);
+							transform: translateX(-50%) translateY(-90%);
 							top: 0;
 							"
 					alt="Mask"
@@ -292,8 +292,8 @@
 						style="
 							width: clamp(40px, 8vw, 120px);
 							height: auto;
-							right: -3%;
-							bottom: -20%;
+							right: -5%;
+							bottom: -25%;
 							transform: translateY(-50%);
 							"
 						aria-label="Submit RSVP"
@@ -306,7 +306,7 @@
 					</button>
 
 					<img
-						src="/images/1/Board-fixed.png"
+						src="/images/1/image%2017.png"
 						class="w-full h-auto pointer-events-none select-none"
 						alt="Board"
 					/>
