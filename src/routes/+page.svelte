@@ -238,10 +238,9 @@
 				style="top: 13%; left: 50%; transform: translateX(-50%); width: 43.5%;"
 			>
 				<p
-				style="
-				font-family: 'IM Fell DW Pica', serif;
-				font-style: italic;
-				font-size: clamp(1rem, 2vw, 2rem);
+						style="
+				font-family: 'Bethany', serif;
+				font-size: clamp(0.75rem, 1.35vw, 1.35rem);
 				color: #fff8e7;
 				letter-spacing: 0.02em;
 				white-space: nowrap;
@@ -252,7 +251,24 @@
 					0 0 80px rgba(255,120,0,0.3);
 				margin: 0; padding: 0;
 				text-align: center;
-				margin-top: 50px;
+				margin-top: 15px;
+				position: absolute;
+				opacity: 0.75;
+			"
+				>
+					BUILD FOR 30 HOURS - LONDON, UK
+				</p>
+
+				<p
+				style="
+				font-family: 'Bethany', serif;
+				font-size: clamp(1.25rem, 2.25vw, 2.25rem);
+				color: #fff8e7;
+				letter-spacing: 0.02em;
+				white-space: nowrap;
+				margin: 0; padding: 0;
+				text-align: center;
+				margin-top: 45px;
 				position: absolute;
 			"
 				>
@@ -367,15 +383,18 @@
 	</div>
 
 	<div
-		class="w-full h-full relative flex items-center flex-col justify-center z-30 p-10"
-		style="background: linear-gradient(#261d18, black)"
+		class="w-full h-full relative flex items-center flex-col justify-center z-30 p-10 overflow-hidden"
+		style="background-image: url('/images/2/yellow-spiral.png'); background-size: cover; background-position: center; background-repeat: no-repeat;"
 	>
+		<div
+				aria-hidden="true"
+				class="pointer-events-none absolute inset-x-0 top-0 z-10 h-[clamp(80px,14vh,180px)] bg-gradient-to-b from-[#241B16] to-transparent"
+		></div>
 		<h1
-			class="mt-10 mb-10"
+			class="mt-24 mb-14"
 			style="
-				font-family: 'IM Fell DW Pica', serif;
-				font-style: italic;
-				font-size: clamp(3rem, 4vw, 8rem);
+				font-family: 'Bethany', serif;
+				font-size: clamp(2.5rem, 4vw, 6rem);
 				color: #fff8e7;
 				text-shadow:
 					0 0 10px rgba(255,200,80,0.9),
@@ -387,7 +406,7 @@
 		>
 			How Does It Work?
 		</h1>
-		<div class="relative flex items-center justify-center w-full h-full">
+		<div class="relative flex items-center justify-center w-full h-full mb-52">
 			<div
 				class="h-full flex flex-col items-center justify-center z-30 w-[min(38vw,10rem)] sm:w-[clamp(10rem,25vw,25rem)]"
 			>
@@ -410,12 +429,16 @@
 				/>
 			</div>
 		</div>
-		<div class="flex flex-col items-center justify-center mt-10 mb-24	">
-			<h1
-				class="mt-10 mb-10"
-				style="
-				font-family: 'IM Fell DW Pica', serif;
-				font-style: italic;
+		<div
+			aria-hidden="true"
+			class="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[clamp(70px,12vh,150px)] bg-[linear-gradient(to_bottom,rgba(0,0,0,0)_0%,rgba(0,0,0,0.75)_65%,#000_100%)]"
+		></div>
+	</div>
+	<div class="flex flex-col h-full w-full items-center justify-center bg-black">
+		<h1
+			class="mt-10 mb-10"
+			style="
+				font-family: 'Bethany', serif;
 				font-size: clamp(2rem, 3vw, 7rem);
 				color: #fff8e7;
 				text-shadow:
@@ -424,34 +447,40 @@
 					0 0 40px rgba(255,150,20,0.5),
 					0 0 80px rgba(255,120,0,0.3);
 				text-align: center;
-			"
-			>
-				your story starts here
-			</h1>
-			<div class="flex flex-col items-center justify-center gap-4">
-				<button
-					class="border-2 h-14 w-48 border-[#FBDA80] text-white text-xl font-myFont hover:opacity-70 transition-all duration-300 ease-in-out"
+		"
+		>
+			your story starts here
+		</h1>
+		<div class="flex w-full max-w-3xl flex-col sm:flex-row items-center justify-center gap-5 sm:gap-12 mb-12 px-6">
+			<button
+					class="btn btn-red"
 					onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-				>
-					Sign Up!
-				</button>
-				<button
-					class="border-2 h-14 w-48 border-[#FBDA80] text-white text-xl font-myFont hover:opacity-70 transition-all duration-300 ease-in-out"
+			>
+				Sign up.
+			</button>
+			<button
+					class="btn btn-blue"
 					onclick="{() => window.location.href = '/faq'}"
-				>
-					FAQ
-				</button>
-			</div>
+			>
+				FAQ
+			</button>
 		</div>
 	</div>
-	<footer class="flex flex-col items-center justify-center h-64 bg-[#830A18]">
+	<footer
+		class="relative overflow-hidden flex flex-col items-center justify-center h-96 bg-[#830A18]"
+		style="background-image: url('/images/2/red-spiral.png'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+	>
+		<div
+			aria-hidden="true"
+			class="pointer-events-none absolute inset-x-0 top-0 z-10 h-[clamp(80px,14vh,180px)] bg-gradient-to-b from-black to-transparent"
+		></div>
 		<img
 			src="/images/1/Logo.png"
-			class="w-[clamp(14rem,22vw,22rem)]"
+			class="relative z-20 w-[clamp(14rem,22vw,22rem)]"
 			alt="Paradox Logo"
 		/>
 		<p
-			class="text-[#FBDA80] mt-4 text-lg font-myFont text-center"
+			class="relative z-20 text-[#FBDA80] mt-4 text-lg font-myFont text-center"
 		>
 			&copy; 2026
 			<a
@@ -462,7 +491,7 @@
 			</a>
 		</p>
 		<p
-			class="text-[#FBDA80] text-lg font-myFont text-center"
+			class="relative z-20 text-[#FBDA80] text-lg font-myFont text-center"
 		>
 			Made By Teens, For Teens.
 		</p>
@@ -477,6 +506,51 @@
 		-webkit-text-fill-color: #9ca3af !important;
 		transition: background-color 5000s ease-in-out 0s;
 	}
+
+	.btn {
+		height: clamp(4.6rem, 10vw, 6.4rem);
+		width: clamp(11.5rem, 72vw, 15rem);
+		max-width: 100%;
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border: 2px solid #dcb86a;
+		padding: 0 1rem;
+		font-size: clamp(1.65rem, 7vw, 3.1rem);
+		line-height: 0.95;
+		white-space: nowrap;
+		color: #f8eac7;
+		transition: all 0.3s ease-out;
+		box-shadow:
+			0 0 0 1px rgba(255, 218, 140, 0.34),
+			0 10px 20px rgba(0, 0, 0, 0.38);
+		font-family: 'Bethany', serif;
+		cursor: pointer;
+		text-shadow: 0 0 8px rgba(255, 225, 150, 0.2);
+	}
+
+	.btn-red {
+		background: linear-gradient(180deg, #e22b2b 0%, #c9151d 48%, #980d12 100%);
+		box-shadow:
+			0 0 0 1px rgba(255, 218, 140, 0.34),
+			0 10px 20px rgba(0, 0, 0, 0.38),
+			inset 0 0 0 9px #941218,
+			inset 0 12px 18px rgba(255, 100, 100, 0.18);
+	}
+
+	.btn-blue {
+		background: linear-gradient(180deg, #3e4ed0 0%, #2d3bb0 48%, #1c256a 100%);
+		box-shadow:
+			0 0 0 1px rgba(255, 218, 140, 0.34),
+			0 10px 20px rgba(0, 0, 0, 0.38),
+			inset 0 0 0 9px #26378f,
+			inset 0 12px 18px rgba(135, 160, 255, 0.14);
+	}
+
+	.btn:hover  { transform: translateY(-4px); filter: brightness(1.1); }
+
+
 	input {
 		filter: none;
 	}
@@ -528,5 +602,4 @@
 	.notification-dismiss:hover {
 		opacity: 1;
 	}
-
 </style>

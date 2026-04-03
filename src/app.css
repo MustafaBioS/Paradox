@@ -11,7 +11,7 @@
 
 @font-face {
     font-family: "Bethany";
-    src: url("../static/fonts/Bethany-Elingston.otf") format("opentype");
+    src: url("/fonts/Bethany-Elingston.otf") format("opentype");
     font-weight: bold;
     font-style: normal;
 }
