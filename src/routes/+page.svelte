@@ -480,7 +480,18 @@
 			alt="Paradox Logo"
 		/>
 		<p
-			class="relative z-20 text-[#FBDA80] mt-4 text-lg font-myFont text-center"
+			class="relative z-20 text-white mt-4 text-lg font-myFont text-center"
+			style="
+				font-family: 'Bethany', serif;
+				font-size: clamp(0.5rem, 1.40vw, 1.40rem);
+				color: #fff8e7;
+				text-shadow:
+					0 0 10px rgba(255,200,80,0.9),
+					0 0 20px rgba(255,180,50,0.7),
+					0 0 40px rgba(255,150,20,0.5),
+					0 0 80px rgba(255,120,0,0.3);
+				text-align: center;
+			"
 		>
 			&copy; 2026
 			<a
@@ -489,11 +500,7 @@
 			>
 				Hack Club
 			</a>
-		</p>
-		<p
-			class="relative z-20 text-[#FBDA80] text-lg font-myFont text-center"
-		>
-			Made By Teens, For Teens.
+			// Made by teens, for teens.
 		</p>
 	</footer>
 </main>

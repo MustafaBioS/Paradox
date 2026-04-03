@@ -2,20 +2,26 @@
 import "../app.css";
 import Lenis from "lenis";
 import { onMount } from "svelte";
+import { page } from '$app/state';
+
 
 onMount(() => {
-	const lenis = new Lenis();
+	if (page.url.pathname === "/faq") {
+		return
+	} else {
+		const lenis = new Lenis();
 
-	const raf = (time: number) => {
-		lenis.raf(time);
+		const raf = (time: number) => {
+			lenis.raf(time);
+			requestAnimationFrame(raf);
+		};
+
 		requestAnimationFrame(raf);
-	};
 
-	requestAnimationFrame(raf);
-
-	return () => {
-		lenis.destroy();
-	};
+		return () => {
+			lenis.destroy();
+		};
+	}
 });
 
 let { children } = $props();</script>

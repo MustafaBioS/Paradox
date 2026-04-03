@@ -6,11 +6,10 @@
 
     let main = null;
     let bookOpened = null;
-    let shine = null;
+    let bookClosed = null;
 
     function animateBook() {
         if (isOpen) {
-            // Hide pages first, then animate book closed.
             showPages = false;
             isOpen = false;
             return;
@@ -19,20 +18,20 @@
         isOpen = true;
     }
 
-    async function handleBookTransitionEnd(event) {
+    function handleBookTransitionEnd(event) {
         if (event.propertyName !== "transform") return;
         if (isOpen) showPages = true;
+        if (bookClosed) bookClosed.classList.add("hidden");
     }
 
-    /** @param {MouseEvent} event */
     function handleDocumentClick(event) {
         if (!showPages || !bookOpened) return;
         if (!(event.target instanceof Node)) return;
 
-        // Close when the click happens outside the opened book panel.
         if (!bookOpened.contains(event.target)) {
             showPages = false;
             isOpen = false;
+            if (bookClosed) bookClosed.classList.remove("hidden");
         }
     }
 
@@ -98,35 +97,39 @@
     <button class="absolute bottom-0 left-1/2 -translate-x-1/2 cursor-auto" onclick={animateBook}>
         <img
                 src="/images/faq/faq-book.png"
-                class="min-w-[20rem] w-[50rem] max-w-[45vw] transition-all duration-700 ease-in-out hover:opacity-80 cursor-pointer"
+                class="w-[50rem] transition-all duration-700 ease-in-out hover:opacity-80 cursor-pointer"
                 class:openBook={isOpen}
                 ontransitionend={handleBookTransitionEnd}
+                bind:this={bookClosed}
                 alt="FAQ Playbook"
         />
     </button>
 
     <div
-        class="absolute bottom-0 left-1/2 -translate-x-1/2 flex-row"
+        class="opened-book absolute bottom-0 left-1/2 flex-row"
         class:flex={showPages}
         class:hidden={!showPages}
         bind:this={bookOpened}
     >
         <div
-            class="bg-[#EDEAE1] min-h-[20rem] h-[50rem] min-w-[20rem] w-[38rem] max-w[42rem] border-r-2 border-black rounded-lg p-10"
+            class="bg-[#EDEAE1] min-h-[20rem] h-[50rem] min-w-[20rem] w-[38rem] max-w-[42rem] border-r-2 border-black rounded-lg p-10"
         >
             <div class="h-4 w-[100%] bg-black"></div>
             <div class="h-1 w-[100%] bg-black mt-2"></div>
             <h1 style="font-family: 'Bethany, serif'" class="text-8xl">FAQ</h1>
             <div class="h-1 w-[30%] bg-black mt-6"></div>
             {#each faqItems as item, i}
-                <button
-                        class="text-4xl mt-6 text-left hover:underline hover:font-bold"
-                        class:font-bold={selected === i}
-                        onclick={() => (selected = i)}
-                        style="font-family: 'Bethany', serif"
-                >
-                    {item.q}
-                </button>
+                    <button
+                            class="q text-3xl mt-6 text-left hover:font-bold"
+                            onclick={() => (selected = i)}
+                            class:under={selected === i}
+                            style="font-family: 'Bethany', serif"
+                    >
+                        {item.q}
+                    </button>
+                    <br>
+                    {#if item.q === "Do I need to have any prior experience?"}<br>{/if}
+
             {/each}
             <div class="h-1 w-[30%] bg-black mt-6"></div>
             <div class="flex flex-row items-center gap-3 mt-16">
@@ -147,7 +150,7 @@
                 </h1>
             </div>
         </div>
-        <div class="bg-[#EDEAE1] min-h-[20rem] h-[50rem] min-w-[20rem] w-[38rem] max-w[42rem] rounded-lg p-10 flex flex-col">
+        <div class="bg-[#EDEAE1] min-h-[20rem] h-[50rem] min-w-[20rem] w-[38rem] max-w-[42rem] rounded-lg p-10 flex flex-col">
             <div class="flex flex-row items-center">
                 <div class="flex flex-col items-center w-full">
                     <div class="h-4 w-[75%] bg-black"></div>
@@ -169,7 +172,7 @@
 
             <div class="flex-1 overflow-y-auto">
                 <h1
-                    class="text-2xl text-center mt-14"
+                    class="text-3xl mt-14"
                     style="font-family: 'Bethany', serif">
                     {faqItems[selected].a}
                 </h1>
@@ -230,6 +233,16 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+
+        --book-gutter: 1rem;
+        --opened-book-base-width: 76rem;
+        --opened-book-scale: min(1, calc((100vw - var(--book-gutter)) / var(--opened-book-base-width)));
+    }
+
+
+    .opened-book {
+        transform: translateX(-50%) scale(var(--opened-book-scale));
+        transform-origin: center bottom;
     }
 
     .openBook  {
@@ -237,4 +250,23 @@
         transform: translateY(10%);
         cursor: auto;
     }
+
+    .q:after {
+        content: "";
+        display: block;
+        height: 4px;
+        background-color: black;
+        margin-top: 2px;
+        width: 0;
+        transition: all 0.5s ease;
+    }
+
+    .q:hover:after {
+        width: 100%;
+    }
+
+    .q.under:after {
+        width: 100%;
+    }
+
 </style>
