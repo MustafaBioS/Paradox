@@ -1,0 +1,202 @@
+<%# app/views/faq/index.html.erb %>
+<main
+  class="main w-full min-h-screen relative overflow-hidden"
+  id="faq-main"
+  style="background-image: url('/images/faq/faq-bg.png'); background-attachment: fixed; background-repeat: no-repeat; background-size: cover; background-position: center;"
+>
+
+  <div class="absolute top-0 left-0 p-4 sm:p-6">
+    <%= link_to root_path do %>
+      <%= image_tag(
+          "/images/faq/faq-btn.png",
+          class: "min-w-52 w-64 max-w-[20vw] transition-all duration-300 ease-in-out hover:opacity-60 cursor-pointer",
+          alt: "Home Button",
+        )
+      %>
+    <% end %>
+  </div>
+
+  <button class="absolute bottom-0 left-1/2 -translate-x-1/2 cursor-auto" id="book-btn" onclick="animateBook()">
+    <%= image_tag(
+        "/images/faq/faq-book.png",
+        class: "w-[50rem] transition-all duration-700 ease-in-out hover:opacity-80 cursor-pointer",
+        id: "book-closed",
+        alt: "FAQ Playbook",
+      )
+    %>
+  </button>
+
+  <div
+    class="opened-book absolute bottom-0 left-1/2 flex-row hidden"
+    id="book-opened"
+  >
+    <div class="bg-[#EDEAE1] min-h-[20rem] h-[50rem] min-w-[20rem] w-[38rem] max-w-[42rem] border-r-2 border-black rounded-lg p-10">
+      <div class="h-4 w-[100%] bg-black"></div>
+      <div class="h-1 w-[100%] bg-black mt-2"></div>
+      <h1 style="font-family: 'Bethany', serif" class="text-8xl">FAQ</h1>
+      <div class="h-1 w-[30%] bg-black mt-6"></div>
+
+      <% @faq_items.each_with_index do |item, i| %>
+        <button
+          class="q text-3xl mt-6 text-left hover:font-bold <%= i == 0 ? 'under' : '' %>"
+          onclick="selectFaq(<%= i %>)"
+          id="faq-btn-<%= i %>"
+          style="font-family: 'Bethany', serif"
+        >
+          <%= item[:q] %>
+        </button>
+        <br>
+        <% if item[:q] == "Do I need to have any prior experience?" %>
+          <br>
+        <% end %>
+      <% end %>
+
+      <div class="h-1 w-[30%] bg-black mt-6"></div>
+      <div class="flex flex-row items-center gap-3 mt-16">
+        <%= image_tag("/images/faq/faq-logo.png", alt: "Paradox Logo") %>
+        <%= image_tag("/images/faq/faq-star.png", alt: "Star", class: "object-contain") %>
+        <h1 class="text-4xl" style="font-family: 'Bethany', serif">Hack Club 2026</h1>
+      </div>
+    </div>
+
+    <div class="bg-[#EDEAE1] min-h-[20rem] h-[50rem] min-w-[20rem] w-[38rem] max-w-[42rem] rounded-lg p-10 flex flex-col">
+      <div class="flex flex-row items-center">
+        <div class="flex flex-col items-center w-full">
+          <div class="h-4 w-[75%] bg-black"></div>
+          <div class="h-1 w-[75%] bg-black mt-2"></div>
+        </div>
+        <h1 class="text-6xl" style="font-family: 'Bethany', serif">ANSWER</h1>
+        <div class="flex flex-col items-center w-full">
+          <div class="h-4 w-[75%] bg-black"></div>
+          <div class="h-1 w-[75%] bg-black mt-2"></div>
+        </div>
+      </div>
+
+      <div class="h-1 w-[100%] bg-black mt-6"></div>
+
+      <div class="flex-1 overflow-y-auto">
+        <% @faq_items.each_with_index do |item, i| %>
+          <h1
+            class="text-3xl mb-10 faq-answer <%= i == 0 ? '' : 'hidden' %>"
+            id="faq-answer-<%= i %>"
+            style="font-family: 'Bethany', serif; white-space: pre-line;"
+          >
+            <%= item[:a] %>
+          </h1>
+        <% end %>
+      </div>
+
+      <footer class="flex flex-col items-end justify-end mt-auto">
+        <div class="h-1 w-[100%] bg-black"></div>
+        <div class="flex flex-row items-center w-full mt-4">
+          <div class="flex-col flex w-full justify-between">
+            <p class="text-lg" style="font-family: 'Bethany', serif">produced by</p>
+            <a href="https://hackclub.com" class="text-3xl" style="font-family: 'Bethany', serif">Hack Club</a>
+          </div>
+          <div class="flex-col w-full flex items-end justify-end">
+            <p class="text-lg" style="font-family: 'Bethany', serif">directed by teens</p>
+            <div class="flex flex-row">
+              <p class="text-3xl" style="font-family: 'Bethany', serif">for teens</p>
+              <%= image_tag("/images/faq/faq-star.png", class: "ml-2", alt: "Star") %>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</main>
+
+<style>
+    .main {
+        background-image: url("/images/faq/faq-bg.png");
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+        --book-gutter: 1rem;
+        --opened-book-base-width: 76rem;
+        --opened-book-scale: min(1, calc((100vw - var(--book-gutter)) / var(--opened-book-base-width)));
+    }
+
+    .opened-book {
+        transform: translateX(-50%) scale(var(--opened-book-scale));
+        transform-origin: center bottom;
+    }
+
+    .openBook {
+        transform-origin: center bottom;
+        transform: translateY(10%);
+        cursor: auto;
+    }
+
+    .q:after {
+        content: "";
+        display: block;
+        height: 4px;
+        background-color: black;
+        margin-top: 2px;
+        width: 0;
+        transition: all 0.5s ease;
+    }
+
+    .q:hover:after { width: 100%; }
+    .q.under:after { width: 100%; }
+    .hidden { display: none; }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let isOpen = false;
+        let showPages = false;
+
+        const bookClosed = document.getElementById('book-closed');
+        const bookOpened = document.getElementById('book-opened');
+
+        window.animateBook = function() {
+            if (isOpen) {
+                showPages = false;
+                isOpen = false;
+                bookOpened.classList.add('hidden');
+                bookOpened.classList.remove('flex');
+                bookClosed.classList.remove('hidden');
+                bookClosed.classList.remove('openBook');
+                return;
+            }
+            isOpen = true;
+            bookClosed.classList.add('openBook');
+        }
+
+        bookClosed.addEventListener('transitionend', function(event) {
+            if (event.propertyName !== 'transform') return;
+            if (isOpen) {
+                showPages = true;
+                bookOpened.classList.remove('hidden');
+                bookOpened.classList.add('flex');
+                bookClosed.classList.add('hidden');
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!showPages || !bookOpened) return;
+            if (!bookOpened.contains(e.target) && e.target !== document.getElementById('book-btn')) {
+                showPages = false;
+                isOpen = false;
+                bookOpened.classList.add('hidden');
+                bookOpened.classList.remove('flex');
+                bookClosed.classList.remove('hidden');
+                bookClosed.classList.remove('openBook');
+            }
+        });
+
+        window.selectFaq = function(index) {
+            document.querySelectorAll('.q').forEach((btn, i) => {
+                btn.classList.toggle('under', i === index);
+            });
+            document.querySelectorAll('.faq-answer').forEach((el, i) => {
+                el.classList.toggle('hidden', i !== index);
+            });
+        }
+    });
+</script>

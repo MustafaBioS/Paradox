@@ -1,39 +1,24 @@
-# Paradox
+# README
 
-## Setup
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-**1. Install dependencies.**
+Things you may want to cover:
 
-```bash
-bun install
-```
+* Ruby version
 
-**2. Copy the environment file and fill it in.**
+* System dependencies
 
-```bash
-cp .env.example .env
-```
+* Configuration
 
-You'll need a Hack Club OAuth app — create one at [auth.hackclub.com](https://auth.hackclub.com). Set `HACKCLUB_REDIRECT_URI` to `http://localhost:5173/api/auth/callback` for local dev. It must match exactly what's registered on your OAuth app.
+* Database creation
 
-You'll also need a PostgreSQL database running. If you don't have one yet:
+* Database initialization
 
-```bash
-createdb paradox
-```
+* How to run the test suite
 
-Then set `DATABASE_URL` in your `.env` to your connection string.
+* Services (job queues, cache servers, search engines, etc.)
 
-**3. Run the database migration.**
+* Deployment instructions
 
-```bash
-bun run db:migrate
-```
-
-**4. Start the dev server.**
-
-```bash
-bun run dev
-```
-
-The app runs at `http://localhost:5173`.
+* ...

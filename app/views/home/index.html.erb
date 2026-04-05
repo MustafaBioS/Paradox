@@ -1,0 +1,9 @@
+<div>
+  <h1><%= current_user.name %></h1>
+  <h1><%= current_user.slack_id %></h1>
+  <h1><%= current_user.username.presence || current_user.name.to_s.split(/\s+/).first %> Is My User</h1>
+  <h1><%= current_user.email %></h1>
+  <h1><%= current_user.verification_status %></h1>
+  <h1><%= current_user.created_at %></h1>
+  <h1><%= current_user.updated_at %></h1>
+</div>
