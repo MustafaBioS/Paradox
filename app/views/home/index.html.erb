@@ -1,9 +1,39 @@
-<div>
-  <h1><%= current_user.name %></h1>
-  <h1><%= current_user.slack_id %></h1>
-  <h1><%= current_user.username.presence || current_user.name.to_s.split(/\s+/).first %> Is My User</h1>
-  <h1><%= current_user.email %></h1>
-  <h1><%= current_user.verification_status %></h1>
-  <h1><%= current_user.created_at %></h1>
-  <h1><%= current_user.updated_at %></h1>
+<%# app/views/home/index.html.erb %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "home", "data-turbo-track": "reload" %>
+<% end %>
+
+<div
+  class="bg"
+>
+  <%= render "shared/nvb", user: current_user %>
+
+  <div class="pageCon">
+    <div class="remainingCon">
+      <%= image_tag "home/clock.png",
+          alt: "Clock",
+          class: "clock"
+      %>
+      <h1 class="remaining">35</h1>
+      <div class="untilCon">
+        <p class="ptag">hours until</p>
+        <p class="ptag">you escape the Paradox</p>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="bottom">
+      <div class="tempBox">???</div>
+    </div>
+    <div class="catCon">
+      <div class="textCloud">
+        <div class="cloud">Bomboclatt message #67</div>
+        <div class="cloudArrow"></div>
+      </div>
+      <%= image_tag "home/cat.png",
+          alt: "Cat",
+          class: "cat"
+      %>
+    </div>
+  </div>
 </div>

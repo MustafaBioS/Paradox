@@ -1,0 +1,94 @@
+<%# app/views/shared/_nvb.html %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "nvb", "data-turbo-track": "reload"%>
+<% end %>
+
+<% user = defined?(user) ? user : current_user %>
+
+<nav class="nvb">
+  <%= image_tag "1/Logo.png",
+      class: "logo",
+      alt: "Paradox Logo"
+  %>
+
+  <%= image_tag "1/o-mask.png",
+      class: "mask",
+      alt: "Paradox Logo"
+  %>
+
+  <div class="items">
+    <a class="itemCon" href="/home">
+      <h1 class="item">Home</h1>
+      <%= image_tag "navbar/home.png",
+          class: "itemImg", alt: "Item Image"
+      %>
+    </a>
+    <a class="itemCon" href="/projects">
+      <h1 class="item">Projects</h1>
+      <%= image_tag "navbar/projects.png",
+            class: "itemImg",
+            alt: "Item Image"
+      %>
+    </a>
+    <a class="itemCon" href="/shop">
+      <h1 class="item">Shop</h1>
+      <%= image_tag "navbar/shop.png",
+            class: "itemImg",
+            alt: "Item Image"
+      %>
+    </a>
+    <a class="itemCon" href="/explore">
+      <h1 class="item">Explore</h1>
+      <%= image_tag "navbar/explore.png",
+            class: "itemImg",
+            alt: "Item Image"
+      %>
+    </a>
+    <a class="itemCon" href="/faq">
+      <h1 class="item">FAQ</h1>
+      <%= image_tag "navbar/faq.png",
+            class: "faqImg itemImg",
+            alt: "Item Image"
+      %>
+    </a>
+  </div>
+
+  <% if user.present? %>
+    <div class="pfpCon">
+      <%= image_tag "https://cachet.dunkirk.sh/users/#{user.slack_id}/r",
+          class: "pfp",
+          alt: "Slack PFP"
+      %>
+      <h1 class="username">@<%= display_username(user) %></h1>
+    </div>
+  <% end %>
+</nav>
+
+<script>
+  const nav = document.querySelector('.nvb');
+  const logo = document.querySelector('.logo');
+  const mask = document.querySelector('.mask');
+  const items = document.querySelectorAll('.item');
+  const username = document.querySelector('.username');
+
+  nav.addEventListener('mouseover', () => {
+    nav.classList.add('open');
+    logo.style.display = 'block';
+    mask.style.display = 'none';
+    items.forEach((item) => {
+        item.style.display = 'block';
+    })
+    username.style.display = 'block'
+  })
+
+  nav.addEventListener('mouseleave', () => {
+      nav.classList.remove('open');
+      logo.style.display = 'none';
+      mask.style.display = 'block';
+      items.forEach((item) => {
+          item.style.display = 'none';
+      })
+      username.style.display = 'none'
+  })
+</script>

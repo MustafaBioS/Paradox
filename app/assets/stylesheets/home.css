@@ -1,0 +1,119 @@
+.bg {
+    min-height: 100vh;
+    width: calc(100% - 150px);
+    margin-left: 150px;
+    background: linear-gradient(to top, #320A32, black);
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.pageCon {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+.remainingCon {
+    width: 75%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    color: #DAC17E;
+    text-shadow: 2px 2px 4px #AA7932;
+}
+
+.clock {
+    width: 300px;
+    height: 350px;
+    margin-bottom: 75px;
+}
+
+.remaining {
+    font-size: 300px;
+    font-family: 'Bethany', serif;
+    margin: 0 30px 100px 50px;
+    line-height: 0.8;
+    display: inline-block;
+}
+
+.untilCon {
+    font-size: 50px;
+    font-family: 'Bethany', serif;
+    margin-bottom: 125px;
+}
+
+.ptag {
+    margin: 0;
+    padding: 0;
+}
+
+.line {
+    height: 2px;
+    background-color: #DAC17E;
+    width: 80%;
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 50%;
+    width: 80%;
+}
+
+.tempBox {
+    height: 300px;
+    width: 550px;
+    background-color: gray;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 30px;
+}
+
+.catCon {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 95%;
+    width: 90%;
+    z-index: 0;
+    pointer-events: none;
+    flex-direction: column;
+}
+
+.cat {
+    width: 300px;
+}
+
+.textCloud {
+    transform: translate(-250px, 15px);
+}
+
+.cloud {
+    width: auto;
+    height: 55px;
+    padding: 20px;
+    background-color: red;
+    border-radius: 12px;
+    z-index: 2;
+}
+
+.cloudArrow {
+    z-index: -1;
+    width: 30px;
+    height: 30px;
+    border-bottom-left-radius: 50%;
+    background-color: red;
+    position: absolute;
+    margin-left: 120px;
+    transform: translateY(-29px);
+}

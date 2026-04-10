@@ -1,4 +1,44 @@
 <%# app/views/faq/index.html.erb %>
+
+<style>
+    .main {
+        background-image: url("/images/faq/faq-bg.png");
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+        --book-gutter: 1rem;
+        --opened-book-base-width: 76rem;
+        --opened-book-scale: min(1, calc((100vw - var(--book-gutter)) / var(--opened-book-base-width)));
+    }
+
+    .opened-book {
+        transform: translateX(-50%) scale(var(--opened-book-scale));
+        transform-origin: center bottom;
+    }
+
+    .openBook {
+        transform-origin: center bottom;
+        transform: translateY(10%);
+        cursor: auto;
+    }
+
+    .q:after {
+        content: "";
+        display: block;
+        height: 4px;
+        background-color: black;
+        margin-top: 2px;
+        width: 0;
+        transition: all 0.5s ease;
+    }
+
+    .q:hover:after { width: 100%; }
+    .q.under:after { width: 100%; }
+    .hidden { display: none; }
+</style>
+
 <main
   class="main w-full min-h-screen relative overflow-hidden"
   id="faq-main"
@@ -106,45 +146,6 @@
   </div>
 
 </main>
-
-<style>
-    .main {
-        background-image: url("/images/faq/faq-bg.png");
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-
-        --book-gutter: 1rem;
-        --opened-book-base-width: 76rem;
-        --opened-book-scale: min(1, calc((100vw - var(--book-gutter)) / var(--opened-book-base-width)));
-    }
-
-    .opened-book {
-        transform: translateX(-50%) scale(var(--opened-book-scale));
-        transform-origin: center bottom;
-    }
-
-    .openBook {
-        transform-origin: center bottom;
-        transform: translateY(10%);
-        cursor: auto;
-    }
-
-    .q:after {
-        content: "";
-        display: block;
-        height: 4px;
-        background-color: black;
-        margin-top: 2px;
-        width: 0;
-        transition: all 0.5s ease;
-    }
-
-    .q:hover:after { width: 100%; }
-    .q.under:after { width: 100%; }
-    .hidden { display: none; }
-</style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
