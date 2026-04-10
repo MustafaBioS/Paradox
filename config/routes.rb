@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   get "/auth/hackclub", to: "auth#redirect", as: :auth_hackclub
   get "/auth/callback", to: "auth#callback", as: :auth_callback
   get "/auth/signout", to: "auth#signout", as: :auth_signout
-  get "home", to: "home#index"
+  get "home", to: "home#index", as: "home"
+  get "/projects", to: "projects#index", as: "projects"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
