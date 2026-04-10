@@ -1,5 +1,6 @@
 <%# app/views/home/index.html.erb %>
 
+
 <% content_for :head do %>
   <%= stylesheet_link_tag "home", "data-turbo-track": "reload" %>
 <% end %>
@@ -27,13 +28,28 @@
     </div>
     <div class="catCon">
       <div class="textCloud">
-        <div class="cloud">Bomboclatt message #67</div>
-        <div class="cloudArrow"></div>
+        <div class="cloud"></div>
+        <div class="arrowCon">
+          <div class="cloudArrow"></div>
+        </div>
       </div>
       <%= image_tag "home/cat.png",
           alt: "Cat",
-          class: "cat"
+          class: "cat",
+          onclick: "randomMessage()"
       %>
     </div>
   </div>
 </div>
+
+<script>
+  const messages = <%= raw json_escape(@messages.to_json) %>;
+
+  function randomMessage() {
+    const cloud = document.querySelector(".cloud");
+    if (!cloud || !Array.isArray(messages) || messages.length === 0) return;
+
+    const index = Math.floor(Math.random() * messages.length);
+    cloud.textContent = messages[index];
+  }
+</script>

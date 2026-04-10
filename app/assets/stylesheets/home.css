@@ -86,12 +86,13 @@
     height: 95%;
     width: 90%;
     z-index: 0;
-    pointer-events: none;
     flex-direction: column;
 }
 
 .cat {
-    width: 300px;
+    width: 250px;
+    pointer-events: auto;
+    cursor: pointer;
 }
 
 .textCloud {
@@ -102,9 +103,17 @@
     width: auto;
     height: 55px;
     padding: 20px;
-    background-color: red;
+    background-color: #A59586;
     border-radius: 12px;
     z-index: 2;
+    border-top: 3px solid #E4DBC4;
+    border-left: 3px solid #CFAF6B;
+    border-right: 3px solid #CFAF6B;
+}
+
+.arrowCon {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .cloudArrow {
@@ -112,8 +121,8 @@
     width: 30px;
     height: 30px;
     border-bottom-left-radius: 50%;
-    background-color: red;
+    background-color: #A59586;
     position: absolute;
     margin-left: 120px;
-    transform: translateY(-29px);
+    transform: translate(-5px, -25px);
 }
