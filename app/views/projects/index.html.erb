@@ -1,9 +1,38 @@
 <%# app/views/projects/index.html.erb %>
 
 <% content_for :head do %>
-  <%= stylesheet_link_tag "home", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "projects", "data-turbo-track": "reload" %>
 <% end %>
 
 <div class="bg">
 <%= render "shared/nvb", user: current_user %>
+
+  <div class="pageCon">
+    <h1 class="title">Projects</h1>
+    <div class="line"></div>
+    <div class="blocksCon">
+      <div class="projectsList">
+        <%# if  %>
+        <%# else %>
+        <div class="projects" data-lenis-prevent>
+          <h1 class="topDesc">No projects yet.</h1>
+          <h1 class="botDesc">Make a new one!</h1>
+        </div>
+        <%# end %>
+        <div class="btnCon">
+          <button class="botBtn">
+            + new project
+          </button>
+        </div>
+      </div>
+      <div class="projectDetails">
+        <%# if  %>
+
+        <%# else %>
+        <h1 class="topDesc">You haven't selected a project yet.</h1>
+        <h1 class="botDesc">Pick one from the sidebar to view details.</h1>
+        <%# end %>
+      </div>
+    </div>
+  </div>
 </div>
