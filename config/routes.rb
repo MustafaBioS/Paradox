@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "/auth/signout", to: "auth#signout", as: :auth_signout
   get "home", to: "home#index", as: "home"
   get "/projects", to: "projects#index", as: "projects"
+  resources :projects, except: [:new, :show]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

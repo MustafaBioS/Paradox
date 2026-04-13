@@ -2,7 +2,7 @@
     position: fixed;
     left: 0;
     top: 0;
-    width: 150px;
+    width: 175px;
     height: 100%;
     box-sizing: border-box;
     background: linear-gradient(to top, #970E0E, #640707, #390302);
@@ -31,36 +31,42 @@
 }
 
 .pfpCon {
-    margin-top: 15px;
     height: 150px;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #620707;
     border: 2px solid #B68840;
+    gap: 15px;
+    padding: 15px;
+}
+
+.pfpCon.hover {
+    padding: 0;
     gap: 20px;
+    flex-direction: row;
 }
 
 .pfp {
     border: 2px solid #DAC17E;
-    width: 70px;
+    width: 75px;
 }
 
 .username {
-    display: none;
+    display: block;
     /*text-decoration: underline;*/
     color: #DAC17E;
     text-shadow: 2px 2px 4px #AA7932;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 20px;
+    font-size: 18px;
     transition: all 0.3s ease;
 }
 
-.username:after {
+.username.hover:after {
     content: "";
     display: block;
     height: 2px;

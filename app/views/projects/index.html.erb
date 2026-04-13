@@ -12,27 +12,51 @@
     <div class="line"></div>
     <div class="blocksCon">
       <div class="projectsList">
-        <%# if  %>
-        <%# else %>
-        <div class="projects" data-lenis-prevent>
-          <h1 class="topDesc">No projects yet.</h1>
-          <h1 class="botDesc">Make a new one!</h1>
-        </div>
-        <%# end %>
+        <% if @projects.empty? %>
+          <div class="emptyCon" data-lenis-prevent>
+            <h1 class="topDesc">No projects yet.</h1>
+            <h1 class="botDesc">Make a new one!</h1>
+          </div>
+        <% else %>
+          <div class="projects" data-lenis-prevent>
+            <% @projects.each do |project| %>
+              <%= link_to projects_path(project_id: project.id), class: "projectItem #{'active' if @selected_project == project}" do %>
+                <h1><%= project.title %></h1>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
         <div class="btnCon">
-          <button class="botBtn">
-            + new project
-          </button>
+          <%= button_to "+ new project", projects_path, method: :post, class: "botBtn" %>
         </div>
       </div>
-      <div class="projectDetails">
-        <%# if  %>
-
-        <%# else %>
-        <h1 class="topDesc">You haven't selected a project yet.</h1>
-        <h1 class="botDesc">Pick one from the sidebar to view details.</h1>
-        <%# end %>
-      </div>
+      <% if @selected_project.present? %>
+        <div class="projectDetails">
+          <div class="titleCon">
+            <h1 class="topDesc"><%= @selected_project.title %></h1>
+            <%= button_to "Delete", project_path(@selected_project), method: :delete, class: "deleteBtn" %>
+          </div>
+          <div class="hrsCon">
+            <div class="codeHrsBox"></div>
+            <div class="artHrsBox"></div>
+          </div>
+          <h1 class="botDesc"><%= @selected_project.description.presence || "No description yet." %></h1>
+          <% if @selected_project.hours.present? %>
+            <h1 class="botDesc">Hours: <%= @selected_project.hours %></h1>
+          <% end %>
+          <% if @selected_project.repo_url.present? %>
+            <h1 class="botDesc">Repo: <%= @selected_project.repo_url %></h1>
+          <% end %>
+          <% if @selected_project.demo_url.present? %>
+            <h1 class="botDesc">Demo: <%= @selected_project.demo_url %></h1>
+          <% end %>
+        <% else %>
+          <div class="projectDetailsEmpty">
+            <h1 class="topDesc">You haven't selected a project yet.</h1>
+            <h1 class="botDesc">Pick one from the sidebar to view details.</h1>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

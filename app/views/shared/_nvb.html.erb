@@ -56,7 +56,11 @@
 
   <% if user.present? %>
     <div class="pfpCon">
-      <%= image_tag "https://cachet.dunkirk.sh/users/#{user.slack_id}/r",
+      <%# image_tag "https://cachet.dunkirk.sh/users/#{user.slack_id}/r",
+          class: "pfp",
+          alt: "Slack PFP"
+      %>
+      <%= image_tag "pfp.png",
           class: "pfp",
           alt: "Slack PFP"
       %>
@@ -71,6 +75,7 @@
   const mask = document.querySelector('.mask');
   const items = document.querySelectorAll('.item');
   const username = document.querySelector('.username');
+  const pfpCon = document.querySelector('.pfpCon');
 
   nav.addEventListener('mouseover', () => {
     nav.classList.add('open');
@@ -79,7 +84,8 @@
     items.forEach((item) => {
         item.style.display = 'block';
     })
-    username.style.display = 'block'
+    username.classList.add('hover');
+    pfpCon.classList.add('hover');
   })
 
   nav.addEventListener('mouseleave', () => {
@@ -89,6 +95,7 @@
       items.forEach((item) => {
           item.style.display = 'none';
       })
-      username.style.display = 'none'
+      username.classList.remove('hover');
+      pfpCon.classList.remove('hover');
   })
 </script>
