@@ -34,10 +34,17 @@ class ProjectsController < ApplicationController
 
   def update
     @project = current_user.projects.find(params[:id])
+
     if @project.update(project_params)
-      redirect_to projects_path, notice: "Project updated!"
+      respond_to do |format|
+        format.html { redirect_to projects_path(project_id: @project.id), notice: "Project updated!" }
+        format.json { render json: { id: @project.id, title: @project.title }, status: :ok }
+      end
     else
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: { errors: @project.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 

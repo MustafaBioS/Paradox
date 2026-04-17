@@ -20,8 +20,22 @@
         <% else %>
           <div class="projects" data-lenis-prevent>
             <% @projects.each do |project| %>
-              <%= link_to projects_path(project_id: project.id), class: "projectItem #{'active' if @selected_project == project}" do %>
-                <h1><%= project.title %></h1>
+              <%= link_to projects_path(project_id: project.id), class: "projectItem #{'active' if @selected_project == project}", data: { project_id: project.id } do %>
+                <h1 class="projectName" data-role="project-title"><%= project.title %></h1>
+                <div class="redRow">
+                  <%= image_tag "projects/red-star.png",
+                      class: "redStar",
+                      alt: "Red Star"
+                  %>
+                  <h1 class="hrsRed">0.00 code hrs</h1>
+                </div>
+                <div class="blueRow">
+                  <%= image_tag "projects/blue-star.png",
+                      class: "blueStar",
+                      alt: "Blue Star"
+                  %>
+                  <h1 class="hrsBlue">0.00 art hrs</h1>
+                </div>
               <% end %>
             <% end %>
           </div>
@@ -33,23 +47,82 @@
       <% if @selected_project.present? %>
         <div class="projectDetails">
           <div class="titleCon">
-            <h1 class="topDesc"><%= @selected_project.title %></h1>
-            <%= button_to "Delete", project_path(@selected_project), method: :delete, class: "deleteBtn" %>
+            <div
+              data-controller="title"
+              data-title-url-value="<%= project_path(@selected_project) %>"
+              data-title-project-id-value="<%= @selected_project.id %>"
+              class="topCon"
+            >
+              <%= text_field_tag :title, @selected_project.title,
+                   class: "projectTitle",
+                   maxlength: 50,
+                   data: { action: "input->title#save blur->title#save" }
+                %>
+            </div>
+            <%= button_to project_path(@selected_project),
+                    method: :delete,
+                    class: "deleteBtn",
+                    form: { class: "deleteForm" } do
+            %>
+              <%= image_tag "projects/trash.png",
+                alt: "Trash Icon",
+                class: "trash"
+              %>
+            <% end %>
           </div>
           <div class="hrsCon">
-            <div class="codeHrsBox"></div>
-            <div class="artHrsBox"></div>
+            <div class="codeHrsBox">
+              <div class="rowCon">
+                <h1 class="hrsRed">0.00 code hrs</h1>
+                <%= image_tag "projects/red-star.png",
+                    class: "redStar",
+                    alt: "Red Star"
+                %>
+              </div>
+              <p class="hackatimeText">select your Hackatime project(s)</p>
+            </div>
+            <div class="artHrsBox">
+              <div class="rowCon">
+                <h1 class="hrsBlue">0.00 code hrs</h1>
+                <%= image_tag "projects/blue-star.png",
+                    class: "blueStar",
+                    alt: "Blue Star"
+                %>
+              </div>
+              <p class="lapseText">select your Lapse project(s)</p>
+            </div>
           </div>
-          <h1 class="botDesc"><%= @selected_project.description.presence || "No description yet." %></h1>
-          <% if @selected_project.hours.present? %>
-            <h1 class="botDesc">Hours: <%= @selected_project.hours %></h1>
-          <% end %>
-          <% if @selected_project.repo_url.present? %>
-            <h1 class="botDesc">Repo: <%= @selected_project.repo_url %></h1>
-          <% end %>
-          <% if @selected_project.demo_url.present? %>
-            <h1 class="botDesc">Demo: <%= @selected_project.demo_url %></h1>
-          <% end %>
+          <div class="descThumb">
+            <div class="descCon">
+              <h1 class="descTitle botTitle">description</h1>
+              <div
+                data-controller="desc"
+                data-desc-url-value="<%= project_path(@selected_project) %>"
+                data-desc-project-id-value="<%= @selected_project.id %>"
+                class="description"
+              >
+                  <%= text_area_tag :desc, @selected_project.description,
+                   class: "desc",
+                   maxlength: 100,
+                   rows: 4,
+                   data: { action: "input->desc#save blur->desc#save" }
+                %>
+              </div>
+            </div>
+            <div class="thumbCon">
+              <h1 class="thumbTitle botTitle">thumbnail</h1>
+              <h1 class="desc">< Insert Input Square Here ></h1>
+            </div>
+            <% if @selected_project.hours.present? %>
+              <h1 class="botDesc">Hours: <%= @selected_project.hours %></h1>
+            <% end %>
+            <% if @selected_project.repo_url.present? %>
+              <h1 class="botDesc">Repo: <%= @selected_project.repo_url %></h1>
+            <% end %>
+            <% if @selected_project.demo_url.present? %>
+              <h1 class="botDesc">Demo: <%= @selected_project.demo_url %></h1>
+            <% end %>
+          </div>
         <% else %>
           <div class="projectDetailsEmpty">
             <h1 class="topDesc">You haven't selected a project yet.</h1>
