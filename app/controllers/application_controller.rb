@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
-  before_action :dev_login
+
+
+  # before_action :dev_login
+
+
   allow_browser versions: :modern
 
   # Changes to the importmap will invalidate the etag for HTML responses
@@ -10,16 +14,16 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def dev_login
-    return unless Rails.env.development?
-
-    user = User.first_or_create!(
-      name: "Dev User",
-      email: "dev@local.test"
-    )
-
-    session[:user_id] = user.id
-  end
+  # def dev_login
+  #   return unless Rails.env.development?
+  #
+  #   user = User.first_or_create!(
+  #     name: "Dev User",
+  #     email: "dev@local.test"
+  #   )
+  #
+  #   session[:user_id] = user.id
+  # end
 
   def current_user
     return @current_user if defined?(@current_user)

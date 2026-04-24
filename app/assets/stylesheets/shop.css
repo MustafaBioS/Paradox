@@ -37,11 +37,14 @@
 
 .title {
     color: #DAC17E;
-    text-shadow: 2px 2px 4px #AA7932;
     font-size: 85px;
     font-family: 'Bethany', serif;
     font-style: italic;
     text-align: start;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .line {
@@ -78,4 +81,8 @@
 
 .ticketTitle {
     font-size: 50px;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }

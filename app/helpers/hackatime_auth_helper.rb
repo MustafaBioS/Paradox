@@ -1,0 +1,2 @@
+module HackatimeAuthHelper
+end

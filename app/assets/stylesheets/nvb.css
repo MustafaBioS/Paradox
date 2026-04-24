@@ -101,9 +101,12 @@
     font-family: 'Bethany', serif;
     text-align: right;
     color: #DAC17E;
-    text-shadow: 2px 2px 4px #AA7932;
     transition: all 0.3s ease;
     text-decoration: none;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .itemImg {

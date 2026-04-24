@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   root "landing#index"
   get "faq", to: "faq#index"
-  get "/auth/hackclub", to: "auth#redirect", as: :auth_hackclub
-  get "/auth/callback", to: "auth#callback", as: :auth_callback
-  get "/auth/signout", to: "auth#signout", as: :auth_signout
+  get "/auth/hackclub", to: "hca_auth#redirect", as: :auth_hackclub
+  get "/hca/auth/callback", to: "hca_auth#callback", as: :auth_callback
+  get "/auth/signout", to: "hca_auth#signout", as: :auth_signout
+
+  get "/auth/hackatime", to: "hackatime_auth#redirect", as: :auth_hackatime
+  get "hackatime/auth/callback", to: "hackatime_auth#callback", as: :auth_hackatime_callback
+
   get "home", to: "home#index", as: "home"
   get "/projects", to: "projects#index", as: "projects"
   resources :projects, except: [:new, :show]

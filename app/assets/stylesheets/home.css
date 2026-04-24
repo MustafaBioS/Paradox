@@ -26,7 +26,10 @@
     justify-content: space-between;
     align-items: end;
     color: #DAC17E;
-    text-shadow: 2px 2px 4px #AA7932;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .clock {

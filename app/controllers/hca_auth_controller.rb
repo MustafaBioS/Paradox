@@ -1,6 +1,6 @@
-class AuthController < ApplicationController
+class HcaAuthController < ApplicationController
   def redirect
-    client_id = ENV["CLIENT_ID"].to_s
+    client_id = ENV["HCA_CLIENT_ID"].to_s
     redirect_uri = oauth_redirect_uri
     email = params[:email].to_s.strip
 
@@ -31,8 +31,8 @@ class AuthController < ApplicationController
       req.headers["Content-Type"] = "application/json"
       req.body = {
         grant_type: "authorization_code",
-        client_id: ENV["CLIENT_ID"],
-        client_secret: ENV["CLIENT_SECRET"],
+        client_id: ENV["HCA_CLIENT_ID"],
+        client_secret: ENV["HCA_CLIENT_SECRET"],
         code: code,
         redirect_uri: oauth_redirect_uri
       }.to_json
@@ -125,6 +125,6 @@ class AuthController < ApplicationController
   end
 
   def oauth_redirect_uri
-    ENV["URL"].presence || auth_callback_url
+    ENV["HCA_URI"].presence || auth_callback_url
   end
 end

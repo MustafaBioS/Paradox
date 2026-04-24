@@ -20,11 +20,14 @@
 
 .title {
     color: #DAC17E;
-    text-shadow: 2px 2px 4px #AA7932;
     font-size: 85px;
     font-family: 'Bethany', serif;
     font-style: italic;
     text-align: start;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .line {
@@ -127,7 +130,6 @@
 
 .projectTitle {
     color: #E5D4A6;
-    text-shadow: 2px 2px 4px #AA7932;
     font-size: 70px;
     border: none;
     outline: none;
@@ -144,7 +146,7 @@
 .btnCon {
     display: flex;
     align-items: flex-end;
-        justify-content: center;
+    justify-content: center;
     width: 100%;
     padding-bottom: 40px;
     flex-shrink: 0;
@@ -153,8 +155,7 @@
 .topDesc {
     width: auto;
     field-sizing: content;
-    color: white;
-    text-shadow: 2px 2px 4px #AA7932;
+    color: #E5D4A6;
 }
 
 .botDesc {

@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_action :require_login
 
   def index
+    @hackatime_projects = HackatimeService.fetch_projects(current_user.hackatime_token)
     @projects = current_user.projects.order(created_at: :desc)
     @selected_project = if params[:project_id].present?
       @projects.find_by(id: params[:project_id])
