@@ -1,0 +1,33 @@
+<%# app/views/shop/index.html.erb %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "shop", "data-turbo-track": "reload" %>
+<% end %>
+
+<div class="bg">
+  <%= render "shared/nvb", user: current_user %>
+
+  <div class="pageCon">
+    <div class="topLine">
+      <h1 class="title">Shop</h1>
+      <button class="orders">Orders</button>
+    </div>
+    <div class="line"></div>
+
+    <div class="ticketCon">
+      <div class="ticketBox">
+        <div class="infoCon">
+          <h1 class="ticketTitle info">Ticket to Fable</h1>
+          <p class="ticketDesc info">A ticket to a 5-day hackathon in the London idk actually insert stuff</p>
+          <h1 class="ticketHours info">35 hours</h1>
+        </div>
+
+        <%= image_tag "shop/fable-ticket.png",
+            class: "ticket",
+            alt: "Fable Ticket"
+        %>
+      </div>
+    </div>
+  </div>
+
+</div>

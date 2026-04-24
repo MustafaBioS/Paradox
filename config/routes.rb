@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get "home", to: "home#index", as: "home"
   get "/projects", to: "projects#index", as: "projects"
   resources :projects, except: [:new, :show]
+  get "/shop", to: "shop#index", as: "shop"
+  resources :items
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

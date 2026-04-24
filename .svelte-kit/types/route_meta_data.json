@@ -1,0 +1,13 @@
+{
+	"/": [
+		"src/routes/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/api/[...slugs]": [
+		"src/routes/api/[...slugs]/+server.ts"
+	],
+	"/faq": [
+		"src/routes/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	]
+}
