@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_054419) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_24_175101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -43,10 +43,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_054419) do
   end
 
   create_table "projects", force: :cascade do |t|
+    t.decimal "art_hours"
+    t.decimal "code_hours"
     t.datetime "created_at", null: false
     t.string "demo_url"
     t.text "description", default: "No description yet"
-    t.decimal "hours"
     t.string "repo_url"
     t.string "title"
     t.datetime "updated_at", null: false

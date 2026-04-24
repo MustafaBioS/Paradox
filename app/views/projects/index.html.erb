@@ -4,13 +4,40 @@
   <%= stylesheet_link_tag "projects", "data-turbo-track": "reload" %>
 <% end %>
 
+
+<div class="modalCon">
+  <div class="redModal"
+       data-controller="hackatime"
+       data-hackatime-project-id-value="<%= @selected_project&.id %>">
+    <% @hackatime_projects.each do |project| %>
+      <p class="prjct"
+         data-hackatime-target="project"
+         data-seconds="<%= project["total_seconds"] || 0 %>"
+         data-action="click->hackatime#toggle">
+        <%= project["name"] %> — <%= ((project["total_seconds"] || 0) / 3600.0).round(1) %> hours
+      </p>
+    <% end %>
+    <button data-action="click->hackatime#confirm">Confirm</button>
+  </div>
+  <div class="blueModal">
+    <h1>Select Lapse Projects</h1>
+<!--    <div class="projectsBox">-->
+      <%# if @hackatime_projects&.any? %>
+        <%# @hackatime_projects.each do |project| %>
+<!--          <p><%#= project["name"] %> — <%#= ((project["total_seconds"] || 0) / 3600.0).round(1) %> hours</p>-->
+        <%# end %>
+      <%# else %>
+<!--        <p>No Hackatime data yet.</p>-->
+      <%# end %>
+<!--    </div>-->
+  </div>
+</div>
+
 <div class="bg">
 <%= render "shared/nvb", user: current_user %>
 
   <div class="pageCon">
-    <h1 class="title">
-      Projects
-    </h1>
+    <h1 class="title">Projects</h1>
     <div class="line"></div>
     <div class="blocksCon">
       <div class="projectsList">
@@ -29,7 +56,7 @@
                       class: "redStar",
                       alt: "Red Star"
                   %>
-                  <h1 class="hrsRed">0.00 code hrs</h1>
+                  <h1 class="hrsRed"><%= @selected_project.hours %> code hours</h1>
                 </div>
                 <div class="blueRow">
                   <%= image_tag "projects/blue-star.png",
@@ -43,7 +70,11 @@
           </div>
         <% end %>
         <div class="btnCon">
-          <%= button_to "+ new project", projects_path, method: :post, class: "botBtn" %>
+          <% if current_user.hackatime_token.present? %>
+            <%= button_to "+ new project", projects_path, method: :post, class: "botBtn" %>
+          <% else %>
+            <%= link_to "link hackatime", auth_hackatime_path, class: "botBtn" %>
+          <% end %>
         </div>
       </div>
       <% if @selected_project.present? %>
@@ -125,6 +156,7 @@
               <h1 class="botDesc">Demo: <%= @selected_project.demo_url %></h1>
             <% end %>
           </div>
+        </div>
         <% else %>
           <div class="projectDetailsEmpty">
             <h1 class="topDesc">You haven't selected a project yet.</h1>

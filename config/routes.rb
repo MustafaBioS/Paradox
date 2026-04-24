@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   get "/auth/hackatime", to: "hackatime_auth#redirect", as: :auth_hackatime
   get "hackatime/auth/callback", to: "hackatime_auth#callback", as: :auth_hackatime_callback
-
   get "home", to: "home#index", as: "home"
   get "/projects", to: "projects#index", as: "projects"
   resources :projects, except: [:new, :show]

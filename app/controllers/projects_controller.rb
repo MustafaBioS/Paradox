@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
       redirect_to projects_path(project_id: @project.id), notice: "Project created!"
     else
       @projects = current_user.projects.order(created_at: :desc)
+      @hackatime_projects = HackatimeService.fetch_projects(current_user.hackatime_token)
       render :index, status: :unprocessable_entity
     end
   end

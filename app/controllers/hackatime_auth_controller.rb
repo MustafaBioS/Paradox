@@ -51,8 +51,6 @@ class HackatimeAuthController < ApplicationController
       return
     end
 
-    hackatime_uid = HackatimeService.fetch_uid(access_token)
-
     if hackatime_uid.blank?
       redirect_to projects_path(error: "hackatime_uid_failed")
       return

@@ -434,3 +434,65 @@
     resize: none;
 }
 
+.modalCon {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.redModal {
+    height: 600px;
+    width: 650px;
+    border-radius: 12px;
+    background: linear-gradient(
+            180deg,
+            transparent 0%,
+            #A06D73 100%
+    );
+
+    box-shadow:
+            0 10px 24px rgba(20, 8, 26, 0.34),
+            inset 0 0 0 3px #DA6767;
+    backdrop-filter: blur(6px) saturate(110%);
+    -webkit-backdrop-filter: blur(6px) saturate(110%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    overflow: hidden;
+    font-family: 'Bethany', serif;
+}
+
+.blueModal {
+    height: 600px;
+    width: 650px;
+    background: linear-gradient(
+            180deg,
+            transparent 0%,
+            #6D6CA0 100%
+    );
+
+    box-shadow:
+            0 10px 24px rgba(20, 8, 26, 0.34),
+            inset 0 0 0 3px #3E4C9E;
+    backdrop-filter: blur(6px) saturate(110%);
+    -webkit-backdrop-filter: blur(6px) saturate(110%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    overflow: hidden;
+    font-family: 'Bethany', serif;
+    display: none;
+}
+
+.prjct.selected {
+    background: rgba(255,255,255,0.2);
+    cursor: pointer;
+}
