@@ -64,13 +64,24 @@
 .ticketBox {
     height: 250px;
     width: 80%;
-    background-color: transparent;
     border: 3px solid #B68840;
     padding: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    background: linear-gradient(
+        0deg,
+        #383F64 0%,
+        #645D54 100%
+    );
+    box-shadow:
+            0 10px 24px rgba(20, 8, 26, 0.34),
+            inset 0 0 0 3px #645D54;
+    backdrop-filter: blur(6px) saturate(110%);
+    -webkit-backdrop-filter: blur(6px) saturate(110%);
+    overflow: hidden;
+    pointer-events: none;
 }
 
 .info {
@@ -80,9 +91,85 @@
 }
 
 .ticketTitle {
-    font-size: 50px;
+    font-size: 60px;
     background: linear-gradient(180deg, white, #c9a84c);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.ticketDesc {
+    font-size: 25px;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.ticketHours {
+    font-size: 45px;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.shopCon {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 70px;
+}
+
+.topRow {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topRow > h1 {
+    font-size: 40px;
+    color: #DAC17E;
+    font-family: 'Bethany', serif;
+    text-align: start;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 435px);
+    gap: 5%;
+    width: 90%;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-item {
+    width: 100%;
+    height: 355px;
+    margin-top: 30px;
+    border: 3px solid #B68840;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(
+            0deg,
+            #383F64 0%,
+            #645D54 100%
+    );
+    box-shadow:
+            0 10px 24px rgba(20, 8, 26, 0.34),
+            inset 0 0 0 3px #645D54;
+    backdrop-filter: blur(6px) saturate(110%);
+    -webkit-backdrop-filter: blur(6px) saturate(110%);
+    overflow: hidden;
+    pointer-events: none;
 }

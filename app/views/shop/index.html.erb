@@ -28,6 +28,20 @@
         %>
       </div>
     </div>
-  </div>
 
+    <div class="shopCon">
+      <div class="topRow">
+        <h1>What if I can't make it?</h1>
+        <h1>Shop Prizes</h1>
+      </div>
+      <div class="line"></div>
+      <div class="grid">
+        <% @shop_items.each do |item| %>
+          <div class="grid-item">
+            <%= item.id %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

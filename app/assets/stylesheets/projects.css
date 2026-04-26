@@ -442,6 +442,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1;
+    pointer-events: none;
 }
 
 .redModal {
@@ -466,6 +467,8 @@
     padding-top: 40px;
     overflow: hidden;
     font-family: 'Bethany', serif;
+    display: none;
+    pointer-events: none;
 }
 
 .blueModal {
@@ -490,9 +493,14 @@
     overflow: hidden;
     font-family: 'Bethany', serif;
     display: none;
+    pointer-events: none;
 }
 
 .prjct.selected {
     background: rgba(255,255,255,0.2);
     cursor: pointer;
+}
+
+.confirmBtn:hover {
+    color: red;
 }

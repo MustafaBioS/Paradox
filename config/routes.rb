@@ -8,10 +8,13 @@ Rails.application.routes.draw do
   get "/auth/hackatime", to: "hackatime_auth#redirect", as: :auth_hackatime
   get "hackatime/auth/callback", to: "hackatime_auth#callback", as: :auth_hackatime_callback
   get "home", to: "home#index", as: "home"
-  get "/projects", to: "projects#index", as: "projects"
   resources :projects, except: [:new, :show]
   get "/shop", to: "shop#index", as: "shop"
   resources :items
+
+
+  # get "/auth/lapse", to: "lapse_auth#redirect", as: :auth_lapse
+  # get "/lapse/auth/callback", to: "lapse_auth#callback", as: :auth_lapse
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

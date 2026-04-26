@@ -1,6 +1,5 @@
 class HackatimeAuthController < ApplicationController
   before_action :require_login
-
   def redirect
     client_id = ENV["HACKATIME_CLIENT_ID"].to_s
 

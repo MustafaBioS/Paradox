@@ -1,0 +1,2 @@
+module LapseAuthHelper
+end

@@ -7,6 +7,14 @@ export default class extends Controller {
 
   connect() {
     this.selected = new Set()
+
+    const saved = JSON.parse(this.element.dataset.hackatimeSavedNames || "[]")
+    this.projectTargets.forEach(el => {
+      if (saved.includes(el.dataset.name)) {
+        this.selected.add(el)
+        el.classList.add("selected")
+      }
+    })
   }
 
   toggle(event) {
@@ -21,19 +29,23 @@ export default class extends Controller {
   }
 
   confirm() {
+    console.log("projectIdValue", this.projectIdValue)
     if (!this.projectIdValue) return
     const totalSeconds = [...this.selected].reduce((sum, el) => sum + Number(el.dataset.seconds), 0)
     const hours = (totalSeconds / 3600.0).toFixed(1)
+    const names = [...this.selected].map(el => el.dataset.name)
+
+    console.log("url:", `/projects/${this.projectIdValue}`)
 
     fetch(`/projects/${this.projectIdValue}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+        "X-HTTP-Method-Override": "PATCH"
       },
-      body: JSON.stringify({project: {hours}})
+      body: JSON.stringify({project: { code_hours: hours, hackatime_projects: names } })
     }).then(() => {
-      // update the hours displayed on the page without reloading
       document.querySelectorAll(".hrsRed").forEach(el => el.textContent = `${hours} code hrs`)
     })
   }

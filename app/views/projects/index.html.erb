@@ -8,16 +8,24 @@
 <div class="modalCon">
   <div class="redModal"
        data-controller="hackatime"
-       data-hackatime-project-id-value="<%= @selected_project&.id %>">
+       data-hackatime-project-id-value="<%= @selected_project&.id %>"
+       data-hackatime-saved-names="<%= (@selected_project&.hackatime_projects || []).to_json %>"
+  >
     <% @hackatime_projects.each do |project| %>
       <p class="prjct"
          data-hackatime-target="project"
          data-seconds="<%= project["total_seconds"] || 0 %>"
+         data-name="<%= project["name"] %>"
          data-action="click->hackatime#toggle">
         <%= project["name"] %> — <%= ((project["total_seconds"] || 0) / 3600.0).round(1) %> hours
       </p>
     <% end %>
-    <button data-action="click->hackatime#confirm">Confirm</button>
+    <button
+      class="confirmBtn"
+      data-action="click->hackatime#confirm"
+    >
+      Confirm
+    </button>
   </div>
   <div class="blueModal">
     <h1>Select Lapse Projects</h1>
@@ -56,14 +64,14 @@
                       class: "redStar",
                       alt: "Red Star"
                   %>
-                  <h1 class="hrsRed"><%= @selected_project.hours %> code hours</h1>
+                  <h1 class="hrsRed"><%= project.code_hours %> code hrs</h1>
                 </div>
                 <div class="blueRow">
                   <%= image_tag "projects/blue-star.png",
                       class: "blueStar",
                       alt: "Blue Star"
                   %>
-                  <h1 class="hrsBlue">0.00 art hrs</h1>
+                  <h1 class="hrsBlue">0.0 art hrs</h1>
                 </div>
               <% end %>
             <% end %>
@@ -106,7 +114,7 @@
           <div class="hrsCon">
             <div class="codeHrsBox">
               <div class="rowCon">
-                <h1 class="hrsRed">0.00 code hrs</h1>
+                <h1 class="hrsRed"><%= @selected_project.code_hours %> code hrs</h1>
                 <%= image_tag "projects/red-star.png",
                     class: "redStar",
                     alt: "Red Star"
@@ -146,9 +154,6 @@
               <h1 class="thumbTitle botTitle">thumbnail</h1>
               <h1 class="desc">< Insert Input Square Here ></h1>
             </div>
-            <% if @selected_project.hours.present? %>
-              <h1 class="botDesc">Hours: <%= @selected_project.hours %></h1>
-            <% end %>
             <% if @selected_project.repo_url.present? %>
               <h1 class="botDesc">Repo: <%= @selected_project.repo_url %></h1>
             <% end %>
