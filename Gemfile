@@ -69,3 +69,4 @@ end
 
 gem "faraday", "~> 2.14"
 gem "dotenv-rails", group: [:development, :test]
+gem "ruby-vips"

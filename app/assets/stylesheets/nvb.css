@@ -12,7 +12,7 @@
     border-right: 2px solid #B68840;
     padding: 20px;
     transition: all 0.3s ease;
-    z-index: 50;
+    z-index: 10;
 }
 
 .nvb.open {

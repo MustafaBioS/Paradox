@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "/shop", to: "shop#index", as: "shop"
   resources :items
   resources :orders, only: [:index, :show, :create]
+  resources :explore
 
 
 

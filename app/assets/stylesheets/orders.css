@@ -145,3 +145,10 @@
 .dateOrdered {
     line-height: 0.8;
 }
+
+.itemImage {
+    width: 450px;
+    height: 250px;
+    border: 3px solid #B68840;
+    object-fit: contain;
+}

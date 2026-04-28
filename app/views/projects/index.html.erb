@@ -11,7 +11,7 @@
        data-hackatime-project-id-value="<%= @selected_project&.id %>"
        data-hackatime-saved-names="<%= (@selected_project&.hackatime_projects || []).to_json %>"
   >
-    <% @hackatime_projects.each do |project| %>
+    <% @hackatime_projects&.each do |project| %>
       <p class="prjct"
          data-hackatime-target="project"
          data-seconds="<%= project["total_seconds"] || 0 %>"
@@ -114,7 +114,7 @@
           <div class="hrsCon">
             <div class="codeHrsBox">
               <div class="rowCon">
-                <h1 class="hrsRed"><%= @selected_project.code_hours %> code hrs</h1>
+                <h1 class="hrsRed" data-hackatime-target="hours"><%= @selected_project.code_hours %> code hrs</h1>
                 <%= image_tag "projects/red-star.png",
                     class: "redStar",
                     alt: "Red Star"

@@ -45,7 +45,7 @@ export default class extends Controller {
       },
       body: JSON.stringify({project: { code_hours: hours, hackatime_projects: names } })
     }).then(() => {
-      document.querySelectorAll(".hrsRed").forEach(el => el.textContent = `${hours} code hrs`)
+      window.location.reload()
     })
   }
 }

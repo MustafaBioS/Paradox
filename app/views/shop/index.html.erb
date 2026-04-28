@@ -4,16 +4,18 @@
   <%= stylesheet_link_tag "shop", "data-turbo-track": "reload" %>
 <% end %>
 
-<div class="modalCon">
-  <div class="itemModal">
+<div class="modalCon" data-controller="shop" data-action="click@document->shop#close" data-shop-target="modalCon">
+  <div class="itemModal" data-shop-target="itemModal">
     <h1 class="prizeTitle">More Prize Info</h1>
     <div class="prizeInfo">
-      <%= image_tag "pfp.png"%>
+      <%= image_tag @selected_item&.image,
+          class: "modalImage itemImage",
+          alt: "Item Image" if @selected_item&.image&.attached? %>
       <h1 class="prizeName"><%= @selected_item&.name %></h1>
       <p class="prizeDesc"><%= @selected_item&.description %></p>
     </div>
-    <div class="btnCon">
-      <%= button_to "ORDER", orders_path, class: "orderBtn", method: :post, params: { shop_item_id: @selected_item&.id } %>
+    <div class="modBtnCon">
+      <%= button_to "Place Order", orders_path, class: "orderBtn", method: :post, params: { shop_item_id: @selected_item&.id } %>
     </div>
   </div>
 </div>
@@ -29,18 +31,18 @@
     <div class="line"></div>
 
     <div class="ticketCon">
-      <div class="ticketBox">
+      <%= link_to shop_path(shop_item_id: @ticket_item&.id), class: "ticketBox", data: { shop_item_id: @ticket_item&.id } do %>
         <div class="infoCon">
-          <h1 class="ticketTitle info">Ticket to Fable</h1>
-          <p class="ticketDesc info">A ticket to a 5-day hackathon in the London idk actually insert stuff</p>
-          <h1 class="ticketHours info">35 hours</h1>
+          <h1 class="ticketTitle info"><%= @ticket_item&.name %></h1>
+          <p class="ticketDesc info"><%= @ticket_item&.description %></p>
+          <h1 class="ticketHours info"><%= @ticket_item&.hours %> hours</h1>
         </div>
 
-        <%= image_tag "shop/fable-ticket.png",
+        <%= image_tag @ticket_item&.image,
             class: "ticket",
-            alt: "Fable Ticket"
+            alt: "Fable Ticket" if @ticket_item&.image&.attached?
         %>
-      </div>
+      <% end %>
     </div>
 
     <div class="shopCon">
@@ -53,8 +55,12 @@
         <% @shop_items.each do |item| %>
 
           <%= link_to shop_path(shop_item_id: item.id), class: "grid-item", data: { shop_item_id: item.id } do %>
-            <%= item.id %>
-            <%= button_to "ORDER", orders_path, class: "orderBtn", method: :post, params: { shop_item_id: item.id } %>
+            <%= image_tag item.image,
+                class: "itemImage shopImage",
+                alt: "Item Image" if item.image.attached? %>
+            <h1 class="itemName"><%= item.name %></h1>
+            <p class="itemDesc"><%= item.description %></p>
+            <h1 class="itemHrs"><%= item.hours %> hours</h1>
           <% end %>
 
         <% end %>

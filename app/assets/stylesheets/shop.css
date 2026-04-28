@@ -6,6 +6,8 @@
     display: flex;
     justify-content: center;
     box-sizing: border-box;
+    overflow: hidden;
+    padding-bottom: 200px;
 }
 
 .pageCon {
@@ -99,7 +101,6 @@
     backdrop-filter: blur(6px) saturate(110%);
     -webkit-backdrop-filter: blur(6px) saturate(110%);
     overflow: hidden;
-    pointer-events: none;
 }
 
 .info {
@@ -175,9 +176,8 @@
     border: 3px solid #B68840;
     padding: 20px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     background: linear-gradient(
             0deg,
             #383F64 0%,
@@ -194,17 +194,16 @@
 .modalCon {
     height: 100vh;
     width: 100vw;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    z-index: 1;
-    pointer-events: none;
+    position: fixed;
+    z-index: 11;
 }
 
 .itemModal {
-    height: 62.5%;
-    width: 57.5%;
+    height: 65%;
+    width: 60%;
     margin-left: 5%;
     border: 3px solid #B68840;
     padding: 20px;
@@ -248,6 +247,7 @@
     color: white;
     font-size: 30px;
     font-family: 'Bethany', serif;
+    line-height: 0.2;
 }
 
 .orderBtn {
@@ -274,3 +274,64 @@
 }
 
 .orderBtn:hover  { transform: translateY(-2px); filter: brightness(1.1); }
+
+.modalImage {
+    width: 600px;
+    height: 350px;
+    margin: 20px;
+}
+
+.itemImage {
+    border: 3px solid #B68840;
+    object-fit: contain;
+}
+
+.shopImage {
+    height: 150px;
+    width: 300px;
+}
+
+.prizeInfo {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.modBtnCon {
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.itemName, .itemHrs {
+    color: #DAC17E;
+    font-size: 45px;
+    font-family: 'Bethany', serif;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.itemHrs {
+    font-size: 35px;
+    margin-top: auto;
+}
+
+.itemName {
+    margin-top: 10px;
+    line-height: 0.9;
+    margin-bottom: 5px;
+}
+
+.itemDesc {
+    color: white;
+    font-size: 18px;
+    font-family: 'Bethany', serif;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}

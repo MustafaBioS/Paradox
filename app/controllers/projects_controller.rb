@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
   def create
     attrs = project_params.to_h
     attrs["title"] = "project name" if attrs["title"].blank?
+    attrs["status"] = "unshipped" if attrs["status"].blank?
     @project = current_user.projects.new(attrs)
 
     if @project.save
@@ -53,6 +54,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.fetch(:project, {}).permit(:title, :description, :code_hours, :art_hours, :image, hackatime_projects: [])
+    params.fetch(:project, {}).permit(:title, :description, :code_hours, :art_hours, :image, :status, hackatime_projects: [])
   end
 end

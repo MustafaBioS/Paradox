@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_26_050509) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_28_231745) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -61,6 +61,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_050509) do
     t.text "description", default: "No description yet"
     t.string "hackatime_projects", default: [], array: true
     t.string "repo_url"
+    t.string "status"
     t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
@@ -83,6 +84,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_050509) do
     t.string "hackatime_uid"
     t.boolean "is_admin", default: false
     t.string "name"
+    t.integer "shipped_hours"
     t.string "slack_id"
     t.datetime "updated_at", null: false
     t.string "username"
