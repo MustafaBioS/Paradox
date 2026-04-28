@@ -57,7 +57,7 @@
         <% else %>
           <div class="projects" data-lenis-prevent>
             <% @projects.each do |project| %>
-              <%= link_to projects_path(project_id: project.id), class: "projectItem #{'active' if @selected_project == project}", data: { project_id: project.id } do %>
+              <%= link_to projects_path(project_id: project.id), class: "projectItem", data: { project_id: project.id } do %>
                 <h1 class="projectName" data-role="project-title"><%= project.title %></h1>
                 <div class="redRow">
                   <%= image_tag "projects/red-star.png",

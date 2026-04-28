@@ -4,13 +4,27 @@
   <%= stylesheet_link_tag "shop", "data-turbo-track": "reload" %>
 <% end %>
 
+<div class="modalCon">
+  <div class="itemModal">
+    <h1 class="prizeTitle">More Prize Info</h1>
+    <div class="prizeInfo">
+      <%= image_tag "pfp.png"%>
+      <h1 class="prizeName"><%= @selected_item&.name %></h1>
+      <p class="prizeDesc"><%= @selected_item&.description %></p>
+    </div>
+    <div class="btnCon">
+      <%= button_to "ORDER", orders_path, class: "orderBtn", method: :post, params: { shop_item_id: @selected_item&.id } %>
+    </div>
+  </div>
+</div>
+
 <div class="bg">
   <%= render "shared/nvb", user: current_user %>
 
   <div class="pageCon">
     <div class="topLine">
       <h1 class="title">Shop</h1>
-      <button class="orders">Orders</button>
+      <a class="orders" href="/orders">My Orders</a>
     </div>
     <div class="line"></div>
 
@@ -37,9 +51,12 @@
       <div class="line"></div>
       <div class="grid">
         <% @shop_items.each do |item| %>
-          <div class="grid-item">
+
+          <%= link_to shop_path(shop_item_id: item.id), class: "grid-item", data: { shop_item_id: item.id } do %>
             <%= item.id %>
-          </div>
+            <%= button_to "ORDER", orders_path, class: "orderBtn", method: :post, params: { shop_item_id: item.id } %>
+          <% end %>
+
         <% end %>
       </div>
     </div>

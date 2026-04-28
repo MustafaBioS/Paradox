@@ -1,0 +1,42 @@
+<%# app/views/orders/index.html.erb %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "orders", "data-turbo-track": "reload" %>
+<% end %>
+
+<div class="bg">
+  <%= render "shared/nvb", user: current_user %>
+
+  <div class="pageCon">
+    <div class="topLine">
+      <h1 class="title">Orders</h1>
+      <a class="shop" href="/shop">Back To Shop</a>
+    </div>
+    <div class="line"></div>
+
+    <div class="ordersCon">
+      <% @orders.each do |order| %>
+        <div class="ordersBox">
+          <div class="leftCol">
+            <h1 class="orderName"><%= order.shop_item.name %></h1>
+            <h2 class="orderPrice info">Order Price: <%= order.shop_item.hours %></h2>
+            <h2 class="orderQuantity info">Quantity: <%= order.quantity %></h2>
+            <h2 class="orderAddress info">Shipping Address: xxx <%# order.user.shipping_address %></h2>
+          </div>
+          <div class="rightCol">
+            <% if order.shop_item.image.attached? %>
+              <%= image_tag order.shop_item.image,
+                  class: "itemImage",
+                  width: "40%",
+                  height: "40%",
+                  alt: "Item Image"
+              %>
+            <% end %>
+            <h1 class="dateOrdered info">Date Ordered: <%= order.created_at.to_date %></h1>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>

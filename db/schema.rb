@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_26_022954) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_26_050509) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -42,6 +42,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_022954) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "quantity"
+    t.bigint "shop_item_id", null: false
+    t.string "status"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["shop_item_id"], name: "index_orders_on_shop_item_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.decimal "art_hours", default: "0.0"
     t.decimal "code_hours", default: "0.0"
@@ -70,6 +81,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_022954) do
     t.string "email"
     t.string "hackatime_token"
     t.string "hackatime_uid"
+    t.boolean "is_admin", default: false
     t.string "name"
     t.string "slack_id"
     t.datetime "updated_at", null: false
@@ -79,5 +91,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_022954) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "orders", "shop_items"
+  add_foreign_key "orders", "users"
   add_foreign_key "projects", "users"
 end

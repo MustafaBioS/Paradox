@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :projects, except: [:new, :show]
   get "/shop", to: "shop#index", as: "shop"
   resources :items
+  resources :orders, only: [:index, :show, :create]
+
 
 
   # get "/auth/lapse", to: "lapse_auth#redirect", as: :auth_lapse

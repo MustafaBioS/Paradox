@@ -80,6 +80,7 @@ class HcaAuthController < ApplicationController
 
     user.slack_id = user_info["slack_id"] if user_info["slack_id"].present?
     user.verification_status = user_info["verification_status"].presence || user.verification_status || "needs_submission"
+    user.is_admin = user_info["is_admin"]
     user.save!
 
     session[:user_id] = user.id
@@ -100,6 +101,9 @@ class HcaAuthController < ApplicationController
   def normalize_user_info(payload)
     raw = payload["user"] || payload["identity"] || payload
 
+    email = raw["email"].presence || raw["primary_email"].presence
+    is_admin = ENV["ADMIN_EMAILS"].to_s.split(",").include?(email)
+
     username = raw["username"].to_s.strip.presence
     first_name = raw["first_name"].to_s.strip.presence
     last_name = raw["last_name"].to_s.strip.presence
@@ -116,11 +120,12 @@ class HcaAuthController < ApplicationController
     end
 
     {
-      "email" => raw["email"].presence || raw["primary_email"].presence,
+      "email" => email,
       "name" => normalized_name,
       "username" => username,
       "slack_id" => raw["slack_id"].presence,
-      "verification_status" => raw["verification_status"].presence
+      "verification_status" => raw["verification_status"].presence,
+      "is_admin" => is_admin
     }
   end
 

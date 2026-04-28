@@ -29,11 +29,29 @@
 }
 
 .orders {
-    background-color: red;
-    height: 30px;
+    height: 70px;
     width: 200px;
     font-family: 'Bethany', serif;
+    border: 2px solid #dcb86a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1rem, 2vw, 2rem);
+    line-height: 0.95;
+    white-space: nowrap;
+    color: #f8eac7;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+    text-shadow: 0 0 8px rgba(255, 225, 150, 0.2);
+    background: linear-gradient(180deg, #e22b2b 0%, #c9151d 48%, #980d12 100%);
+    box-shadow:
+            0 0 0 1px rgba(255, 218, 140, 0.34),
+            0 10px 20px rgba(0, 0, 0, 0.38),
+            inset 0 0 0 9px #941218,
+            inset 0 12px 18px rgba(255, 100, 100, 0.18);
 }
+
+.orders:hover  { transform: translateY(-2px); filter: brightness(1.1); }
 
 .title {
     color: #DAC17E;
@@ -171,5 +189,88 @@
     backdrop-filter: blur(6px) saturate(110%);
     -webkit-backdrop-filter: blur(6px) saturate(110%);
     overflow: hidden;
+}
+
+.modalCon {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 1;
     pointer-events: none;
 }
+
+.itemModal {
+    height: 62.5%;
+    width: 57.5%;
+    margin-left: 5%;
+    border: 3px solid #B68840;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(
+            0deg,
+            transparent 0%,
+            #99713D 100%
+    );
+    box-shadow:
+            0 10px 24px rgba(20, 8, 26, 0.34),
+            inset 0 0 0 3px #99713D;
+    backdrop-filter: blur(6px) saturate(110%);
+    -webkit-backdrop-filter: blur(6px) saturate(110%);
+    overflow: hidden;
+}
+
+.prizeTitle {
+    color: #DAC17E;
+    font-size: 45px;
+    font-family: 'Bethany', serif;
+    font-style: italic;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.prizeName {
+    color: #DAC17E;
+    font-size: 45px;
+    font-family: 'Bethany', serif;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.prizeDesc {
+    color: white;
+    font-size: 30px;
+    font-family: 'Bethany', serif;
+}
+
+.orderBtn {
+    height: 70px;
+    width: 200px;
+    font-family: 'Bethany', serif;
+    border: 2px solid #dcb86a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1rem, 2vw, 2rem);
+    line-height: 0.95;
+    white-space: nowrap;
+    color: #f8eac7;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+    text-shadow: 0 0 8px rgba(255, 225, 150, 0.2);
+    background: linear-gradient(180deg, #e22b2b 0%, #c9151d 48%, #980d12 100%);
+    box-shadow:
+            0 0 0 1px rgba(255, 218, 140, 0.34),
+            0 10px 20px rgba(0, 0, 0, 0.38),
+            inset 0 0 0 9px #941218,
+            inset 0 12px 18px rgba(255, 100, 100, 0.18);
+}
+
+.orderBtn:hover  { transform: translateY(-2px); filter: brightness(1.1); }

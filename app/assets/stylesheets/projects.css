@@ -221,11 +221,6 @@
     overflow: hidden;
 }
 
-/*.projectItem.active {*/
-/*    border-color: #dcb86a;*/
-/*    background: rgba(60, 42, 88, 0.55);*/
-/*}*/
-
 .titleCon {
     display: inline-flex;
     flex-direction: row;
