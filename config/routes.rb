@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/shop", to: "shop#index", as: "shop"
   post "/shop", to: "shop#create"
   get "/shop/my_orders", to: "shop#orders", as: "orders"
+  get "/shop/confirm", to: "shop#confirm", as: "confirm"
 
   resources :items
   resources :explore

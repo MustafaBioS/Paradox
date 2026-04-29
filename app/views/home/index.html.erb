@@ -14,7 +14,7 @@
           alt: "Clock",
           class: "clock"
       %>
-      <h1 class="remaining">35</h1>
+      <h1 class="remaining"><%= [current_user.shipped_hours - 35, 0].max %></h1>
       <div class="untilCon">
         <p class="ptag">hours until</p>
         <p class="ptag">you escape the Paradox</p>

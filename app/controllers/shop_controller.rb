@@ -14,8 +14,8 @@ class ShopController < ApplicationController
     end
   end
 
-  def orders
-    @orders = current_user.orders
+  def confirm
+    
   end
 
   def create
@@ -34,4 +34,9 @@ class ShopController < ApplicationController
 
     redirect_to shop_path, notice: "Order placed!"
   end
+
+  def orders
+    @orders = current_user.orders
+  end
+
 end
