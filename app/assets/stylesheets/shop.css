@@ -273,12 +273,20 @@
             inset 0 12px 18px rgba(255, 100, 100, 0.18);
 }
 
-.orderBtn:hover  { transform: translateY(-2px); filter: brightness(1.1); }
+.orderBtn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.orderBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
 .modalImage {
     width: 600px;
     height: 350px;
-    margin: 20px;
+    margin: 10px;
 }
 
 .itemImage {
@@ -296,6 +304,7 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 5px;
 }
 
 .modBtnCon {

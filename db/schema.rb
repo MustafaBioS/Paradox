@@ -84,7 +84,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_231745) do
     t.string "hackatime_uid"
     t.boolean "is_admin", default: false
     t.string "name"
-    t.integer "shipped_hours"
+    t.integer "shipped_hours", default: 0
     t.string "slack_id"
     t.datetime "updated_at", null: false
     t.string "username"

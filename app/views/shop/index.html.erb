@@ -15,7 +15,15 @@
       <p class="prizeDesc"><%= @selected_item&.description %></p>
     </div>
     <div class="modBtnCon">
-      <%= button_to "Place Order", orders_path, class: "orderBtn", method: :post, params: { shop_item_id: @selected_item&.id } %>
+      <% if @selected_item %>
+        <%= button_to "Place Order",
+            shop_path(shop_item_id: @selected_item&.id),
+            class: "orderBtn",
+            disabled: (@selected_item&.hours.to_f > current_user.shipped_hours.to_f),
+            method: :post,
+            params: { shop_item_id: @selected_item&.id }
+        %>
+      <% end %>
     </div>
   </div>
 </div>
@@ -26,7 +34,7 @@
   <div class="pageCon">
     <div class="topLine">
       <h1 class="title">Shop</h1>
-      <a class="orders" href="/orders">My Orders</a>
+      <a class="orders" href="/shop/my_orders">My Orders</a>
     </div>
     <div class="line"></div>
 

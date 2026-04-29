@@ -19,7 +19,7 @@
         <div class="ordersBox">
           <div class="leftCol">
             <h1 class="orderName"><%= order.shop_item.name %></h1>
-            <h2 class="orderPrice info">Order Price: <%= order.shop_item.hours %></h2>
+            <h2 class="orderPrice info">Order Price: <%= order.shop_item.hours * order.quantity %></h2>
             <h2 class="orderQuantity info">Quantity: <%= order.quantity %></h2>
             <h2 class="orderAddress info">Shipping Address: xxx <%# order.user.shipping_address %></h2>
           </div>

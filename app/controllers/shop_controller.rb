@@ -14,13 +14,24 @@ class ShopController < ApplicationController
     end
   end
 
-  def order
-    item = ShopItem.find(params[:shop_item_id])
+  def orders
+    @orders = current_user.orders
+  end
 
-    current_user.orders.create!(
-      shop_item: item,
-      quantity: 1,
-      status: "pending"
-    )
+  def create
+    item = ShopItem.find(params[:shop_item_id])
+    quantity = 2
+
+    current_user.with_lock do
+      current_user.orders.create!(
+        shop_item: item,
+        quantity: quantity,
+        status: "pending"
+      )
+      new_hours = current_user.shipped_hours - (item.hours * quantity)
+      current_user.update!(shipped_hours: new_hours)
+    end
+
+    redirect_to shop_path, notice: "Order placed!"
   end
 end

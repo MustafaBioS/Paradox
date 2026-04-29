@@ -9,9 +9,12 @@ Rails.application.routes.draw do
   get "hackatime/auth/callback", to: "hackatime_auth#callback", as: :auth_hackatime_callback
   get "home", to: "home#index", as: "home"
   resources :projects, except: [:new, :show]
+
   get "/shop", to: "shop#index", as: "shop"
+  post "/shop", to: "shop#create"
+  get "/shop/my_orders", to: "shop#orders", as: "orders"
+
   resources :items
-  resources :orders, only: [:index, :show, :create]
   resources :explore
 
 
