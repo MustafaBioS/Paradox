@@ -36,4 +36,10 @@ class ApplicationController < ActionController::Base
 
     redirect_to root_path(error: "login_required")
   end
+
+  def require_admin
+    return if current_user.is_admin?
+
+    redirect_to home_path(error: "access_denied")
+  end
 end

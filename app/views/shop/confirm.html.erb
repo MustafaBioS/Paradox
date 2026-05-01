@@ -1,0 +1,43 @@
+<%# app/views/shop/confirm.html.erb %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "confirm", "data-turbo-track": "reload" %>
+<% end %>
+
+<div class="bg">
+  <div class="pageCon">
+    <div class="topLine">
+      <h1 class="title">Order Confirmation</h1>
+      <a class="back" href="/shop">
+        Back
+        <%= image_tag "shop/Union.png",
+            class: "arrow",
+            alt: "Arrow"
+        %>
+      </a>
+    </div>
+    <div class="line"></div>
+
+    <div class="itemCon">
+      <div class="itemBox">
+        <div class="infoCon">
+          <h1 class="itemTitle info"><%= @selected_item&.name %></h1>
+          <p class="info">Base Price: <%= @selected_item&.hours %></p>
+          <h1 class="info">Quantity: <%= @quantity %></h1>
+          <h1 class="info">Total Price: <%= @selected_item&.hours * @quantity %> hours</h1>
+        </div>
+
+        <%= image_tag @selected_item&.image,
+            class: "ticket",
+            alt: "Fable Ticket" if @selected_item&.image&.attached?
+        %>
+      </div>
+    </div>
+
+    <div class="informationCon">
+      <h1 class="infoTitle">Information</h1>
+      <div class="line"></div>
+    </div>
+
+  </div>
+</div>

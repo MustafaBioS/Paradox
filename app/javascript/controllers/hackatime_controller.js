@@ -48,4 +48,18 @@ export default class extends Controller {
       window.location.reload()
     })
   }
+
+  previewImage(event) {
+    const file = event.target.files[0]
+    if (!file) return
+    const url = URL.createObjectURL(file)
+    const label = event.target.closest("label")
+    label.querySelector("h1")?.remove()
+    let img = label.querySelector(".previewImage") || document.createElement("img")
+    img.src = url
+    img.className = "previewImage"
+    label.prepend(img)
+    event.target.closest("form").requestSubmit()
+  }
+
 }

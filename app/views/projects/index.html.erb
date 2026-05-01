@@ -120,7 +120,7 @@
                     alt: "Red Star"
                 %>
               </div>
-              <p class="hackatimeText">select your Hackatime project(s)</p>
+              <p class="hackatimeText"><%= @selected_project.hackatime_projects.presence&.join(", ") || "select your Hackatime project(s)" %></p>
             </div>
             <div class="artHrsBox">
               <div class="rowCon">
@@ -150,17 +150,24 @@
                 %>
               </div>
             </div>
-            <div class="thumbCon">
+          <%= form_with model: @selected_project, url: project_path(@selected_project), method: :patch, multipart: true do |f| %>
+            <div class="thumbCon" data-controller="hackatime">
               <h1 class="thumbTitle botTitle">thumbnail</h1>
-              <h1 class="desc">< Insert Input Square Here ></h1>
+              <label>
+                <div class="thumbBox">
+                    <% if @selected_project&.thumbnail&.attached? %>
+                      <%= image_tag @selected_project.thumbnail, class: "previewImage" %>
+                    <% else %>
+                      <h1>Upload image here</h1>
+                    <% end %>
+                    <input type="file" name="project[thumbnail]" accept="image/*" class="hiddenInput" data-action="change->hackatime#previewImage" />
+                </div>
+              </label>
             </div>
-            <% if @selected_project.repo_url.present? %>
-              <h1 class="botDesc">Repo: <%= @selected_project.repo_url %></h1>
-            <% end %>
-            <% if @selected_project.demo_url.present? %>
-              <h1 class="botDesc">Demo: <%= @selected_project.demo_url %></h1>
-            <% end %>
+          <% end %>
           </div>
+          <%= link_to "SHIP!" %>
+
         </div>
         <% else %>
           <div class="projectDetailsEmpty">

@@ -71,8 +71,13 @@ class HcaAuthController < ApplicationController
       return
     end
 
+    slack_id = user_info["slack_id"].to_s
+
+    is_admin = ENV["ADMIN_SLACK_ID"].to_s.split(",").map(&:strip).include?(slack_id)
+
     user = User.find_or_initialize_by(email: email)
     user.name = user_info["name"] if user_info["name"].present?
+    user.is_admin = is_admin
 
     fallback_username = user_info["name"].to_s.split(/\s+/).first
     resolved_username = user_info["username"].presence || fallback_username
@@ -80,8 +85,11 @@ class HcaAuthController < ApplicationController
 
     user.slack_id = user_info["slack_id"] if user_info["slack_id"].present?
     user.verification_status = user_info["verification_status"].presence || user.verification_status || "needs_submission"
-    user.is_admin = user_info["is_admin"]
+    user.is_admin = is_admin
     user.save!
+
+    Rails.logger.info "SLACK ID: #{slack_id}"
+    Rails.logger.info "ADMIN IDS: #{ENV["ADMIN_SLACK_ID"]}"
 
     session[:user_id] = user.id
     redirect_to home_path
@@ -102,7 +110,7 @@ class HcaAuthController < ApplicationController
     raw = payload["user"] || payload["identity"] || payload
 
     email = raw["email"].presence || raw["primary_email"].presence
-    is_admin = ENV["ADMIN_EMAILS"].to_s.split(",").include?(email)
+    slack_id = raw["slack_id"].presence
 
     username = raw["username"].to_s.strip.presence
     first_name = raw["first_name"].to_s.strip.presence
@@ -123,9 +131,8 @@ class HcaAuthController < ApplicationController
       "email" => email,
       "name" => normalized_name,
       "username" => username,
-      "slack_id" => raw["slack_id"].presence,
+      "slack_id" => slack_id,
       "verification_status" => raw["verification_status"].presence,
-      "is_admin" => is_admin
     }
   end
 

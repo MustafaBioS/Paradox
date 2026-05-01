@@ -15,7 +15,12 @@ class ShopController < ApplicationController
   end
 
   def confirm
-    
+    redirect_to shop_path and return unless params[:shop_item_id].present?
+    @selected_item = ShopItem.find_by(id: params[:shop_item_id])
+    redirect_to shop_path and return unless @selected_item
+    redirect_to shop_path, alert: "Not enough hours." and return if @selected_item.hours > current_user.shipped_hours
+    @quantity = params[:quantity].to_i
+    redirect_to confirm_path(shop_item_id: @selected_item, quantity: 1) and return unless @quantity > 0
   end
 
   def create
@@ -26,7 +31,8 @@ class ShopController < ApplicationController
       current_user.orders.create!(
         shop_item: item,
         quantity: quantity,
-        status: "pending"
+        status: "pending",
+        total: item.hours * quantity
       )
       new_hours = current_user.shipped_hours - (item.hours * quantity)
       current_user.update!(shipped_hours: new_hours)

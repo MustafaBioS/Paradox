@@ -18,4 +18,13 @@ export default class extends Controller {
       window.history.pushState({}, "", url)
     }
   }
+
+  updateQuantity(event) {
+    const quantity = event.target.value
+    const link = this.element.querySelector(".orderBtn")
+    const url = new URL(link.href)
+    url.searchParams.set("quantity", quantity)
+    link.href = url.toString()
+  }
+
 }

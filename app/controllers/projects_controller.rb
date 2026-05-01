@@ -54,6 +54,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.fetch(:project, {}).permit(:title, :description, :code_hours, :art_hours, :image, :status, hackatime_projects: [])
+    params.fetch(:project, {}).permit(:title, :description, :code_hours, :art_hours, :thumbnail, :status, hackatime_projects: [])
   end
 end

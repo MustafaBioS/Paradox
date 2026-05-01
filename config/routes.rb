@@ -18,6 +18,12 @@ Rails.application.routes.draw do
   resources :items
   resources :explore
 
+  get "/admin", to: "admin#index", as: "admin"
+  get "/admin/users", to: "admin#users", as: "admin_users"
+  get "admin/orders", to: "admin#orders", as: "admin_orders"
+  get "admin/projects", to: "admin#projects", as: "admin_projects"
+  get "admin/shop", to: "admin#shop", as: "admin_shop"
+
 
 
   # get "/auth/lapse", to: "lapse_auth#redirect", as: :auth_lapse
