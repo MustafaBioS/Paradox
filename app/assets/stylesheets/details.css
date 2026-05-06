@@ -1,0 +1,360 @@
+.bg {
+    min-height: 100vh;
+    width: 100vw;
+    background: linear-gradient(to top, #581757, #0F1325);
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.pageCon {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    margin-left: 5%;
+}
+
+.title {
+    color: #DAC17E;
+    font-size: 85px;
+    font-family: 'Bethany', serif;
+    font-style: italic;
+    text-align: start;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.line {
+    height: 3px;
+    width: 95%;
+    background-color: #B68840;
+}
+
+
+.angledTitle {
+    margin-top: 28px;
+    padding: 10px 55px 10px 20px;
+    box-sizing: border-box;
+    font-family: 'Bethany', serif;
+    font-size: 40px;
+    font-style: italic;
+    line-height: 0.9;
+    color: #F3E0B1;
+    text-shadow:
+            0 1px 0 #8A5A28,
+            0 3px 0 #7A4921,
+            2px 5px 0 rgba(72, 40, 16, 0.55),
+            0 0 8px rgba(255, 240, 200, 0.12);
+    background: linear-gradient(180deg, #8F7A59 0%, #7A6245 100%);
+    border: 4px solid #D8C28A;
+    clip-path: polygon(0 0, calc(100% - 46px) 0, 100% 100%, 0 100%);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 241, 207, 0.28),
+            inset 0 -10px 18px rgba(70, 43, 20, 0.12),
+            0 10px 18px rgba(20, 8, 26, 0.22);
+    margin-left: 2.5%;
+}
+
+.container {
+    height: 65%;
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    margin-left: 5%;
+}
+
+.verifyOuterBox {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 85%;
+
+    background: linear-gradient(180deg, #8F7A59 0%, #333350 100%);
+    border: 3px solid #D8C28A;
+    box-shadow: inset 0 1px 0 rgba(255, 241, 207, 0.28),
+    inset 0 -10px 18px rgba(70, 43, 20, 0.12),
+    0 10px 18px rgba(20, 8, 26, 0.22);
+}
+
+.titleCon {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 5%;
+}
+
+.verifyTitle {
+    color: #DAC17E;
+    font-size: 40px;
+    font-family: 'Bethany', serif;
+    text-align: start;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: 10px;
+    text-decoration: underline;
+}
+
+.verifyInnerBox {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-sizing: border-box;
+    border: 2px solid #DAC17E;
+    margin-top: 10px;
+    width: 85%;
+    height: 100%;
+    background: linear-gradient(180deg, #8F7A59 0%, #525466 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 241, 207, 0.28),
+    inset 0 -10px 18px rgba(70, 43, 20, 0.12),
+    0 10px 18px rgba(20, 8, 26, 0.22);
+    overflow-y: auto;
+}
+
+.topRow {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px 80px;
+}
+
+.descTitle, .thumbTitle {
+    color: #DAC17E;
+    font-size: 35px;
+    font-family: 'Bethany', serif;
+    text-align: start;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: 10px;
+    text-decoration: underline;
+}
+
+.descCon, .thumbCon {
+    display: flex;
+    flex-direction: column;
+}
+
+.thumbCon {
+    align-items: center;
+}
+
+.description {
+    color: #DAC17E;
+    font-size: 25px;
+    font-family: 'Bethany', serif;
+    text-align: start;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: 10px;
+    width: 100%;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.inpField:focus,
+.inpField:focus-visible,
+#project_repo_url:focus,
+#project_repo_url:focus-visible {
+    outline: 3px solid #FFF0BF;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(255, 240, 191, 0.22);
+}
+
+.repoHighlight {
+    outline: 3px solid #FFF0BF;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(255, 240, 191, 0.22);
+}
+
+.imageThumb {
+    height: 150px;
+    width: 150px;
+    object-fit: contain;
+    border: 3px solid #D8C28A;
+}
+
+.hrsCon {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.codeHrsBox {
+    height: 75px;
+    width: 350px;
+    background: linear-gradient(
+            180deg,
+            transparent 0%,
+            #A06D73 100%
+    );
+
+    box-shadow:
+            0 10px 24px rgba(20, 8, 26, 0.34),
+            inset 0 0 0 3px #DA6767;
+    backdrop-filter: blur(6px) saturate(110%);
+    -webkit-backdrop-filter: blur(6px) saturate(110%);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    font-family: 'Bethany', serif;
+    padding-left: 35px;
+    gap: 15px;
+}
+
+.artHrsBox {
+    height: 75px;
+    width: 350px;
+    background: linear-gradient(
+            180deg,
+            transparent 0%,
+            #6D6CA0 100%
+    );
+
+    box-shadow:
+            0 10px 24px rgba(20, 8, 26, 0.34),
+            inset 0 0 0 3px #3E4C9E;
+    backdrop-filter: blur(6px) saturate(110%);
+    -webkit-backdrop-filter: blur(6px) saturate(110%);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 35px;
+    overflow: hidden;
+    font-family: 'Bethany', serif;
+    gap: 15px;
+}
+
+.hrsRed,
+.hrsBlue {
+    font-family: 'Bethany', serif;
+    font-size: 30px;
+    margin: 0;
+}
+
+.hrsRed {
+    color: #E58D8D;
+    -webkit-text-stroke: 1.5px #A10F0F;
+    text-shadow:
+            0 1px 0 rgba(255, 225, 225, 0.45),
+            0 3px 0 rgba(148, 30, 30, 0.55),
+            0 8px 12px rgba(88, 8, 8, 0.45);
+    line-height: 0.9;
+}
+
+.hrsBlue {
+    color: #939CC9;
+    -webkit-text-stroke: 1.5px #3E4D9E;
+    text-shadow:
+            0 1px 0 rgba(238, 226, 255, 0.45),
+            0 3px 0 rgba(86, 46, 128, 0.55),
+            0 8px 12px rgba(43, 18, 66, 0.45);
+}
+
+.redStar,
+.blueStar {
+    width: 30px;
+    margin: 0;
+}
+
+.btnCon {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 50px;
+    height: 200px;
+}
+
+.btn {
+    height: clamp(2rem, 4vw, 4rem);
+    width: clamp(7rem, 12vw, 12rem);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #dcb86a;
+    padding: 0 1rem;
+    font-size: clamp(1rem, 5vw, 2.5rem);
+    line-height: 0.95;
+    white-space: nowrap;
+    color: #f8eac7;
+    transition: all 0.3s ease-out;
+    box-shadow:
+            0 0 0 1px rgba(255, 218, 140, 0.34),
+            0 10px 20px rgba(0, 0, 0, 0.38);
+    font-family: 'Bethany', serif;
+    cursor: pointer;
+    text-shadow: 0 0 8px rgba(255, 225, 150, 0.2);
+}
+
+.redBtn {
+    background: linear-gradient(180deg, #e22b2b 0%, #c9151d 48%, #980d12 100%);
+    box-shadow:
+            0 0 0 1px rgba(255, 218, 140, 0.34),
+            0 10px 20px rgba(0, 0, 0, 0.38),
+            inset 0 0 0 9px #941218,
+            inset 0 12px 18px rgba(255, 100, 100, 0.18);
+}
+
+.blueBtn {
+    background: linear-gradient(180deg, #3e4ed0 0%, #2d3bb0 48%, #1c256a 100%);
+    box-shadow:
+            0 0 0 1px rgba(255, 218, 140, 0.34),
+            0 10px 20px rgba(0, 0, 0, 0.38),
+            inset 0 0 0 9px #26378f,
+            inset 0 12px 18px rgba(135, 160, 255, 0.14);
+}
+
+.btn:hover  { transform: translateY(-4px); filter: brightness(1.1); }
+
+.addDeets {
+    margin-top: 80px;
+}
+
+.linkBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.lbl {
+    color: #DAC17E;
+    font-size: 35px;
+    font-family: 'Bethany', serif;
+    text-align: start;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.inpField {
+    width: 80%;
+}

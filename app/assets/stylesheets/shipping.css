@@ -1,0 +1,249 @@
+.bg {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(to top, #581757, #0F1325);
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.pageCon {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    margin-left: 5%;
+
+}
+
+.title {
+    color: #DAC17E;
+    font-size: 85px;
+    font-family: 'Bethany', serif;
+    font-style: italic;
+    text-align: start;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.line {
+    height: 3px;
+    width: 95%;
+    background-color: #B68840;
+}
+
+
+.angledTitle {
+    margin-top: 28px;
+    padding: 10px 55px 10px 20px;
+    box-sizing: border-box;
+    font-family: 'Bethany', serif;
+    font-size: 40px;
+    font-style: italic;
+    line-height: 0.9;
+    color: #F3E0B1;
+    text-shadow:
+        0 1px 0 #8A5A28,
+        0 3px 0 #7A4921,
+        2px 5px 0 rgba(72, 40, 16, 0.55),
+        0 0 8px rgba(255, 240, 200, 0.12);
+    background: linear-gradient(180deg, #8F7A59 0%, #7A6245 100%);
+    border: 4px solid #D8C28A;
+    clip-path: polygon(0 0, calc(100% - 46px) 0, 100% 100%, 0 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 241, 207, 0.28),
+        inset 0 -10px 18px rgba(70, 43, 20, 0.12),
+        0 10px 18px rgba(20, 8, 26, 0.22);
+    margin-left: 2.5%;
+
+}
+
+.checkCon {
+    height: 57%;
+    width: 95%;
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.checkBoxOuter {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 70%;
+
+    background: linear-gradient(180deg, #8F7A59 0%, #7A6245 100%);
+    border: 3px solid #D8C28A;
+    box-shadow: inset 0 1px 0 rgba(255, 241, 207, 0.28),
+    inset 0 -10px 18px rgba(70, 43, 20, 0.12),
+    0 10px 18px rgba(20, 8, 26, 0.22);
+}
+
+.outerTitle {
+    color: #DAC17E;
+    font-size: 50px;
+    font-family: 'Bethany', serif;
+    text-align: start;
+    background: linear-gradient(180deg, white, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: 10px;
+}
+
+.checkBoxInner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 10px 40px 0;
+    box-sizing: border-box;
+    border: 2px solid #DAC17E;
+
+    margin-top: 10px;
+    width: 85%;
+    height: 75%;
+    background: linear-gradient(180deg, #0e0519 0%, #7A6245 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 241, 207, 0.28),
+    inset 0 -10px 18px rgba(70, 43, 20, 0.12),
+    0 10px 18px rgba(20, 8, 26, 0.22);
+    justify-content: space-evenly;
+}
+
+.checkItem {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: #F4E7C7;
+    font-family: 'Bethany', serif;
+    font-size: 30px;
+    line-height: 1.1;
+    text-shadow: 0 1px 0 rgba(78, 48, 18, 0.45);
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkInput {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    pointer-events: none;
+}
+
+.checkMark {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    border: 3px solid #D8C28A;
+    background: linear-gradient(180deg, #9A8664 0%, #7B6444 100%);
+    box-shadow:
+        0 0 0 1px rgba(92, 56, 23, 0.12),
+        inset 0 1px 0 rgba(255, 241, 207, 0.32),
+        inset 0 -6px 10px rgba(70, 43, 20, 0.12),
+        0 4px 8px rgba(20, 8, 26, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkIcon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.checkInput:checked + .checkMark .checkIcon {
+    opacity: 1;
+}
+
+.checkInput:focus-visible + .checkMark {
+    outline: 2px solid #FFF0BF;
+    outline-offset: 3px;
+}
+
+.checkText {
+    padding-top: 1px;
+}
+
+.checkItem:hover .checkMark {
+    filter: brightness(1.05);
+}
+
+.checkItem:hover .checkText {
+    color: #FFF0CF;
+}
+
+.btnCon {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 50px;
+    margin-top: 2.5%;
+}
+
+.btn {
+    height: clamp(3rem, 12vw, 5rem);
+    width: clamp(8rem, 13vw, 13rem);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #dcb86a;
+    padding: 0 1rem;
+    font-size: clamp(1rem, 5vw, 2.5rem);
+    line-height: 0.95;
+    white-space: nowrap;
+    color: #f8eac7;
+    transition: all 0.3s ease-out;
+    box-shadow:
+            0 0 0 1px rgba(255, 218, 140, 0.34),
+            0 10px 20px rgba(0, 0, 0, 0.38);
+    font-family: 'Bethany', serif;
+    cursor: pointer;
+    text-shadow: 0 0 8px rgba(255, 225, 150, 0.2);
+}
+
+.btn.disabled {
+    opacity: 0.45;
+    transform: none;
+    filter: grayscale(10%);
+    pointer-events: none;
+}
+
+.btn.disabled:hover {
+    transform: none;
+    filter: grayscale(10%);
+    cursor: not-allowed;
+}
+
+.redBtn {
+    background: linear-gradient(180deg, #e22b2b 0%, #c9151d 48%, #980d12 100%);
+    box-shadow:
+            0 0 0 1px rgba(255, 218, 140, 0.34),
+            0 10px 20px rgba(0, 0, 0, 0.38),
+            inset 0 0 0 9px #941218,
+            inset 0 12px 18px rgba(255, 100, 100, 0.18);
+}
+
+.blueBtn {
+    background: linear-gradient(180deg, #3e4ed0 0%, #2d3bb0 48%, #1c256a 100%);
+    box-shadow:
+            0 0 0 1px rgba(255, 218, 140, 0.34),
+            0 10px 20px rgba(0, 0, 0, 0.38),
+            inset 0 0 0 9px #26378f,
+            inset 0 12px 18px rgba(135, 160, 255, 0.14);
+}
+
+.btn:hover  { transform: translateY(-4px); filter: brightness(1.1); }

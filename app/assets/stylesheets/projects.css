@@ -219,6 +219,7 @@
     margin: 0;
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .titleCon {
@@ -510,8 +511,8 @@
 }
 
 .thumbBox {
-    height: 250px;
-    width: 300px;
+    height: 200px;
+    width: 250px;
     transition: all 0.3s ease;
 
     border: 3px solid #dcb86a;
@@ -552,3 +553,98 @@
     height: 100%;
     object-fit: cover;
 }
+
+.shipCon {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.shipBtn {
+    height: 70px;
+    width: 200px;
+    font-family: 'Bethany', serif;
+    border: 2px solid #dcb86a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1rem, 2vw, 2rem);
+    line-height: 0.95;
+    white-space: nowrap;
+    color: #f8eac7;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+    text-shadow: 0 0 8px rgba(255, 225, 150, 0.2);
+    background: linear-gradient(180deg, #e22b2b 0%, #c9151d 48%, #980d12 100%);
+    box-shadow:
+            0 0 0 1px rgba(255, 218, 140, 0.34),
+            0 10px 20px rgba(0, 0, 0, 0.38),
+            inset 0 0 0 9px #941218,
+            inset 0 12px 18px rgba(255, 100, 100, 0.18);
+}
+
+.shipBtnDisabled {
+    position: relative;
+    opacity: 0.45;
+    cursor: not-allowed;
+    filter: grayscale(15%);
+}
+
+.shipBtn:hover  { transform: translateY(-2px); filter: brightness(1.1); }
+
+.shipBtnDisabled:hover {
+    transform: none;
+    filter: grayscale(15%);
+}
+
+.shipBtnTooltip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 12px);
+    transform: translateX(-50%) translateY(4px);
+    min-width: 260px;
+    max-width: 340px;
+    padding: 10px 12px;
+    border: 1px solid #dcb86a;
+    background: rgba(20, 11, 18, 0.98);
+    color: #f8eac7;
+    font-size: 14px;
+    line-height: 1.35;
+    white-space: normal;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.38),
+        inset 0 1px 0 rgba(255, 241, 207, 0.14);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 5;
+}
+
+.shipBtnTooltip::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    width: 12px;
+    height: 12px;
+    background: rgba(20, 11, 18, 0.98);
+    border-right: 1px solid #dcb86a;
+    border-bottom: 1px solid #dcb86a;
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.shipBtnTooltipLine {
+    display: block;
+}
+
+.shipBtnDisabled:hover .shipBtnTooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+

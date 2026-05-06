@@ -1,0 +1,83 @@
+<%# app/views/projects/checklist.html.erb %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag asset_path("shipping.css"), "data-turbo-track": "reload" %>
+<% end %>
+
+
+<div class="bg">
+  <div class="pageCon" data-controller="checklist">
+    <h1 class="title">Ship</h1>
+    <div class="line"></div>
+
+    <div class="angledTitle">Checklist</div>
+
+    <div class="checkCon">
+      <div class="checkBoxOuter">
+        <h1 class="outerTitle">Is your project...</h1>
+        <div class="checkBoxInner">
+          <label class="checkItem">
+            <%= check_box_tag "checklist[available_link]", "1", params.dig(:checklist, "available_link") == "1", class: "checkInput", data: { checklist_target: "checkbox", action: "change->checklist#updateState" } %>
+            <span class="checkMark" aria-hidden="true">
+              <%= image_tag asset_path("projects/check-star.png"),
+                  class: "checkIcon",
+                  alt: "Star"
+              %>
+            </span>
+            <span class="checkText">Available on a link where everyone can try your project?</span>
+          </label>
+
+          <label class="checkItem">
+            <%= check_box_tag "checklist[source_code]", "1", params.dig(:checklist, "source_code") == "1", class: "checkInput", data: { checklist_target: "checkbox", action: "change->checklist#updateState" } %>
+            <span class="checkMark" aria-hidden="true">
+              <%= image_tag asset_path("projects/check-star.png"),
+                  class: "checkIcon",
+                  alt: "Star"
+              %>
+            </span>
+            <span class="checkText">Source code available on a public GitHub URL?</span>
+          </label>
+
+          <label class="checkItem">
+            <%= check_box_tag "checklist[deployed]", "1", params.dig(:checklist, "deployed") == "1", class: "checkInput", data: { checklist_target: "checkbox", action: "change->checklist#updateState" } %>
+            <span class="checkMark" aria-hidden="true">
+              <%= image_tag asset_path("projects/check-star.png"),
+                  class: "checkIcon",
+                  alt: "Star"
+              %>
+            </span>
+            <span class="checkText">Deployed on the web? (Vercel, GitHub Pages, itch.io, etc.)</span>
+          </label>
+
+          <label class="checkItem">
+            <%= check_box_tag "checklist[complete]", "1", params.dig(:checklist, "complete") == "1", class: "checkInput", data: { checklist_target: "checkbox", action: "change->checklist#updateState" } %>
+            <span class="checkMark" aria-hidden="true">
+              <%= image_tag asset_path("projects/check-star.png"),
+                  class: "checkIcon",
+                  alt: "Star"
+              %>
+            </span>
+            <span class="checkText">Working and complete? (no placeholders)</span>
+          </label>
+
+          <label class="checkItem">
+            <%= check_box_tag "checklist[readme]", "1", params.dig(:checklist, "readme") == "1", class: "checkInput", data: { checklist_target: "checkbox", action: "change->checklist#updateState" } %>
+            <span class="checkMark" aria-hidden="true">
+              <%= image_tag asset_path("projects/check-star.png"),
+                  class: "checkIcon",
+                  alt: "Star"
+              %>
+            </span>
+            <span class="checkText">Does your project have a filled-out README document?</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="btnCon">
+      <%= link_to "Back", projects_path(project_id: @project.id), class: "blueBtn btn" %>
+      <%= link_to "Continue", project_details_path(@project.id), class: "redBtn btn disabled", data: { checklist_target: "continueLink", action: "click->checklist#preventIfDisabled" }, aria: { disabled: true }, tabindex: -1 %>
+    </div>
+
+  </div>
+</div>

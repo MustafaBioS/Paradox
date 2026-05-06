@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+
   root "landing#index"
+
   get "faq", to: "faq#index"
+
   get "/auth/hackclub", to: "hca_auth#redirect", as: :auth_hackclub
   get "/hca/auth/callback", to: "hca_auth#callback", as: :auth_callback
   get "/auth/signout", to: "hca_auth#signout", as: :auth_signout
@@ -8,7 +11,11 @@ Rails.application.routes.draw do
   get "/auth/hackatime", to: "hackatime_auth#redirect", as: :auth_hackatime
   get "hackatime/auth/callback", to: "hackatime_auth#callback", as: :auth_hackatime_callback
   get "home", to: "home#index", as: "home"
+
   resources :projects, except: [:new, :show]
+  get "project/:id/checklist", to: "projects#checklist", as: "project_checklist"
+  get "project/:id/details", to: "projects#details", as: "project_details"
+  get "project/:id/ship", to: "projects#ship", as: "project_ship"
 
   get "/shop", to: "shop#index", as: "shop"
   post "/shop", to: "shop#create"
@@ -23,7 +30,6 @@ Rails.application.routes.draw do
   get "admin/orders", to: "admin#orders", as: "admin_orders"
   get "admin/projects", to: "admin#projects", as: "admin_projects"
   get "admin/shop", to: "admin#shop", as: "admin_shop"
-
 
 
   # get "/auth/lapse", to: "lapse_auth#redirect", as: :auth_lapse

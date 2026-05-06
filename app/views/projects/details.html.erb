@@ -1,0 +1,80 @@
+<%# app/views/projects/details.html.erb %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "details", "data-turbo-track": "reload" %>
+<% end %>
+
+<div class="bg">
+  <div class="pageCon" data-controller="project-details">
+    <h1 class="title">Ship</h1>
+    <div class="line"></div>
+
+    <div class="angledTitle">Project Details</div>
+
+    <div class="container">
+
+      <div class="verifyOuterBox">
+        <div class="titleCon">
+          <h1 class="verifyTitle">Verify Current Information</h1>
+        </div>
+        <div class="verifyInnerBox">
+          <div class="topRow">
+            <div class="descCon">
+              <h1 class="descTitle">Description</h1>
+              <p class="description"><%= @project.description %></p>
+            </div>
+            <div class="thumbCon">
+              <h1 class="thumbTitle">Thumbnail</h1>
+              <%= image_tag @project.thumbnail, class: "imageThumb", alt: "Project Image" if @project&.thumbnail&.attached? %>
+            </div>
+          </div>
+          <div class="hrsCon">
+            <div class="codeHrsBox">
+                <h1 class="hrsRed" data-hackatime-target="hours"><%= @project.code_hours %> code hrs</h1>
+                <%= image_tag "projects/red-star.png",
+                    class: "redStar",
+                    alt: "Red Star"
+                %>
+            </div>
+            <div class="artHrsBox">
+                <h1 class="hrsBlue">0.00 code hrs</h1>
+                <%= image_tag "projects/blue-star.png",
+                    class: "blueStar",
+                    alt: "Blue Star"
+                %>
+            </div>
+          </div>
+        </div>
+
+        <div class="btnCon">
+          <%= link_to "Back", project_checklist_path(project_id: @project.id), class: "blueBtn btn" %>
+          <%= button_tag "Continue",
+                type: "button",
+                class: "redBtn btn",
+                data: { action: "click->project-details#focusRepoUrl" } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="angledTitle addDeets">Add Details</div>
+
+    <div class="container">
+
+      <div class="verifyOuterBox">
+        <%= form_with model: @project, id: "project-details-form", html: { class: "verifyInnerBox linkBox" } do |f| %>
+          <label class="lbl">Github Repo Link</label>
+          <%= f.text_field :repo_url, placeholder: "https://github.com/user/repo", class: "inpField repo", data: { project_details_target: "repoUrl" } %>
+          <label class="lbl">Shipped Project Link</label>
+          <%= f.text_field :demo_url, placeholder: "https://projectdotcom", class: "inpField demo" %>
+        <% end %>
+        <div class="btnCon">
+          <%= link_to "Back", project_checklist_path(project_id: @project.id), class: "blueBtn btn" %>
+          <%= button_tag "Continue", type: "submit", form: "project-details-form", class: "redBtn btn" %>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
