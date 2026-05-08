@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["modalCon", "itemModal"]
+  static targets = ["modalCon", "itemModal", "quantity"]
 
   connect() {
     const params = new URLSearchParams(window.location.search)
@@ -19,12 +19,15 @@ export default class extends Controller {
     }
   }
 
-  updateQuantity(event) {
-    const quantity = event.target.value
-    const link = this.element.querySelector(".orderBtn")
-    const url = new URL(link.href)
-    url.searchParams.set("quantity", quantity)
-    link.href = url.toString()
+  incrementQuantity(event) {
+    event.preventDefault()
+    this.quantityTarget.stepUp()
+  }
+
+  decrementQuantity(event) {
+    event.preventDefault()
+    if (Number(this.quantityTarget.value) <= Number(this.quantityTarget.min || 1)) return
+    this.quantityTarget.stepDown()
   }
 
 }

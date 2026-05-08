@@ -168,18 +168,35 @@
           </div>
 
           <div class="shipCon">
-            <% if project_ready_for_shipping?(@selected_project) %>
-              <%= link_to "SHIP!", project_checklist_path(@selected_project.id), class: "shipBtn" %>
-            <% else %>
-              <% ship_reasons = shipping_incomplete_reasons(@selected_project) %>
-              <span class="shipBtn shipBtnDisabled" aria-disabled="true" title="<%= ship_reasons.join(' ') %>">
-                SHIP!
-                <span class="shipBtnTooltip">
-                  <% ship_reasons.each do |reason| %>
-                    <span class="shipBtnTooltipLine"><%= reason %></span>
-                  <% end %>
+            <% if @selected_project.status == "unshipped" %>
+              <% if project_ready_for_shipping?(@selected_project) %>
+                <%= link_to "SHIP!", project_checklist_path(@selected_project.id), class: "shipBtn" %>
+              <% else %>
+                <% ship_reasons = shipping_incomplete_reasons(@selected_project) %>
+                <span class="shipBtn shipBtnDisabled" aria-disabled="true" title="<%= ship_reasons.join(' ') %>">
+                  SHIP!
+                  <span class="shipBtnTooltip">
+                    <% ship_reasons.each do |reason| %>
+                      <span class="shipBtnTooltipLine"><%= reason %></span>
+                    <% end %>
+                  </span>
                 </span>
-              </span>
+              <% end %>
+
+            <% else %>
+              <% if project_ready_for_shipping?(@selected_project) %>
+                <%= link_to "RE-SHIP!", project_checklist_path(@selected_project.id), class: "shipBtn" %>
+              <% else %>
+                <% ship_reasons = shipping_incomplete_reasons(@selected_project) %>
+                <span class="shipBtn shipBtnDisabled" aria-disabled="true" title="<%= ship_reasons.join(' ') %>">
+                  RE-SHIP!
+                  <span class="shipBtnTooltip">
+                    <% ship_reasons.each do |reason| %>
+                      <span class="shipBtnTooltipLine"><%= reason %></span>
+                    <% end %>
+                  </span>
+                </span>
+              <% end %>
             <% end %>
           </div>
 

@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   resources :projects, except: [:new, :show]
   get "project/:id/checklist", to: "projects#checklist", as: "project_checklist"
   get "project/:id/details", to: "projects#details", as: "project_details"
+  patch "project/:id/details", to: "projects#details_update", as: "project_details_update"
   get "project/:id/ship", to: "projects#ship", as: "project_ship"
+  patch "project/:id/ship", to: "projects#ship_submit", as: "project_ship_submit"
 
   get "/shop", to: "shop#index", as: "shop"
   post "/shop", to: "shop#create"

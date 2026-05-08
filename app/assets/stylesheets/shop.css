@@ -310,9 +310,72 @@
 .modBtnCon {
     display: flex;
     width: 100%;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
+    justify-content: flex-start;
     flex-direction: row;
+    gap: 18px;
+}
+
+.quantityCon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.quantityBtn {
+    height: 54px;
+    width: 54px;
+    border: 2px solid #dcb86a;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bethany', serif;
+    font-size: 34px;
+    line-height: 1;
+    color: #f8eac7;
+    cursor: pointer;
+    background: linear-gradient(180deg, #3e4ed0 0%, #2d3bb0 48%, #1c256a 100%);
+    box-shadow:
+            0 0 0 1px rgba(255, 218, 140, 0.34),
+            0 10px 20px rgba(0, 0, 0, 0.38),
+            inset 0 0 0 7px #26378f,
+            inset 0 12px 18px rgba(135, 160, 255, 0.14);
+    transition: all 0.3s ease;
+}
+
+.quantityBtn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.quantityInput {
+    width: 110px;
+    height: 54px;
+    border: 2px solid #dcb86a;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'Bethany', serif;
+    font-size: 28px;
+    color: #f8eac7;
+    background: linear-gradient(180deg, #8D7681, rgba(149, 124, 98, 0.88) 100%);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 245, 223, 0.35),
+            inset 0 -10px 18px rgba(104, 72, 32, 0.14),
+            0 1px 0 rgba(0, 0, 0, 0.12);
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.quantityInput::-webkit-outer-spin-button,
+.quantityInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantityInput:focus {
+    outline: none;
+    border-color: #f4dd9e;
 }
 
 .itemName, .itemHrs {

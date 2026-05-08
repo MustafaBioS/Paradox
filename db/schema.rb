@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_29_022450) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_08_122600) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -61,12 +61,30 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_29_022450) do
     t.string "demo_url"
     t.text "description", default: "No description yet"
     t.string "hackatime_projects", default: [], array: true
+    t.decimal "last_shipped_code_hours", default: "0.0", null: false
     t.string "repo_url"
     t.string "status"
     t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "shipping_infos", force: :cascade do |t|
+    t.string "address_line_1"
+    t.string "address_line_2"
+    t.date "birth_date"
+    t.string "city"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "postal_code"
+    t.string "state"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_shipping_infos_on_user_id", unique: true
   end
 
   create_table "shop_items", force: :cascade do |t|
@@ -97,4 +115,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_29_022450) do
   add_foreign_key "orders", "shop_items"
   add_foreign_key "orders", "users"
   add_foreign_key "projects", "users"
+  add_foreign_key "shipping_infos", "users"
 end

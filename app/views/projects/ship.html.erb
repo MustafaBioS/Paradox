@@ -1,0 +1,63 @@
+<%# app/views/projects/ship.html.erb %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag asset_path("ship.css"), "data-turbo-track": "reload" %>
+<% end %>
+
+<div class="bg">
+  <div class="pageCon">
+    <h1 class="title">Ship</h1>
+    <div class="line"></div>
+
+    <div class="angledTitle">Your Info</div>
+
+    <%= form_with model: @shipping_info, url: project_ship_submit_path(@project), method: :patch, id: "shipping-form", html: { class: "shippingCon" } do |f| %>
+      <div class="shippingBox">
+        <div class="row">
+          <div class="col">
+            <label class="lbl">First Name</label>
+            <%= f.text_field :first_name, class: "fieldInput", placeholder: "xxxxxxxxxxxxxx", required: true %>
+          </div>
+          <div class="col">
+            <label class="lbl">Last Name</label>
+            <%= f.text_field :last_name, class: "fieldInput", placeholder: "xxxxxxxxxxxxxx", required: true %>
+          </div>
+        </div>
+        <label class="lbl">Email Address</label>
+        <%= f.email_field :email, class: "fieldInput", placeholder: "address@email.com", required: true %>
+        <label class="lbl">Birth Date</label>
+        <%= f.date_field :birth_date, class: "fieldInput", required: true %>
+        <label class="lbl">Address Line 1</label>
+        <%= f.text_field :address_line_1, class: "fieldInput", placeholder: "xxxxxxxxxxxxxxxxxxx", required: true %>
+        <label class="lbl">Address Line 2 <span class="optional">(optional)</span></label>
+        <%= f.text_field :address_line_2, class: "fieldInput", placeholder: "xxxxxxxxxxxxxxxxxxx", required: false %>
+        <div class="grid">
+          <div class="field-group">
+            <label class="lbl">Country</label>
+            <%= f.text_field :country, class: "fieldInput", placeholder: "United States", required: true %>
+          </div>
+
+          <div class="field-group">
+            <label class="lbl">City</label>
+            <%= f.text_field :city, class: "fieldInput", placeholder: "San Francisco", required: true %>
+          </div>
+
+          <div class="field-group">
+            <label class="lbl">State/Province</label>
+            <%= f.text_field :state, class: "fieldInput", placeholder: "California", required: true %>
+          </div>
+
+          <div class="field-group">
+            <label class="lbl">ZIP/Postal Code</label>
+            <%= f.text_field :postal_code, class: "fieldInput", placeholder: "xxxxxx", required: true %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="btnCon">
+      <%= link_to "Back", project_details_path(@project), class: "blueBtn btn" %>
+      <%= button_tag "SHIP!", type: "submit", form: "shipping-form", class: "redBtn btn" %>
+    </div>
+  </div>
+</div>

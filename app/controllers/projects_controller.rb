@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
     else
       @projects = current_user.projects.order(created_at: :desc)
       @hackatime_projects = HackatimeService.fetch_projects(current_user.hackatime_token)
-      render :index, status: :unprocessable_entity
+      render "projects/index", status: :unprocessable_entity
     end
   end
 
@@ -40,15 +40,27 @@ class ProjectsController < ApplicationController
     @project = current_user.projects.find(params[:id])
 
     if @project.update(project_params)
-      respond_to do |format|
-        format.html { redirect_to projects_path(project_id: @project.id), notice: "Project updated!" }
-        format.json { render json: { id: @project.id, title: @project.title }, status: :ok }
+      if request.format.json?
+        render json: { id: @project.id, title: @project.title }, status: :ok
+      else
+        redirect_to projects_path(project_id: @project.id), notice: "Project updated!"
       end
     else
-      respond_to do |format|
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: { errors: @project.errors.full_messages }, status: :unprocessable_entity }
+      if request.format.json?
+        render json: { errors: @project.errors.full_messages }, status: :unprocessable_entity
+      else
+        redirect_to projects_path(project_id: @project.id), alert: @project.errors.full_messages.to_sentence
       end
+    end
+  end
+
+  def details_update
+    @project = current_user.projects.find(params[:id])
+
+    if @project.update(details_project_params)
+      redirect_to project_ship_path(@project)
+    else
+      redirect_to project_details_path(@project), alert: @project.errors.full_messages.to_sentence
     end
   end
 
@@ -65,26 +77,46 @@ class ProjectsController < ApplicationController
   end
 
   def ship
+    @project = current_user.projects.find(params[:id])
+    @shipping_info = current_user.shipping_info || current_user.build_shipping_info
+  end
+
+  def ship_submit
+    @project = current_user.projects.find(params[:id])
+    @shipping_info = current_user.shipping_info || current_user.build_shipping_info
+
+    ActiveRecord::Base.transaction do
+      @shipping_info.assign_attributes(shipping_info_params)
+      @shipping_info.save!
+      @project.mark_as_shipped!
+    end
+
+    redirect_to projects_path(project_id: @project.id), notice: "Shipping submitted!"
+  rescue ActiveRecord::RecordInvalid
+    redirect_to project_ship_path(@project), alert: @shipping_info.errors.full_messages.to_sentence
   end
 
   private
 
   def project_params
-    params.fetch(:project, {}).permit(:title, :description, :code_hours, :art_hours, :thumbnail, :status, hackatime_projects: [])
+    params.fetch(:project, {}).permit(:title, :description, :repo_url, :demo_url, :code_hours, :art_hours, :thumbnail, :status, hackatime_projects: [])
+  end
+
+  def details_project_params
+    params.fetch(:project, {}).permit(:repo_url, :demo_url)
+  end
+
+  def shipping_info_params
+    params.require(:shipping_info).permit(:first_name, :last_name, :email, :birth_date, :address_line_1, :address_line_2, :city, :state, :postal_code, :country)
   end
 
   def project_ready_for_shipping?(project)
-    shipping_incomplete_reasons(project).empty?
+    project.present? && project.ready_for_shipping?
   end
 
   def shipping_incomplete_reasons(project)
     return ["Project not found."] if project.blank?
 
-    reasons = []
-    reasons << "Please change the project title from \"project name\"." if project.title.blank? || project.title == "project name"
-    reasons << "Please fill out the project description." if project.description.blank? || project.description == "No description yet"
-    reasons << "Please upload a thumbnail before shipping." unless project.thumbnail.attached?
-    reasons << "Please reach at least 5 Hackatime hours before shipping." if project.code_hours.to_f < 5.0
-    reasons
+    project.shipping_incomplete_reasons
   end
 end

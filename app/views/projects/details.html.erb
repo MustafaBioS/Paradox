@@ -59,13 +59,12 @@
     <div class="angledTitle addDeets">Add Details</div>
 
     <div class="container">
-
       <div class="verifyOuterBox">
-        <%= form_with model: @project, id: "project-details-form", html: { class: "verifyInnerBox linkBox" } do |f| %>
+        <%= form_with model: @project, url: project_details_update_path(@project), method: :patch, id: "project-details-form", html: { class: "verifyInnerBox linkBox" } do |f| %>
           <label class="lbl">Github Repo Link</label>
-          <%= f.text_field :repo_url, placeholder: "https://github.com/user/repo", class: "inpField repo", data: { project_details_target: "repoUrl" } %>
+          <%= f.text_field :repo_url, placeholder: "https://github.com/user/repo", class: "inpField repo", data: { project_details_target: "repoUrl" }, required: true %>
           <label class="lbl">Shipped Project Link</label>
-          <%= f.text_field :demo_url, placeholder: "https://projectdotcom", class: "inpField demo" %>
+          <%= f.text_field :demo_url, placeholder: "https://projectdotcom", class: "inpField demo", required: true %>
         <% end %>
         <div class="btnCon">
           <%= link_to "Back", project_checklist_path(project_id: @project.id), class: "blueBtn btn" %>

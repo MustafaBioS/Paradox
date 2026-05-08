@@ -1,7 +1,7 @@
 <%# app/views/shop/index.html.erb %>
 
 <% content_for :head do %>
-  <%= stylesheet_link_tag "shop", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag asset_path("shop.css"), "data-turbo-track": "reload" %>
 <% end %>
 
 <div class="modalCon" data-controller="shop" data-action="click@document->shop#close" data-shop-target="modalCon">
@@ -17,8 +17,12 @@
 
       <%= form_with url: confirm_path, class: "modBtnCon",method: :get do |f| %>
         <%= f.hidden_field :shop_item_id, value: @selected_item&.id %>
-        <%= f.number_field :quantity, value: 1, min: 1 %>
-        <%= f.submit "Place Order", class: "orderBtn", disabled: (@selected_item&.hours.to_f > current_user.shipped_hours.to_f) %>
+        <div class="quantityCon">
+          <button type="button" class="quantityBtn" data-action="click->shop#decrementQuantity">-</button>
+          <%= f.number_field :quantity, value: 1, min: 1, class: "quantityInput", data: { shop_target: "quantity" } %>
+          <button type="button" class="quantityBtn" data-action="click->shop#incrementQuantity">+</button>
+        </div>
+        <%= f.submit "Place Order", class: "orderBtn", disabled: (!@selected_item || @selected_item.hours.to_f > current_user.shipped_hours.to_f) %>
       <% end %>
 
       <%# if @selected_item %>
