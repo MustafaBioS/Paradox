@@ -5,8 +5,12 @@
 <% end %>
 
 
-<div class="modalCon">
+<div class="modalCon"
+     data-controller="projects-modal"
+     data-action="click->projects-modal#close"
+     data-projects-modal-target="modalCon">
   <div class="redModal"
+       data-projects-modal-target="redModal"
        data-controller="hackatime"
        data-hackatime-project-id-value="<%= @selected_project&.id %>"
        data-hackatime-saved-names="<%= (@selected_project&.hackatime_projects || []).to_json %>"
@@ -27,7 +31,7 @@
       Confirm
     </button>
   </div>
-  <div class="blueModal">
+  <div class="blueModal" data-projects-modal-target="blueModal">
     <h1>Select Lapse Projects</h1>
 <!--    <div class="projectsBox">-->
       <%# if @hackatime_projects&.any? %>
@@ -124,7 +128,7 @@
             </div>
             <div class="artHrsBox">
               <div class="rowCon">
-                <h1 class="hrsBlue">0.00 code hrs</h1>
+                <h1 class="hrsBlue" data-hackatime-target="hours"><%= @selected_project.art_hours %> art hrs</h1>
                 <%= image_tag "projects/blue-star.png",
                     class: "blueStar",
                     alt: "Blue Star"

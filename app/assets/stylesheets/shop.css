@@ -310,10 +310,11 @@
 .modBtnCon {
     display: flex;
     width: 100%;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: space-between;
     flex-direction: row;
     gap: 18px;
+    margin-top: 14px;
 }
 
 .quantityCon {
@@ -321,7 +322,8 @@
     align-items: center;
     justify-content: center;
     gap: 12px;
-    width: 100%;
+    width: fit-content;
+    flex: 0 0 auto;
 }
 
 .quantityBtn {
@@ -342,6 +344,7 @@
             inset 0 0 0 7px #26378f,
             inset 0 12px 18px rgba(135, 160, 255, 0.14);
     transition: all 0.3s ease;
+    padding: 0;
 }
 
 .quantityBtn:hover {
@@ -378,6 +381,11 @@
     border-color: #f4dd9e;
 }
 
+.orderBtn {
+    align-self: center;
+    flex: 0 0 auto;
+}
+
 .itemName, .itemHrs {
     color: #DAC17E;
     font-size: 45px;
@@ -408,3 +416,36 @@
     word-wrap: break-word;
     word-break: break-word;
 }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.currencyBox {
+    height: 60px;
+    width: 175px;
+    max-width: 100%;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #dcb86a;
+    padding: 0 1rem;
+    font-size: clamp(0.8rem, 4vw, 2rem);
+    line-height: 0.95;
+    white-space: nowrap;
+    color: #f8eac7;
+    transition: all 0.3s ease-out;
+    font-family: 'Bethany', serif;
+    text-shadow: 0 0 8px rgba(255, 225, 150, 0.2);
+    background: linear-gradient(180deg, #3e4ed0 0%, #2d3bb0 48%, #1c256a 100%);
+    box-shadow:
+            0 0 0 1px rgba(255, 218, 140, 0.34),
+            0 10px 20px rgba(0, 0, 0, 0.38),
+            inset 0 0 0 9px #26378f,
+            inset 0 12px 18px rgba(135, 160, 255, 0.14);
+}
+

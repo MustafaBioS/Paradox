@@ -14,7 +14,10 @@
     }
 
     .opened-book {
-        transform: translateX(-50%) scale(var(--opened-book-scale));
+        left: 50%;
+        margin-left: calc(var(--opened-book-base-width) * -0.5);
+        width: var(--opened-book-base-width);
+        transform: scale(var(--opened-book-scale));
         transform-origin: center bottom;
     }
 
@@ -22,6 +25,15 @@
         transform-origin: center bottom;
         transform: translateY(10%);
         cursor: auto;
+    }
+
+    .q {
+        transition: all 0.3s ease;
+    }
+
+    .q:hover {
+        cursor: pointer;
+        font-weight: bold;
     }
 
     .q:after {
@@ -35,7 +47,20 @@
     }
 
     .q:hover:after { width: 100%; }
-    .q.under:after { width: 100%; }
+
+    .txtRow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+    }
+
+    .txtRow p {
+        white-space: nowrap;
+    }
+
     .hidden { display: none; }
 </style>
 
@@ -78,7 +103,7 @@
 
       <% @faq_items.each_with_index do |item, i| %>
         <button
-          class="q text-3xl mt-6 text-left hover:font-bold <%= i == 0 ? 'under' : '' %>"
+          class="q text-3xl mt-6 text-left <%= i == 0 ? 'under' : '' %>"
           onclick="selectFaq(<%= i %>)"
           id="faq-btn-<%= i %>"
           style="font-family: 'Bethany', serif"
@@ -135,7 +160,7 @@
           </div>
           <div class="flex-col w-full flex items-end justify-end">
             <p class="text-lg" style="font-family: 'Bethany', serif">directed by teens</p>
-            <div class="flex flex-row">
+            <div class="flex flex-row txtRow">
               <p class="text-3xl" style="font-family: 'Bethany', serif">for teens</p>
               <%= image_tag("/images/faq/faq-star.png", class: "ml-2", alt: "Star") %>
             </div>

@@ -43,7 +43,12 @@
   <div class="pageCon">
     <div class="topLine">
       <h1 class="title">Shop</h1>
-      <a class="orders" href="/shop/my_orders">My Orders</a>
+      <div class="row">
+        <div class="currencyBox">
+          <%= current_user.shipped_hours %> hours
+        </div>
+        <a class="orders" href="/shop/my_orders">My Orders</a>
+      </div>
     </div>
     <div class="line"></div>
 

@@ -33,6 +33,9 @@ Rails.application.routes.draw do
   get "admin/projects", to: "admin#projects", as: "admin_projects"
   get "admin/shop", to: "admin#shop", as: "admin_shop"
 
+  get "/profile/:id", to: "profile#show", as: "profile"
+
+  get "/refer", to: "refer#index", as: "refer"
 
   # get "/auth/lapse", to: "lapse_auth#redirect", as: :auth_lapse
   # get "/lapse/auth/callback", to: "lapse_auth#callback", as: :auth_lapse

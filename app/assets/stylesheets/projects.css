@@ -268,6 +268,7 @@
     align-items: center;
     width: 100%;
     margin-top: 30px;
+    gap: 30px;
 }
 
 .codeHrsBox {
@@ -288,9 +289,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 40px;
+    justify-content: center;
     overflow: hidden;
     font-family: 'Bethany', serif;
+    transition: all 0.3s ease;
 }
 
 .artHrsBox {
@@ -311,9 +313,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 40px;
+    justify-content: center;
     overflow: hidden;
     font-family: 'Bethany', serif;
+    transition: all 0.3s ease;
+}
+
+.codeHrsBox:hover, .artHrsBox:hover {
+    opacity: 0.75;
+    cursor: pointer;
 }
 
 .rowCon {
@@ -437,12 +445,12 @@
     justify-content: center;
     z-index: 1;
     pointer-events: none;
+    user-select: none;
 }
 
 .redModal {
     height: 600px;
     width: 650px;
-    border-radius: 12px;
     background: linear-gradient(
             180deg,
             transparent 0%,
@@ -454,15 +462,22 @@
             inset 0 0 0 3px #DA6767;
     backdrop-filter: blur(6px) saturate(110%);
     -webkit-backdrop-filter: blur(6px) saturate(110%);
-
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
-    padding-top: 40px;
+    justify-content: center;
     overflow: hidden;
     font-family: 'Bethany', serif;
-    display: none;
-    pointer-events: none;
+}
+
+.modalCon.open {
+    z-index: 50;
+    pointer-events: auto;
+}
+
+.redModal.open {
+    display: flex;
+    pointer-events: auto;
 }
 
 .blueModal {
@@ -473,21 +488,22 @@
             transparent 0%,
             #6D6CA0 100%
     );
-
     box-shadow:
             0 10px 24px rgba(20, 8, 26, 0.34),
             inset 0 0 0 3px #3E4C9E;
     backdrop-filter: blur(6px) saturate(110%);
     -webkit-backdrop-filter: blur(6px) saturate(110%);
-
-    display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 40px;
+    justify-content: center;
     overflow: hidden;
     font-family: 'Bethany', serif;
-    display: none;
     pointer-events: none;
+    display: none;
+}
+.blueModal.open {
+    display: flex;
+    pointer-events: auto;
 }
 
 .prjct.selected {
@@ -647,4 +663,5 @@
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
+
 
