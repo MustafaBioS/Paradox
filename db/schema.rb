@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_08_122600) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_13_090000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -103,11 +103,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_08_122600) do
     t.string "hackatime_uid"
     t.boolean "is_admin", default: false
     t.string "name"
+    t.string "referral_code"
+    t.integer "referrals_count", default: 0, null: false
+    t.bigint "referred_by_id"
     t.integer "shipped_hours", default: 0
     t.string "slack_id"
     t.datetime "updated_at", null: false
     t.string "username"
     t.string "verification_status"
+    t.index ["referral_code"], name: "index_users_on_referral_code", unique: true
+    t.index ["referred_by_id"], name: "index_users_on_referred_by_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -116,4 +121,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_08_122600) do
   add_foreign_key "orders", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "shipping_infos", "users"
+  add_foreign_key "users", "users", column: "referred_by_id"
 end

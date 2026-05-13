@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get "/profile/:id", to: "profile#show", as: "profile"
 
   get "/refer", to: "refer#index", as: "refer"
+  get "/referral", to: "refer#capture", as: "referral"
 
   # get "/auth/lapse", to: "lapse_auth#redirect", as: :auth_lapse
   # get "/lapse/auth/callback", to: "lapse_auth#callback", as: :auth_lapse
@@ -52,4 +53,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  if Rails.env.development?
+    get "/dev/login", to: "dev#login", as: "dev_login"
+    get "/dev/logout", to: "dev#logout", as: "dev_logout"
+  end
+
 end

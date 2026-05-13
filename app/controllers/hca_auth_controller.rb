@@ -76,6 +76,7 @@ class HcaAuthController < ApplicationController
     is_admin = ENV["ADMIN_SLACK_ID"].to_s.split(",").map(&:strip).include?(slack_id)
 
     user = User.find_or_initialize_by(email: email)
+    new_record = user.new_record?
     user.name = user_info["name"] if user_info["name"].present?
     user.is_admin = is_admin
 
@@ -86,7 +87,17 @@ class HcaAuthController < ApplicationController
     user.slack_id = user_info["slack_id"] if user_info["slack_id"].present?
     user.verification_status = user_info["verification_status"].presence || user.verification_status || "needs_submission"
     user.is_admin = is_admin
+    user.referral_code ||= User.generate_referral_code
+
+    if new_record
+      referral_code = session[:referral_code].to_s.strip
+      referrer = User.find_by(referral_code: referral_code) if referral_code.present?
+      user.referred_by = referrer if referrer && referrer.email != email
+    end
+
     user.save!
+
+    session.delete(:referral_code)
 
     Rails.logger.info "SLACK ID: #{slack_id}"
     Rails.logger.info "ADMIN IDS: #{ENV["ADMIN_SLACK_ID"]}"

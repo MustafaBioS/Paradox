@@ -1,0 +1,16 @@
+<main class="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-16">
+  <div class="w-full max-w-xl space-y-6">
+    <h1 class="text-3xl font-bold">Refer a friend</h1>
+    <div class="space-y-2">
+      <p class="text-lg">Your referral link</p>
+      <div class="bg-neutral-900 border border-neutral-700 rounded-lg p-4 break-all">
+        <%= @referral_url %>
+      </div>
+    </div>
+    <div class="space-y-2">
+      <p class="text-lg">Successful referrals</p>
+      <div class="text-2xl font-semibold"><%= current_user.referrals_count %></div>
+    </div>
+  </div>
+</main>
+

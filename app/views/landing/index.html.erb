@@ -113,22 +113,39 @@
           BUILD FOR 30 HOURS - LONDON, UK
         </p>
 
-        <p
-          style="
-          font-family: 'Bethany', serif;
-            font-size: clamp(1.25rem, 2.25vw, 2.25rem);
-            color: #fff8e7;
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-            margin: 0; padding: 0;
-            text-align: center;
-            margin-top: 45px;
-            position: absolute;
-          "
-        >
-          Build a story. Then live inside it.
-        </p>
-
+        <% if session[:referred_by_name].present? %>
+            <p
+              style="
+              font-family: 'Bethany', serif;
+                font-size: clamp(1.25rem, 2.25vw, 2.25rem);
+                color: #fff8e7;
+                letter-spacing: 0.02em;
+                white-space: nowrap;
+                margin: 0; padding: 0;
+                text-align: center;
+                margin-top: 45px;
+                position: absolute;
+              "
+            >
+              You've been referred by <strong><%= session[:referred_by_name] %></strong>
+            </p>
+        <% else %>
+          <p
+            style="
+            font-family: 'Bethany', serif;
+              font-size: clamp(1.25rem, 2.25vw, 2.25rem);
+              color: #fff8e7;
+              letter-spacing: 0.02em;
+              white-space: nowrap;
+              margin: 0; padding: 0;
+              text-align: center;
+              margin-top: 45px;
+              position: absolute;
+            "
+          >
+            Build a story. Then live inside it.
+          </p>
+        <% end %>
         <%=
           image_tag(
             "1/Logo-fixed.png",
