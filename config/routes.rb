@@ -35,11 +35,13 @@ Rails.application.routes.draw do
 
   get "/profile/:id", to: "profile#show", as: "profile"
 
-  get "/refer", to: "refer#index", as: "refer"
-  get "/referral", to: "refer#capture", as: "referral"
+  match "/404", to: "errors#not_found", via: :all
 
-  # get "/auth/lapse", to: "lapse_auth#redirect", as: :auth_lapse
-  # get "/lapse/auth/callback", to: "lapse_auth#callback", as: :auth_lapse
+  # get "/refer", to: "refer#index", as: "refer"
+  # get "/referral", to: "refer#capture", as: "referral"
+
+  get "/auth/lapse", to: "lapse_auth#redirect", as: "auth_lapse"
+  get "/lapse/auth/callback", to: "lapse_auth#callback", as: "auth_lapse_callback"
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

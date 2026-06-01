@@ -72,7 +72,12 @@
   const items = document.querySelectorAll('.item');
   const username = document.querySelector('.username');
   const pfpCon = document.querySelector('.pfpCon');
+  const pfp = document.querySelector('.pfp');
 
+<!--  pfp.addEventListener('click', () => {-->
+<!--      window.location.href = "/profile";-->
+<!--  })-->
+<!---->
   nav.addEventListener('mouseover', () => {
     nav.classList.add('open');
     logo.style.display = 'block';
@@ -83,7 +88,6 @@
     username.classList.add('hover');
     pfpCon.classList.add('hover');
   })
-
   nav.addEventListener('mouseleave', () => {
       nav.classList.remove('open');
       logo.style.display = 'none';

@@ -52,7 +52,13 @@
 .pfp {
     border: 2px solid #DAC17E;
     width: 75px;
+    transition: all 0.3s ease;
 }
+
+/*.pfp:hover {*/
+/*    opacity: 0.7;*/
+/*    cursor: pointer;*/
+/*}*/
 
 .username {
     display: block;

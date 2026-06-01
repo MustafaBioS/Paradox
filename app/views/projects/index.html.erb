@@ -85,7 +85,7 @@
           <% if current_user.hackatime_token.present? %>
             <%= button_to "+ new project", projects_path, method: :post, class: "botBtn" %>
           <% else %>
-            <%= link_to "link hackatime", auth_hackatime_path, class: "botBtn" %>
+            <%= link_to "Link Hackatime", auth_hackatime_path, class: "botBtn" %>
           <% end %>
         </div>
       </div>
@@ -160,7 +160,10 @@
               <label>
                 <div class="thumbBox">
                     <% if @selected_project&.thumbnail&.attached? %>
-                      <%= image_tag @selected_project.thumbnail, class: "previewImage" %>
+                      <%= image_tag @selected_project.thumbnail,
+                          class: "previewImage",
+                          alt: @selected_project.title
+                      %>
                     <% else %>
                       <h1>Upload image here</h1>
                     <% end %>

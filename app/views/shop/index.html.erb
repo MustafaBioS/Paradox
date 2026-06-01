@@ -10,7 +10,7 @@
     <div class="prizeInfo">
       <%= image_tag @selected_item&.image,
           class: "modalImage itemImage",
-          alt: "Item Image" if @selected_item&.image&.attached? %>
+          alt: @selected_item.name if @selected_item&.image&.attached? %>
       <h1 class="prizeName"><%= @selected_item&.name %></h1>
       <p class="prizeDesc"><%= @selected_item&.description %></p>
     </div>
@@ -62,7 +62,7 @@
 
         <%= image_tag @ticket_item&.image,
             class: "ticket",
-            alt: "Fable Ticket" if @ticket_item&.image&.attached?
+            alt: @ticket_item.name if @ticket_item&.image&.attached?
         %>
       <% end %>
     </div>
@@ -79,7 +79,7 @@
           <%= link_to shop_path(shop_item_id: item.id), class: "grid-item", data: { shop_item_id: item.id } do %>
             <%= image_tag item.image,
                 class: "itemImage shopImage",
-                alt: "Item Image" if item.image.attached? %>
+                alt: item.name if item.image.attached? %>
             <h1 class="itemName"><%= item.name %></h1>
             <p class="itemDesc"><%= item.description %></p>
             <h1 class="itemHrs"><%= item.hours %> hours</h1>

@@ -1,0 +1,12 @@
+<%# app/views/errors/not_found.html.erb %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag asset_path("404.css"), "data-turbo-track": "reload" %>
+<% end %>
+
+<div class="container">
+  <h1 class="404">404</h1>
+  <p class="nf">Not Found</p>
+  <% image_tag "", alt: "Stage", class: "stage" %>
+  <button class="back">Back to stage</button>
+</div>
