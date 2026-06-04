@@ -63,14 +63,6 @@
     width: 80%;
 }
 
-.bottom {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50%;
-    width: 80%;
-}
-
 .tempBox {
     height: 300px;
     width: 550px;
@@ -82,14 +74,16 @@
 }
 
 .catCon {
-    position: absolute;
+    position: fixed;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    height: 95%;
+    height: 100%;
     width: 90%;
     z-index: 0;
     flex-direction: column;
+    pointer-events: none;
+    padding-bottom: 50px;
 }
 
 .cat {
@@ -105,7 +99,7 @@
 }
 
 .textCloud {
-    transform: translate(-250px, 5px) scale(0.98);
+    transform: translate(-225px, 20px) scale(0.98);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease, transform 0.2s ease;
@@ -113,7 +107,7 @@
 
 .textCloud.is-visible {
     opacity: 1;
-    transform: translate(-250px, 5px) scale(1);
+    transform: translate(-225px, 20px) scale(1);
     pointer-events: auto;
 }
 
@@ -150,4 +144,77 @@
     position: absolute;
     margin-left: 120px;
     transform: translate(-5px, -25px);
+}
+
+.annCon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.annBox {
+    min-height: 250px;
+    width: 55%;
+    border: 3px solid #DAC17E;
+    margin-top: 20px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.annBox:hover {
+    opacity: 0.75;
+    cursor: pointer;
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
+.name {
+    color: #DAC17E;
+    font-size: 20px;
+}
+
+.annPfp {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.msgCon {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    padding-bottom: 15px;
+}
+
+.msg {
+    color: #DAC17E;
+    width: 80%;
+    text-align: center;
+    user-select: auto;
+}
+
+.noneCon {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.none {
+    font-size: 50px;
+    color: white;
 }

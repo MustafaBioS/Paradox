@@ -17,14 +17,16 @@ class HomeController < ApplicationController
       msg["type"] == "message" && msg["subtype"].nil?
     end
 
+
     @announcements = announcements.map do |msg|
       {
-        text: msg["text"],
+        text: slack_to_html(msg["text"]),
         ts: msg["ts"],
         user: msg["user"],
+        link: "https://hackclub.slack.com/archives/C0AFQ0Z5NAG/p#{msg['ts'].delete('.')}"
       }
-    end
 
+    end
 
     @messages = [
       "Bomboclat Message #67",
@@ -43,7 +45,24 @@ class HomeController < ApplicationController
       "Bomboclat Message #14",
       "Bomboclat Message #15",
     ]
+  end
+
+  def slack_to_html(text)
+
+    text = text.gsub(/:[a-zA-Z0-9_+-]+:/, "")
+    text = text.gsub(/<#.*?>/, "")
+    text = text.squish
 
 
+    text = text.gsub(
+      /<([^|>]+)\|([^>]+)>/,
+      '<a class="link" href="\1">\2</a>'
+    )
+
+    text = text.gsub(/\*(.*?)\*/, '<strong>\1</strong>')
+    text = text.gsub(/_(.*?)_/, '<em>\1</em>')
+    text = text.gsub("\n", "<br>")
+
+    text.html_safe
   end
 end

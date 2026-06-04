@@ -21,16 +21,26 @@
       </div>
     </div>
     <div class="line"></div>
-    <div class="bottom">
-      <% @announcements.each do |ann| %>
-        <div class="annBox">
-          <div class="top">
-            <%= image_tag "https://cachet.dunkirk.sh/users/#{ann[:user]}/r", class: "annPfp", src: "#{ann[:user]}" %>
-            <h1>Mustafa</h1>
+    <div class="annCon">
+      <% if @announcements.present? %>
+        <% @announcements.each do |ann| %>
+          <div class="annBox" data-link="<%= ann[:link] %>">
+            <div class="top">
+              <%= image_tag "https://cachet.dunkirk.sh/users/#{ann[:user]}/r", class: "annPfp", alt: "#{ann[:user]}" %>
+              <h1 class="name">@Mustafa</h1>
+            </div>
+            <div class="msgCon">
+              <p class="msg">
+                <%= ann[:text] %>
+              </p>
+            </div>
           </div>
-          <%= ann[:message] %>
-        </div>
-      <% end %>
+        <% end %>
+    <% else %>
+      <div class="noneCon">
+        <h1 class="none">No Announcements Available</h1>
+      </div>
+    <% end %>
     </div>
     <div class="catCon">
       <div class="textCloud">
@@ -50,6 +60,19 @@
 
 <script>
   const messages = <%= raw json_escape(@messages.to_json) %>;
+  const announcements = <%= raw @announcements.to_json %>;
+
+  document.addEventListener("DOMContentLoaded", () => {
+      document.querySelector(".annCon").addEventListener("click", (e) => {
+          const card = e.target.closest(".annBox");
+          if (!card) return;
+
+          const link = card.dataset.link;
+          if (link) {
+              window.open(link, "_blank");
+          }
+      });
+  });
 
   function randomMessage() {
     const cloud = document.querySelector(".cloud");
