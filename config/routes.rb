@@ -43,7 +43,6 @@ Rails.application.routes.draw do
   get "/auth/lapse", to: "lapse_auth#redirect", as: "auth_lapse"
   get "/lapse/auth/callback", to: "lapse_auth#callback", as: "auth_lapse_callback"
 
-
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

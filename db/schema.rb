@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_13_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_01_232343) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -102,6 +102,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_13_090000) do
     t.string "hackatime_token"
     t.string "hackatime_uid"
     t.boolean "is_admin", default: false
+    t.string "lapse_token"
+    t.string "lapse_uid"
     t.string "name"
     t.string "referral_code"
     t.integer "referrals_count", default: 0, null: false

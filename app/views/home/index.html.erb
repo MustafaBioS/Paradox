@@ -22,7 +22,15 @@
     </div>
     <div class="line"></div>
     <div class="bottom">
-      <div class="tempBox">???</div>
+      <% @announcements.each do |ann| %>
+        <div class="annBox">
+          <div class="top">
+            <%= image_tag "https://cachet.dunkirk.sh/users/#{ann[:user]}/r", class: "annPfp", src: "#{ann[:user]}" %>
+            <h1>Mustafa</h1>
+          </div>
+          <%= ann[:message] %>
+        </div>
+      <% end %>
     </div>
     <div class="catCon">
       <div class="textCloud">
@@ -45,9 +53,17 @@
 
   function randomMessage() {
     const cloud = document.querySelector(".cloud");
-    if (!cloud || !Array.isArray(messages) || messages.length === 0) return;
+    const textCloud = document.querySelector(".textCloud");
+    const cat = document.querySelector(".cat");
+    if (!cloud || !textCloud || !Array.isArray(messages) || messages.length === 0) return;
 
     const index = Math.floor(Math.random() * messages.length);
     cloud.textContent = messages[index];
+    textCloud.classList.add("is-visible");
+
+    if (cat) {
+      cat.classList.add("squashed");
+      setTimeout(() => cat.classList.remove("squashed"), 140);
+    }
   }
 </script>

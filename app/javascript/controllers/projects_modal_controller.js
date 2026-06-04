@@ -8,7 +8,8 @@ export default class extends Controller {
     this.artHrsBox = document.querySelector(".artHrsBox")
 
     this.handleCodeClick = () => this.open("red")
-    this.handleArtClick = () => this.open("blue")
+    // this.handleArtClick = () => this.open("blue")
+    this.handleArtClick = () => alert("W.I.P")
     this.handleEscape = (event) => {
       if (event.key === "Escape") this.close()
     }

@@ -31,17 +31,27 @@
       Confirm
     </button>
   </div>
-  <div class="blueModal" data-projects-modal-target="blueModal">
-    <h1>Select Lapse Projects</h1>
-<!--    <div class="projectsBox">-->
-      <%# if @hackatime_projects&.any? %>
-        <%# @hackatime_projects.each do |project| %>
-<!--          <p><%#= project["name"] %> — <%#= ((project["total_seconds"] || 0) / 3600.0).round(1) %> hours</p>-->
-        <%# end %>
-      <%# else %>
-<!--        <p>No Hackatime data yet.</p>-->
-      <%# end %>
-<!--    </div>-->
+  <div class="redModal"
+       data-projects-modal-target="redModal"
+       data-controller="hackatime"
+       data-hackatime-project-id-value="<%= @selected_project&.id %>"
+       data-hackatime-saved-names="<%= (@selected_project&.hackatime_projects || []).to_json %>"
+  >
+    <% @lapse_projects&.each do |project| %>
+      <p class="prjct"
+         data-hackatime-target="project"
+         data-seconds="<%= project["total_seconds"] || 0 %>"
+         data-name="<%= project["name"] %>"
+         data-action="click->hackatime#toggle">
+        <%= project["name"] %> — <%= ((project["total_seconds"] || 0) / 3600.0).round(1) %> hours
+      </p>
+    <% end %>
+    <button
+      class="confirmBtn"
+      data-action="click->hackatime#confirm"
+    >
+      Confirm
+    </button>
   </div>
 </div>
 
@@ -82,6 +92,10 @@
           </div>
         <% end %>
         <div class="btnCon">
+          <%# unless current_user.lapse_token.present? %>
+            <%#= link_to "Link Lapse", auth_lapse_path, class: "botBtn" %>
+          <%# end %>
+
           <% if current_user.hackatime_token.present? %>
             <%= button_to "+ new project", projects_path, method: :post, class: "botBtn" %>
           <% else %>
