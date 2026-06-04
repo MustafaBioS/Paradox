@@ -37,8 +37,8 @@ Rails.application.routes.draw do
 
   match "/404", to: "errors#not_found", via: :all
 
-  # get "/refer", to: "refer#index", as: "refer"
-  # get "/referral", to: "refer#capture", as: "referral"
+  get "/refer", to: "refer#index", as: "refer"
+  get "/referral", to: "refer#capture", as: "referral"
 
   get "/auth/lapse", to: "lapse_auth#redirect", as: "auth_lapse"
   get "/lapse/auth/callback", to: "lapse_auth#callback", as: "auth_lapse_callback"
