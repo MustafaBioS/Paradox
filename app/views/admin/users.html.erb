@@ -8,7 +8,31 @@
 
   <div class="pageCon">
     <div class="topLine">
-      <h1 class="title">Order Confirmation</h1>
+      <h1 class="title">All Users</h1>
+      <%= form_with url: admin_users_path, method: :get, local: true, class: "topForm" do %>
+        <%= text_field_tag :q, params[:q], placeholder: "Search Users", class: "search" %>
+        <%= submit_tag "Search", class: "searchSubmit" %>
+
+        <%= select_tag :sort,
+           options_for_select([
+            ["Name", "name"],
+            ["Email", "email"],
+            ["Created At", "created_at"]
+          ], params[:sort]),
+             onchange: "this.form.submit()",
+             class: "sortMenu sort"
+        %>
+
+        <%= select_tag :direction,
+           options_for_select([
+            ["Ascending", "asc"],
+            ["Descending", "desc"]
+          ], params[:direction]),
+            onchange: "this.form.submit()",
+            class: "sortMenu direction"
+        %>
+
+      <% end %>
       <a class="back" href="/admin">
         Back
         <%= image_tag "shop/Union.png",
@@ -26,7 +50,6 @@
           </div>
       <% end %>
     </div>
-
+    <%= paginate @users %>
   </div>
-
 </div>
