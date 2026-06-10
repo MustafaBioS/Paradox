@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_01_232343) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_07_045031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -108,7 +108,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_01_232343) do
     t.string "referral_code"
     t.integer "referrals_count", default: 0, null: false
     t.bigint "referred_by_id"
-    t.integer "shipped_hours", default: 0
+    t.integer "shipped_hours", default: 0, null: false
     t.string "slack_id"
     t.datetime "updated_at", null: false
     t.string "username"

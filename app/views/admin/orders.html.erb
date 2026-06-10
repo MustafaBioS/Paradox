@@ -1,0 +1,21 @@
+<%# app/views/admin/index.html.erb %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
+<% end %>
+
+<div class="bgOther">
+  <div class="pageCon">
+    <div class="topLine">
+      <h1 class="title">Orders</h1>
+      <a class="back" href="/admin">
+        Back
+        <%= image_tag "shop/Union.png",
+                      class: "arrow",
+                      alt: "Arrow"
+        %>
+      </a>
+    </div>
+    <div class="line"></div>
+  </div>
+</div>

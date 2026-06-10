@@ -27,7 +27,7 @@ export default class extends Controller {
     }
   }
 
-  confirm() {
+    confirm() {
     console.log("projectIdValue", this.projectIdValue)
     if (!this.projectIdValue) return
     const totalSeconds = [...this.selected].reduce((sum, el) => sum + Number(el.dataset.seconds), 0)
@@ -43,7 +43,7 @@ export default class extends Controller {
         "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
         "X-HTTP-Method-Override": "PATCH"
       },
-      body: JSON.stringify({project: { code_hours: hours, hackatime_projects: names } })
+      body: JSON.stringify({project: { code_hours: hours, hackatime_projects: names }})
     }).then(() => {
       window.location.reload()
     })

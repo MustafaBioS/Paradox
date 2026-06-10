@@ -28,7 +28,7 @@ class Project < ApplicationRecord
     reasons
   end
 
-  def mark_as_shipped!
+  def mark_as_pending_review!
     update!(status: "pending_review", last_shipped_code_hours: code_hours)
   end
 end

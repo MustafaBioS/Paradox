@@ -4,52 +4,90 @@
   <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
 <% end %>
 
-<div class="bgOther">
+<div data-controller="admin">
 
-  <div class="pageCon">
-    <div class="topLine">
-      <h1 class="title">All Users</h1>
-      <%= form_with url: admin_users_path, method: :get, local: true, class: "topForm" do %>
-        <%= text_field_tag :q, params[:q], placeholder: "Search Users", class: "search" %>
-        <%= submit_tag "Search", class: "searchSubmit" %>
-
-        <%= select_tag :sort,
-           options_for_select([
-            ["Name", "name"],
-            ["Email", "email"],
-            ["Created At", "created_at"]
-          ], params[:sort]),
-             onchange: "this.form.submit()",
-             class: "sortMenu sort"
-        %>
-
-        <%= select_tag :direction,
-           options_for_select([
-            ["Ascending", "asc"],
-            ["Descending", "desc"]
-          ], params[:direction]),
-            onchange: "this.form.submit()",
-            class: "sortMenu direction"
-        %>
-
-      <% end %>
-      <a class="back" href="/admin">
-        Back
-        <%= image_tag "shop/Union.png",
-            class: "arrow",
-            alt: "Arrow"
-        %>
-      </a>
+  <div class="modalCon" data-admin-target="modal">
+    <div class="hoursModal">
+      <h1 class="modalTitle" data-admin-target="title"></h1>
+      <input class="modalUserId" type="hidden" data-admin-target="userId">
     </div>
-    <div class="line"></div>
+  </div>
 
-    <div class="usersCon">
-      <% @users.each do |user| %>
-          <div class="usersBox">
-            <h1><%= user.name %></h1>
+  <div class="bgOther">
+    <div class="pageCon">
+      <div class="topLine">
+        <h1 class="title">Users</h1>
+        <%= form_with url: admin_users_path, method: :get, local: true, class: "topForm" do %>
+          <div class="searchInpCon">
+            <%= text_field_tag :q, params[:q], placeholder: "Search Users", class: "search" %>
+            <%= image_submit_tag "search.png", class:"searchImg", alt: "Search" %>
           </div>
-      <% end %>
+
+          <%= select_tag :sort,
+             options_for_select([
+              ["Name", "name"],
+              ["Email", "email"],
+              ["Created At", "created_at"]
+            ], params[:sort]),
+               onchange: "this.form.submit()",
+               class: "sortMenu sort"
+          %>
+
+          <%= select_tag :direction,
+             options_for_select([
+              ["Ascending", "asc"],
+              ["Descending", "desc"]
+            ], params[:direction]),
+              onchange: "this.form.submit()",
+              class: "sortMenu direction"
+          %>
+
+        <% end %>
+        <a class="back" href="/admin">
+          Back
+          <%= image_tag "shop/Union.png",
+              class: "arrow",
+              alt: "Arrow"
+          %>
+        </a>
+      </div>
+      <div class="line"></div>
+
+      <div class="usersCon">
+        <% @users.each do |user| %>
+            <div class="usersBox">
+              <div class="deetsCon">
+                <h1 class="username det">Username: <%= user.name %></h1>
+                <h1 class="useremail det">Email: <%= user.email %></h1>
+                <h1 class="createdat det">Created At: <%= user.created_at.strftime("%Y/%m/%d") %></h1>
+                <h1 class="shippedHours det">Shipped Hours: <%= user.shipped_hours %></h1>
+                <h1 class="shippedHours det">Unshipped Hours: <%= user.projects.where(status: "unshipped").sum(:code_hours) %></h1>
+              </div>
+              <div class="actionsCon">
+                <button
+                  class="action add"
+                  data-action="click->admin#openModal"
+                  data-user-id="<%= user.id %>"
+                  data-user-name="<%= user.name %>"
+                >
+                  Add Hours
+                </button>
+
+                <button
+                  class="action remove"
+                  data-action="click->admin#openModal"
+                  data-user-id="<%= user.id %>"
+                  data-user-name="<%= user.name %>"
+                >
+                  Remove Hours
+                </button>
+              </div>
+            </div>
+        <% end %>
+      </div>
+      <div class="paginateCon">
+        <%= paginate @users, class: "paginate" %>
+      </div>
     </div>
-    <%= paginate @users %>
   </div>
 </div>

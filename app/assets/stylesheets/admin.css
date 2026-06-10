@@ -24,10 +24,9 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     box-sizing: border-box;
-    margin-left: 5%;
 
 }
 
@@ -128,8 +127,8 @@
 }
 
 .usersBox {
-    width: 90%;
-    height: 350px;
+    width: 80%;
+    height: 300px;
     border: 3px solid #dcb86a;
     display: flex;
     flex-direction: row;
@@ -146,5 +145,139 @@
     backdrop-filter: blur(6px) saturate(110%);
     -webkit-backdrop-filter: blur(6px) saturate(110%);
     overflow: hidden;
+}
+
+.topForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchInpCon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.searchImg {
+    width: 20px;
+    position: absolute;
+    right: 15px;
+    transition: all 0.3s ease;
+}
+
+.searchImg:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.search {
+    color: white;
+    outline: none;
+    border: 2px solid #DAC17E;
+    padding: 5px 10px;
+    width: 325px;
+    height: 45px;
+    border-radius: 12px;
+}
+
+.search::placeholder {
+    color: white;
+}
+
+.searchSubmit {
+    background-color: white;
+    color: black;
+    width: 100px;
+    margin-right: 20px;
+}
+
+.sortMenu {
+    background-color: #DAC17E;
+    padding: 0 10px;
+    height: 40px;
+    width: 185px;
+    color: white;
+    border-radius: 12px;
+}
+
+.sort {
+    margin: 0 10px;
+}
+
+.det {
+    color: white;
+    font-size: 30px;
+}
+
+.paginateCon {
+    color: white;
+    font-size: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0 40px 0;
+}
+
+.deetsCon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.actionsCon {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.action {
+    height: 70px;
+    width: 250px;
+    font-family: 'Bethany', serif;
+    border: 2px solid #dcb86a;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: clamp(1.2rem, 2.2vw, 2.2rem);
+    line-height: 0.95;
+    white-space: nowrap;
+    color: #f8eac7;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+    text-shadow: 0 0 8px rgba(255, 225, 150, 0.2);
+    background: linear-gradient(180deg, #3e4ed0 0%, #2d3bb0 48%, #1c256a 100%);
+    box-shadow:
+            0 0 0 1px rgba(255, 218, 140, 0.34),
+            0 10px 20px rgba(0, 0, 0, 0.38),
+            inset 0 0 0 9px #26378f,
+            inset 0 12px 18px rgba(135, 160, 255, 0.14);
+    font-style: italic;
+}
+
+.action:hover  { transform: translateY(-2px); filter: brightness(1.1); }
+
+.modalCon {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 50;
     pointer-events: none;
+}
+
+.modalCon.on {
+    pointer-events: auto;
+    display: flex;
+}
+
+.hoursModal {
+    background-color: black;
+    height: 100px;
+    width: 100px;
 }

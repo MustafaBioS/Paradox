@@ -10,6 +10,7 @@ class DevController < ApplicationController
 
     user = User.find_or_create_by!(email: email) do |record|
       record.name = name
+      record.is_admin = true
     end
 
     if user.previously_new_record?

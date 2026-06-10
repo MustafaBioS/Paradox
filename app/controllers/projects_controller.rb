@@ -88,7 +88,7 @@ class ProjectsController < ApplicationController
     ActiveRecord::Base.transaction do
       @shipping_info.assign_attributes(shipping_info_params)
       @shipping_info.save!
-      @project.mark_as_shipped!
+      @project.mark_as_pending_review!
     end
 
     redirect_to projects_path(project_id: @project.id), notice: "Shipping submitted!"

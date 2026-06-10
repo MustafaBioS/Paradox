@@ -11,5 +11,19 @@
     <h1 class="title">Explore</h1>
     <div class="line"></div>
 
+    <div class="projectCon">
+      <% @projects.each_with_index do |project, index| %>
+      <%= link_to project.demo_url, class: "projectBox #{index.even? ? 'yellow' : 'purple'}" do %>
+        <% if project.thumbnail&.attached? %>
+          <%= image_tag project.thumbnail,
+              class: "projectImage",
+              alt: project.title
+          %>
+        <% end %>
+        <h1 class="title projectTitle"><%= project.title %></h1>
+        <p class="projectDesc"><%= project.description %></p>
+      <% end %>
+    <% end %>
+    </div>
   </div>
 </div>

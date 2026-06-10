@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   get "admin/projects", to: "admin#projects", as: "admin_projects"
   get "admin/shop", to: "admin#shop", as: "admin_shop"
 
+  get "/review", to: "admin#review", as: "review"
+
   get "/profile/:id", to: "profile#show", as: "profile"
 
   match "/404", to: "errors#not_found", via: :all

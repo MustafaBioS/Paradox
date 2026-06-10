@@ -1,9 +1,13 @@
 .bg {
-    background: linear-gradient(to top, #3E4D9E, black);
-    height: 100vh;
-    width: calc(100vw - 150px);
+    min-height: 100vh;
+    width: calc(100% - 150px);
     margin-left: 150px;
+    background: linear-gradient(to top, #3E4D9E, black);
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
     overflow: hidden;
+    padding-bottom: 200px;
 }
 
 .pageCon {
@@ -32,6 +36,67 @@
 
 .line {
     height: 3px;
-    width: 90%;
+    width: 95%;
     background-color: #B68840;
+}
+
+.projectCon {
+    display: grid;
+    align-content: center;
+    width: 96%;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 30px;
+    gap: 40px;
+    justify-items: center;
+}
+
+.projectBox {
+    min-height: 500px;
+    width: 475px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #DAC17E;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.projectBox:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.yellow {
+    background: linear-gradient(0deg, #422B3E 0%, #6C4B25 85%);
+}
+
+.purple {
+    background: linear-gradient(to bottom, #321B41, #0F1325);
+}
+
+.projectImage {
+    height: 165px;
+    width: 385px;
+    object-fit: cover;
+    margin-top: 30px;
+    border: 2px solid #DAC17E;
+}
+
+.projectTitle {
+    font-size: 40px;
+    margin-top: 10px;
+    font-style: normal;
+}
+
+.projectDesc {
+    width: 85%;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    color: white;
+    font-size: 20px;
+    font-family: 'Bethany', serif;
 }
