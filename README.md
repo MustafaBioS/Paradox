@@ -24,11 +24,22 @@ LAPSE_CLIENT_ID=
 LAPSE_CLIENT_SECRET=
 LAPSE_URI=
 
-
 SLACK_APP_ID=
 SLACK_CLIENT_ID=
 SLACK_CLIENT_SECRET=
 SLACK_SIGNING_SECRET=
 SLACK_VERIFICATION_TOKEN=
 BOT_OAUTH_TOKEN=
+```
+
+## Dev Login
+To log in as dev go to this route:
+```
+http://127.0.0.1:3000/dev/login
+```
+
+## Admin Panel
+To see the admin panel go to this route:
+```
+http://127.0.0.1:3000/admin
 ```
