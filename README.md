@@ -1,24 +1,36 @@
-# README
+<div align="center">
+  <img src="https://assets.hackclub.com/flag-standalone.svg" width="100" alt="Hack Club flag" />
+  <h2><a href="https://paradox.mustafa.hackclub.app">Paradox</a></h2>
+  <p>Paradox YSWS Platform, Made using Ruby on Rails</p>
+</div>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+# Paradox
+Paradox is a YSWS where you ship projects with a story to them, and get tickets to buy stuff from the shop with them!
+Or get 30 hours and go to Fable, an IRL Hackathon in London, UK.
 
-* Ruby version
+## Enviroment Variables
 
-* System dependencies
+```bash
+HCA_CLIENT_ID=
+HCA_CLIENT_SECRET=
+HCA_URI=
 
-* Configuration
+HACKATIME_CLIENT_ID=
+HACKATIME_CLIENT_SECRET=
+HACKATIME_URI=
 
-* Database creation
+LAPSE_CLIENT_ID=
+LAPSE_CLIENT_SECRET=
+LAPSE_URI=
 
-* Database initialization
 
-* How to run the test suite
+SLACK_APP_ID=
+SLACK_CLIENT_ID=
+SLACK_CLIENT_SECRET=
+SLACK_SIGNING_SECRET=
+SLACK_VERIFICATION_TOKEN=
+BOT_OAUTH_TOKEN=
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+ADMIN_SLACK_ID=
+```
