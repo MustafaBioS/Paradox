@@ -13,21 +13,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = current_user.projects.new(
-      title: "project name",
-      status: "unshipped",
-      description: "No description yet"
-    )
-
-    if @project.save
-      redirect_to projects_path(project_id: @project.id), notice: "Project created!"
-    else
-      Rails.logger.info(@project.errors.full_messages)
-      flash.now[:alert] = @project.errors.full_messages.to_sentence
-      @projects = current_user.projects.order(created_at: :desc)
-      @hackatime_projects = HackatimeService.fetch_projects(current_user.hackatime_token)
-      render "projects/index", status: :unprocessable_entity
-    end
+    render plain: "CREATE HIT", status: 200
   end
 
   def destroy
