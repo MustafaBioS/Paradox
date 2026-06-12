@@ -15,7 +15,8 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.new(
       title: "project name",
-      status: "unshipped"
+      status: "unshipped",
+      description: "No description yet"
     )
 
     if @project.save
