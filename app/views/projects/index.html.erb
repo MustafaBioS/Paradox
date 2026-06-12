@@ -96,11 +96,11 @@
             <%#= link_to "Link Lapse", auth_lapse_path, class: "botBtn" %>
           <%# end %>
 
-          <% if current_user.hackatime_token.present? %>
+          <%# if current_user.hackatime_token.present? %>
             <%= button_to "+ new project", projects_path, method: :post, class: "botBtn" %>
-          <% else %>
-            <%= link_to "Link Hackatime", auth_hackatime_path, class: "botBtn" %>
-          <% end %>
+          <%# else %>
+            <%#= link_to "Link Hackatime", auth_hackatime_path, class: "botBtn" %>
+          <%# end %>
         </div>
       </div>
       <% if @selected_project.present? %>
