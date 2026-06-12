@@ -30,15 +30,16 @@ class AdminController < ApplicationController
     sort = params[:sort].presence_in(%w[name email created_at]) || "created_at"
     direction = params[:direction] == "asc" ? "asc" : "desc"
 
-    @users = @users.order("#{sort} #{direction}")
+    @orders = @users.order("#{sort} #{direction}")
 
-    @users = @users.page(params[:page]).per(3)
+    @orders = @users.page(params[:page]).per(3)
   end
 
   def projects
   end
 
   def shop
+
   end
 
   def review

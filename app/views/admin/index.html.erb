@@ -4,21 +4,28 @@
 <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
 <% end %>
 
-<div class="bg">
-  <%= render "shared/nvb", user: current_user %>
+<div data-controller="admin">
+  <div class="bg">
+    <%= render "shared/nvb", user: current_user %>
 
-  <div class="pageCon">
-    <h1 class="title">Admin</h1>
-    <div class="line"></div>
+    <div class="pageCon">
+      <h1 class="title">Admin</h1>
+      <div class="line"></div>
 
-    <div class="btnCon">
-      <%= link_to "Users", admin_users_path, class: "btn" %>
-      <%= link_to "Orders", admin_orders_path, class: "btn"%>
-      <%= link_to "Projects", admin_projects_path, class: "btn"%>
-      <%= link_to "Shop", admin_shop_path, class: "btn"%>
-      <%#= link_to "Reviews", admin_review_path, class: "btn"%>
+      <div class="btnCon">
+        <%= link_to "Users", admin_users_path, class: "btn" %>
+        <button data-action="click->admin#workInProgress" class="btn">
+          Orders
+        </button>
+        <button data-action="click->admin#workInProgress" class="btn">
+          Projects
+        </button>
+        <button data-action="click->admin#workInProgress" class="btn">
+          Shop
+        </button>
+        <%#= link_to "Reviews", admin_review_path, class: "btn"%>
+      </div>
+
     </div>
-
   </div>
-
 </div>

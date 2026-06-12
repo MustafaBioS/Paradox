@@ -12,7 +12,9 @@ export default class extends Controller {
     this.userIdTarget.value = userId
     this.titleTarget.textContent =
         `${isAdd ? "Add" : "Remove"} Hours for ${username}`
+  }
 
-    this.modalTarget.classList.add("on")
+  workInProgress() {
+    alert("W.I.P");
   }
 }
