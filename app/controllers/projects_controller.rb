@@ -13,14 +13,16 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    attrs = project_params.to_h
-    attrs["title"] = "project name" if attrs["title"].blank?
-    attrs["status"] = "unshipped" if attrs["status"].blank?
-    @project = current_user.projects.new(attrs)
+    @project = current_user.projects.new(
+      title: "project name",
+      status: "unshipped"
+    )
 
     if @project.save
       redirect_to projects_path(project_id: @project.id), notice: "Project created!"
     else
+      Rails.logger.info(@project.errors.full_messages)
+      flash.now[:alert] = @project.errors.full_messages.to_sentence
       @projects = current_user.projects.order(created_at: :desc)
       @hackatime_projects = HackatimeService.fetch_projects(current_user.hackatime_token)
       render "projects/index", status: :unprocessable_entity
