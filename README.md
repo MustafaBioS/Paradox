@@ -39,7 +39,7 @@ To log in as dev go to this route:
 ```
 
 ## Admin Panel
-To see the admin panel go to this route:
+To see the admin panel **(in development only)** go to this route:
 ```
 /admin
 ```
