@@ -35,11 +35,11 @@ BOT_OAUTH_TOKEN=
 ## Dev Login
 To log in as dev go to this route:
 ```
-http://127.0.0.1:3000/dev/login
+/dev/login
 ```
 
 ## Admin Panel
 To see the admin panel go to this route:
 ```
-http://127.0.0.1:3000/admin
+/admin
 ```
