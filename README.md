@@ -33,7 +33,7 @@ BOT_OAUTH_TOKEN=
 ```
 
 ## Dev Login
-To log in as dev go to this route:
+To log in as dev **(in development only)** go to this route:
 ```
 /dev/login
 ```
